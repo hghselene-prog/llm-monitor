@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM Monitor — 大模型性能监控对比平台</title>
+<script>
+/* 后台自动识别设备类型：在首屏渲染前设置 data-device，避免版式闪烁 */
+(function(){
+  try{
+    var ua = navigator.userAgent || '';
+    var isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Windows Phone/i.test(ua);
+    var touch = ('ontouchstart' in window) || (navigator.maxTouchPoints || 0) > 0;
+    var narrow = window.matchMedia('(max-width: 768px)').matches;
+    var device = (isMobileUA || (touch && narrow)) ? 'mobile' : 'desktop';
+    document.documentElement.setAttribute('data-device', device);
+  }catch(e){ document.documentElement.setAttribute('data-device', 'desktop'); }
+})();
+</script>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app">
+
+  <!-- Mobile Top Bar (only visible on mobile, auto-detected) -->
+  <div class="mobile-topbar">
+    <div class="logo-icon">📊</div>
+    <div>
+      <div class="logo-text">LLM Monitor</div>
+      <div class="logo-sub">大模型性能监控对比</div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-icon">📊</div>
+      <div>
+        <div class="logo-text">LLM Monitor</div>
+        <div class="logo-sub">大模型性能监控对比</div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">总览</div>
+        <button class="nav-item active" data-page="dashboard">
+          <span class="nav-item-icon">🏠</span> 仪表盘
+        </button>
+        <button class="nav-item" data-page="leaderboard">
+          <span class="nav-item-icon">🏆</span> 排行榜
+        </button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">分析</div>
+        <button class="nav-item" data-page="compare">
+          <span class="nav-item-icon">⚖️</span> 模型对比
+        </button>
+        <button class="nav-item" data-page="trends">
+          <span class="nav-item-icon">📈</span> 趋势分析
+        </button>
+        <button class="nav-item" data-page="cost">
+          <span class="nav-item-icon">💰</span> 成本分析
+        </button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">专项评测</div>
+        <button class="nav-item" data-page="coding">
+          <span class="nav-item-icon">💻</span> 编程能力
+        </button>
+        <button class="nav-item" data-page="multimodal">
+          <span class="nav-item-icon">🎨</span> 多模态
+        </button>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">关于</div>
+        <button class="nav-item" data-page="methodology">
+          <span class="nav-item-icon">📋</span> 数据来源与方法论
+        </button>
+      </div>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <!-- ===== SOURCE SELECTOR (multi-select focus) ===== -->
+    <div class="source-selector" id="source-selector">
+      <span class="source-selector-label">数据源筛选（可多选 · 默认全选）</span>
+      <button class="source-chip active" data-source="all">🌐 全部</button>
+      <button class="source-chip" data-source="AA" style="--sc:var(--source-aa)">🧪 Artificial Analysis</button>
+      <button class="source-chip" data-source="LB" style="--sc:var(--source-lb)">🔬 LiveBench</button>
+      <button class="source-chip" data-source="Arena" style="--sc:var(--source-arena)">🏟️ LMArena</button>
+    </div>
+
+    <!-- ===== DASHBOARD ===== -->
+    <div class="page active" id="page-dashboard">
+      <div class="header">
+        <div class="header-left">
+          <h1>仪表盘</h1>
+          <p><span class="pulse-dot"></span>聚合 Artificial Analysis · LiveBench · LMArena 三大权威数据源 · 追踪 10+ 模型</p>
+        </div>
+        <div class="header-right">
+          <button class="btn btn-primary" onclick="switchPage('leaderboard')">查看完整排行 →</button>
+        </div>
+      </div>
+
+      <!-- Source Legend -->
+      <div class="source-legend">
+        <span style="font-weight:600;color:var(--text-secondary)">数据来源：</span>
+        <span class="source-legend-item"><span class="source-legend-dot" style="background:var(--source-aa)"></span><span class="source-badge AA">AA</span> Artificial Analysis — API实测</span>
+        <span class="source-legend-item"><span class="source-legend-dot" style="background:var(--source-lb)"></span><span class="source-badge LB">LB</span> LiveBench — 防污染Benchmark</span>
+        <span class="source-legend-item"><span class="source-legend-dot" style="background:var(--source-arena)"></span><span class="source-badge Arena">Arena</span> LMArena — 盲测投票</span>
+      </div>
+
+      <div class="stats-grid" id="dashboard-stats"></div>
+
+      <div id="dashboard-charts"></div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <h3>🏆 综合排行榜 TOP 8</h3>
+            <a href="#" onclick="switchPage('leaderboard')" style="font-size:12px">查看全部 →</a>
+          </div>
+          <div class="card-body" style="padding:0">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>#</th><th>模型</th><th>智力指数</th><th>Arena Elo</th><th>速度 t/s</th><th>成本/任务</th></tr></thead>
+                <tbody id="top8-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>📰 最新动态</h3></div>
+          <div class="card-body"><div id="feed-list"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== LEADERBOARD ===== -->
+    <div class="page" id="page-leaderboard">
+      <div class="header">
+        <div class="header-left"><h1>🏆 模型排行榜</h1><p>综合三大数据源的多维度排名 · 每个指标标注来源 · 点击表头排序</p></div>
+        <div class="header-right">
+          <input class="search-input" placeholder="🔍 搜索模型..." oninput="filterLeaderboard()">
+          <button class="btn" onclick="switchPage('compare')">⚖️ 对比选中模型</button>
+        </div>
+      </div>
+      <!-- Source Legend -->
+      <div class="source-legend">
+        <span style="font-weight:600;color:var(--text-secondary)">指标来源标注：</span>
+        <span class="source-legend-item"><span class="source-badge AA">AA</span> Artificial Analysis</span>
+        <span class="source-legend-item"><span class="source-badge LB">LB</span> LiveBench</span>
+        <span class="source-legend-item"><span class="source-badge Arena">Arena</span> LMArena</span>
+      </div>
+      <div class="main-tabs" id="leaderboard-tabs">
+        <button class="main-tab active" data-cat="all">综合排名</button>
+        <button class="main-tab" data-cat="reasoning">推理 <span class="source-badge LB">LB</span></button>
+        <button class="main-tab" data-cat="coding">编程 <span class="source-badge LB">LB</span></button>
+        <button class="main-tab" data-cat="math">数学 <span class="source-badge LB">LB</span></button>
+        <button class="main-tab" data-cat="agent">Agent <span class="source-badge LB">LB</span></button>
+      </div>
+      <div class="filters">
+        <select class="filter-select" onchange="filterLeaderboard()"><option>全部厂商</option><option>OpenAI</option><option>Anthropic</option><option>Google</option><option>Meta</option><option>DeepSeek</option><option>阿里</option><option>月之暗面</option><option>xAI</option><option>智谱</option></select>
+        <select class="filter-select" onchange="filterLeaderboard()"><option>全部类型</option><option>闭源</option><option>开源</option></select>
+        <select class="filter-select" onchange="filterLeaderboard()"><option>全部模式</option><option>推理模型</option><option>非推理模型</option></select>
+      </div>
+      <div class="card">
+        <div class="card-body" style="padding:0">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th><th>模型</th>
+                  <th>智力指数 <span class="source-badge AA">AA</span></th>
+                  <th>Arena Elo <span class="source-badge Arena">Arena</span></th>
+                  <th>推理 <span class="source-badge LB">LB</span></th>
+                  <th>编程 <span class="source-badge LB">LB</span></th>
+                  <th>数学 <span class="source-badge LB">LB</span></th>
+                  <th>Agent <span class="source-badge LB">LB</span></th>
+                  <th>速度 t/s</th><th>成本/任务</th><th>类型</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== COMPARE ===== -->
+    <div class="page" id="page-compare">
+      <div class="header">
+        <div class="header-left"><h1>⚖️ 模型对比</h1><p>多模型并排对比 · 每个指标标注数据来源 · 一目了然三大平台评分</p></div>
+        <div class="header-right">
+          <select class="filter-select" id="compare-select" onchange="addCompareModel()">
+            <option value="">+ 添加模型（可多选）</option>
+          </select>
+        </div>
+      </div>
+      <div class="source-legend">
+        <span style="font-weight:600">评分来源：</span>
+        <span class="source-legend-item"><span class="source-badge AA">AA</span> = Artificial Analysis 独立API测量</span>
+        <span class="source-legend-item"><span class="source-badge LB">LB</span> = LiveBench 防污染客观题</span>
+        <span class="source-legend-item"><span class="source-badge Arena">Arena</span> = LMArena 人类盲测投票</span>
+      </div>
+      <div class="compare-list" id="compare-chips"></div>
+      <div class="compare-empty" id="compare-empty">👆 请从上方下拉框中选择模型开始对比（支持多选，可重复添加）</div>
+      <div id="compare-content" style="display:none">
+        <div class="grid-2" style="margin-top:16px">
+          <div class="card">
+            <div class="card-header"><h3>📊 能力雷达图（标准化至0-100）</h3></div>
+            <div class="card-body"><div class="chart-container" style="height:400px"><canvas id="radarCompare"></canvas></div></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><h3>📋 详细指标对比（含数据来源）</h3></div>
+            <div class="card-body" style="padding:0">
+              <div class="table-wrap" id="compare-table-wrap"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card grid-full" style="margin-top:20px">
+          <div class="card-header">
+            <h3>💰 智力 vs 成本 <span class="source-badge AA">AA</span></h3>
+            <span style="font-size:12px;color:var(--text-muted)">灰点为全部模型 · 彩色为选中模型 · 数据来源: Artificial Analysis</span>
+          </div>
+          <div class="card-body"><div class="chart-container"><canvas id="compareScatter"></canvas></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== TRENDS ===== -->
+    <div class="page" id="page-trends">
+      <div class="header">
+        <div class="header-left"><h1>📈 趋势分析</h1><p>追踪各大厂商模型能力随时间的变化</p></div>
+      </div>
+      <div class="trend-header">
+        <div class="trend-legend">
+          <span class="legend-item"><span class="legend-dot" style="background:#2563eb"></span>OpenAI</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#8b5cf6"></span>Anthropic</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#10b981"></span>Google</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#ef4444"></span>Meta</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#f59e0b"></span>DeepSeek</span>
+          <span class="legend-item"><span class="legend-dot" style="background:#ec4899"></span>月之暗面</span>
+        </div>
+      </div>
+      <div class="card grid-full">
+        <div class="card-header"><h3>📊 各大厂商 Intelligence Index 演进 <span class="source-badge AA">AA</span></h3><span style="font-size:12px;color:var(--text-muted)">2024Q1 — 2026Q1 · 来源: Artificial Analysis</span></div>
+        <div class="card-body"><div class="chart-container tall"><canvas id="trendTimeline"></canvas></div></div>
+      </div>
+      <div class="grid-2" style="margin-top:20px">
+        <div class="card">
+          <div class="card-header"><h3>🚀 编程能力趋势 <span class="source-badge LB">LB</span></h3></div>
+          <div class="card-body"><div class="chart-container"><canvas id="trendCoding"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>🎯 Arena Elo 分变化 <span class="source-badge Arena">Arena</span></h3></div>
+          <div class="card-body"><div class="chart-container"><canvas id="trendElo"></canvas></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== COST ===== -->
+    <div class="page" id="page-cost">
+      <div class="header">
+        <div class="header-left"><h1>💰 成本分析</h1><p>API 价格 · 任务成本 · 性价比 · 数据来源: Artificial Analysis</p></div>
+      </div>
+      <div class="source-legend">
+        <span style="font-weight:600">数据来源：</span>
+        <span class="source-legend-item"><span class="source-badge AA">AA</span> Artificial Analysis — API 实测定价</span>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><h3>📊 智力 vs 每任务成本 <span class="source-badge AA">AA</span></h3></div>
+          <div class="card-body"><div class="chart-container"><canvas id="costScatter"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>💲 API 价格对比 ($/百万Token) <span class="source-badge AA">AA</span></h3></div>
+          <div class="card-body" style="padding:0">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>模型</th><th>输入 $/M</th><th>输出 $/M</th><th>缓存命中 $/M</th><th>推理Token $/M</th></tr></thead>
+                <tbody id="cost-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card grid-full" style="margin-top:20px">
+        <div class="card-header"><h3>📊 速度 vs 成本 vs 智力 三维分析 <span class="source-badge AA">AA</span></h3><span style="font-size:12px;color:var(--text-muted)">气泡大小 = 智力指数</span></div>
+        <div class="card-body"><div class="chart-container tall"><canvas id="costSpeedIntel"></canvas></div></div>
+      </div>
+    </div>
+
+    <!-- ===== CODING ===== -->
+    <div class="page" id="page-coding">
+      <div class="header">
+        <div class="header-left"><h1>💻 编程能力</h1><p>Coding · Agentic Coding · WebDev · 来源: LiveBench + LMArena</p></div>
+      </div>
+      <div class="source-legend">
+        <span class="source-legend-item"><span class="source-badge LB">LB</span> 编程/Agent编程 → LiveBench</span>
+        <span class="source-legend-item"><span class="source-badge Arena">Arena</span> WebDev Elo → LMArena</span>
+        <span class="source-legend-item"><span class="source-badge AA">AA</span> SciCode/Terminal → Artificial Analysis</span>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><h3>🏆 编程综合排行</h3></div>
+          <div class="card-body" style="padding:0">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>#</th><th>模型</th><th>编程 <span class="source-badge LB">LB</span></th><th>Agent编程 <span class="source-badge LB">LB</span></th><th>WebDev Elo <span class="source-badge Arena">Arena</span></th><th>综合</th></tr></thead>
+                <tbody id="coding-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>📊 编程能力雷达（多数据源混合）</h3></div>
+          <div class="card-body"><div class="chart-container" style="height:400px"><canvas id="codingRadar"></canvas></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MULTIMODAL ===== -->
+    <div class="page" id="page-multimodal">
+      <div class="header">
+        <div class="header-left"><h1>🎨 多模态</h1><p>视觉理解 · 图像生成 · 视频生成 · 来源: LMArena</p></div>
+      </div>
+      <div class="source-legend">
+        <span class="source-legend-item"><span class="source-badge Arena">Arena</span> 所有Elo评分均来自 LMArena 专项 Arena 盲测投票</span>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><h3>👁️ 视觉理解排行 <span class="source-badge Arena">Arena</span></h3></div>
+          <div class="card-body" style="padding:0">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>#</th><th>模型</th><th>Vision Elo <span class="source-badge Arena">Arena</span></th><th>Document Elo <span class="source-badge Arena">Arena</span></th><th>图生WebDev <span class="source-badge Arena">Arena</span></th></tr></thead>
+                <tbody id="vision-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>🎨 图像/视频生成排行 <span class="source-badge Arena">Arena</span></h3></div>
+          <div class="card-body" style="padding:0">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>#</th><th>模型</th><th>文生图 Elo <span class="source-badge Arena">Arena</span></th><th>图编辑 Elo <span class="source-badge Arena">Arena</span></th><th>文生视频 Elo <span class="source-badge Arena">Arena</span></th></tr></thead>
+                <tbody id="gen-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== METHODOLOGY ===== -->
+    <div class="page" id="page-methodology">
+      <div class="header">
+        <div class="header-left"><h1>📋 数据来源与方法论</h1><p>了解每个评分的来源、评测方式和局限性</p></div>
+      </div>
+      <div class="source-legend">
+        <span style="font-weight:600">三大数据源：</span>
+        <span class="source-legend-item"><span class="source-badge AA">AA</span> Artificial Analysis — 独立API测量</span>
+        <span class="source-legend-item"><span class="source-badge LB">LB</span> LiveBench — 防污染客观Benchmark</span>
+        <span class="source-legend-item"><span class="source-badge Arena">Arena</span> LMArena — 真实用户盲测投票</span>
+      </div>
+      <div id="methodology-content"></div>
+    </div>
+
+  </main>
+
+  <!-- Mobile Bottom Navigation (only visible on mobile, auto-detected) -->
+  <nav class="mobile-nav">
+    <button class="mobile-nav-item active" data-page="dashboard"><span class="mi-icon">🏠</span><span class="mi-label">仪表盘</span></button>
+    <button class="mobile-nav-item" data-page="leaderboard"><span class="mi-icon">🏆</span><span class="mi-label">排行榜</span></button>
+    <button class="mobile-nav-item" data-page="compare"><span class="mi-icon">⚖️</span><span class="mi-label">对比</span></button>
+    <button class="mobile-nav-item" data-page="trends"><span class="mi-icon">📈</span><span class="mi-label">趋势</span></button>
+    <button class="mobile-nav-item" data-page="cost"><span class="mi-icon">💰</span><span class="mi-label">成本</span></button>
+    <button class="mobile-nav-item" data-page="coding"><span class="mi-icon">💻</span><span class="mi-label">编程</span></button>
+    <button class="mobile-nav-item" data-page="multimodal"><span class="mi-icon">🎨</span><span class="mi-label">多模态</span></button>
+    <button class="mobile-nav-item" data-page="methodology"><span class="mi-icon">📋</span><span class="mi-label">方法</span></button>
+  </nav>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

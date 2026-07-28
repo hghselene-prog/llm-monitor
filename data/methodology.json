@@ -1,0 +1,99 @@
+{
+  "title": "数据来源与方法论",
+  "sections": [
+    {
+      "id": "overview",
+      "title": "三大数据源概览",
+      "content": "本平台聚合三大权威 AI 模型评测平台的数据，提供多维度的模型性能对比视角。每个指标均标注其数据来源，确保透明可追溯。"
+    },
+    {
+      "id": "artificial-analysis",
+      "source": "AA",
+      "title": "Artificial Analysis — 独立 API 级性能测量",
+      "url": "https://artificialanalysis.ai",
+      "content": "Artificial Analysis 通过直接调用各模型的 API 进行独立评测，不依赖厂商自报数据。核心方法论包括：",
+      "items": [
+        "Intelligence Index v4.1：综合 9 项独立评测的加权指数（GDPval-AA v2、τ³-Banking、Terminal-Bench v2.1、SciCode、Humanity's Last Exam、GPQA Diamond、CritPt、AA-Omniscience、AA-LCR）",
+        "Speed：实测输出 tokens/秒、首 token 延迟、端到端响应时间",
+        "Cost per Task：加权平均每任务成本，包含输入/输出/缓存命中/推理 Token 分项计价",
+        "Coding Index / Agentic Index / 行业 Capability Indices：专项能力评测"
+      ],
+      "metrics_provided": ["智力综合指数", "编程指数", "Agent指数", "输出速度", "延迟", "每任务成本", "API四级价格", "上下文窗口"]
+    },
+    {
+      "id": "livebench",
+      "source": "LB",
+      "title": "LiveBench — 防数据污染的客观 Benchmark",
+      "url": "https://livebench.ai",
+      "content": "LiveBench 的核心设计目标是防止评测数据被模型训练时“背题”——所有题目每 6 个月完全刷新。",
+      "items": [
+        "7 大类别：推理(Reasoning)、编程(Coding)、Agent编程(Agentic Coding)、数学(Mathematics)、数据分析(Data Analysis)、语言(Language)、指令遵循(Instruction Following)",
+        "版本化发布：每次刷新产生新的版本号，支持跨版本对比",
+        "Cost per Successful Task：创新性地将任务成功率与 API 成本结合",
+        "题目来源：从最新学术论文、竞赛、实际场景中提取，确保模型未见过"
+      ],
+      "metrics_provided": ["推理得分", "编程得分", "Agent编程得分", "数学得分", "数据分析得分", "语言能力得分", "指令遵循得分"]
+    },
+    {
+      "id": "arena",
+      "source": "Arena",
+      "title": "LMArena (Chatbot Arena) — 人类偏好盲测投票",
+      "url": "https://arena.ai",
+      "content": "LMArena 由 LMSYS Org（伯克利/ UCSD / CMU 联合）创建，采用匿名双盲对战 + Bradley-Terry 模型计算 Elo 评分。",
+      "items": [
+        "匿名盲测：用户看到两个匿名模型的回答后投票，消除品牌偏见",
+        "Elo 评分：基于 Bradley-Terry 模型，K-factor=4，95% 置信区间",
+        "规模：670+ 模型、460万+ 投票、覆盖 100+ 国家",
+        "专项 Arena：文本对话、视觉理解、WebDev、文档处理、图像生成/编辑、视频生成/编辑、搜索、Agent"
+      ],
+      "metrics_provided": ["文本对话Elo", "视觉理解Elo", "WebDev Elo", "文档处理Elo", "图像生成Elo", "视频生成Elo", "搜索Elo", "Agent投票率"]
+    }
+  ],
+  "comparison": {
+    "dimensions": ["评测方式", "核心指标", "更新频率", "数据透明", "覆盖模型", "优势", "局限"],
+    "rows": [
+      {
+        "dimension": "评测方式",
+        "AA": "独立API调用 + 自动评分",
+        "LB": "客观题自动评分（防污染）",
+        "Arena": "真实用户盲测投票"
+      },
+      {
+        "dimension": "核心指标",
+        "AA": "智力指数 / 速度 / 成本",
+        "LB": "7类客观得分 + 成本效率",
+        "Arena": "Elo评分 + 置信区间"
+      },
+      {
+        "dimension": "更新频率",
+        "AA": "持续（新模型1-3天上线）",
+        "LB": "每6月版本发布",
+        "Arena": "实时（随投票动态更新）"
+      },
+      {
+        "dimension": "数据透明",
+        "AA": "方法论文档公开",
+        "LB": "题目/评分全开源",
+        "Arena": "投票数据集公开可下载"
+      },
+      {
+        "dimension": "覆盖模型",
+        "AA": "577+",
+        "LB": "33+（每版本精选）",
+        "Arena": "670+"
+      },
+      {
+        "dimension": "优势",
+        "AA": "API实测+成本透明",
+        "LB": "杜绝数据泄漏+版本对比",
+        "Arena": "真实人类偏好+规模最大"
+      },
+      {
+        "dimension": "局限",
+        "AA": "API层不代表端到端体验",
+        "LB": "覆盖模型较少",
+        "Arena": "用户群体偏技术向"
+      }
+    ]
+  }
+}
