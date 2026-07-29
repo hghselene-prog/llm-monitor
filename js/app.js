@@ -414,7 +414,7 @@ function buildScatterIntelCost() {
     const speed = getMetricVal(m,'speed_tps');
     return { x:cost||0.01, y:intel||0, r:Math.max(4,(speed||50)/20), name:m.name, color:m.color };
   });
-  makeChart('scatterIntelCost', { type:'scatter',
+  makeChart('scatterIntelCost', { type:'bubble',
     data:{ datasets:[{ data:points, backgroundColor:points.map(p=>p.color+'99'), borderColor:points.map(p=>p.color), borderWidth:1.5 }] },
     options:{ responsive:true, maintainAspectRatio:false,
       plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
@@ -602,13 +602,18 @@ function renderCompareContent() {
     body.innerHTML = `<div style="padding:24px;color:var(--text-secondary);font-size:13px;line-height:1.7">当前未勾选 <strong>Artificial Analysis</strong>，智力 vs 成本散点仅来自 AA（API 实测）。<br>请在上方勾选「🧪 Artificial Analysis」查看该图。</div>`;
   } else {
     body.innerHTML = `<div class="chart-container"><canvas id="compareScatter"></canvas></div>`;
-    const bgData = DATA.models.map(m => ({ x:getMetricVal(m,'cost_per_task')||0.01, y:getMetricVal(m,'intelligence_index')||0, r:4, name:m.name, color:'#d1d5db', skipLabel:true }));
-    const selData = selected.map(m => ({ x:getMetricVal(m,'cost_per_task')||0.01, y:getMetricVal(m,'intelligence_index')||0, r:8, name:m.name, color:m.color }));
-    makeChart('compareScatter', { type:'scatter',
-      data:{ datasets:[
-        { data:bgData, backgroundColor:'#e5e7eb', borderColor:'#d1d5db', borderWidth:1 },
-        { data:selData, backgroundColor:selData.map(d=>d.color), borderColor:selData.map(d=>d.color), borderWidth:2, pointRadius:8 }
-      ]},
+    const pts = DATA.models.map(m => {
+      const sel = selected.some(s => s.id === m.id);
+      return {
+        x: getMetricVal(m,'cost_per_task')||0.01,
+        y: getMetricVal(m,'intelligence_index')||0,
+        r: sel ? 9 : 5,
+        name: m.name,
+        color: sel ? m.color : '#9ca3af'
+      };
+    });
+    makeChart('compareScatter', { type:'bubble',
+      data:{ datasets:[{ data:pts, backgroundColor:pts.map(p=>p.color), borderColor:pts.map(p=>p.color), borderWidth:1.5 }] },
       options:{ responsive:true, maintainAspectRatio:false,
         plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
         scales:{ x:{ title:{display:true,text:'每任务成本 (USD)',font:{size:12}}, type:'logarithmic', ticks:{font:{size:11}} }, y:{ title:{display:true,text:'智力指数 (来源: AA)',font:{size:12}}, min:65, max:86, ticks:{font:{size:11}} } }
