@@ -170,6 +170,49 @@ function getMetricVal(m, key) { const met = getMetric(m, key); return met ? met.
 function formatSourceBadge(source) { if(!source) return ''; return `<span class="source-badge ${source}" title="${DATA.sources[source]?.desc || ''}">${source}</span>`; }
 function getSourceColor(source) { return DATA.sources[source]?.color || '#999'; }
 
+// ——— 散点图点旁模型名标注插件（带简单防重叠）———
+const pointLabelPlugin = {
+  id: 'pointLabels',
+  afterDatasetsDraw(chart) {
+    const opt = chart.options.plugins?.pointLabels;
+    if (!opt?.enabled) return;
+    const { ctx, chartArea } = chart;
+    const isMobile = document.documentElement.dataset.device === 'mobile';
+    ctx.save();
+    ctx.font = `600 ${isMobile ? 9 : 10.5}px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC",sans-serif`;
+    const placed = [];
+    chart.data.datasets.forEach((ds, di) => {
+      const meta = chart.getDatasetMeta(di);
+      if (meta.hidden) return;
+      meta.data.forEach((el, i) => {
+        const raw = ds.data[i];
+        if (!raw || !raw.name || raw.skipLabel) return;
+        const r = (el.options && el.options.radius) || raw.r || 4;
+        const w = ctx.measureText(raw.name).width;
+        let align = 'left', tx = el.x + r + 5, ty = el.y + 3;
+        if (tx + w > chartArea.right - 2) { align = 'right'; tx = el.x - r - 5; }
+        // 防重叠：与已放置的标签冲突时向下挪
+        let box = { x: align === 'left' ? tx : tx - w, y: ty - 9, w, h: 12 };
+        let tries = 0;
+        while (tries < 6 && placed.some(p => !(box.x + box.w < p.x || p.x + p.w < box.x || box.y + box.h < p.y || p.y + p.h < box.y))) {
+          ty += 12; box.y += 12; tries++;
+        }
+        if (ty > chartArea.bottom - 2) ty = el.y - r - 5; // 兜底：挪不开就放到点上方
+        placed.push(box);
+        // 白色描边提升可读性
+        ctx.textAlign = align;
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = 'rgba(255,255,255,.85)';
+        ctx.strokeText(raw.name, tx, ty);
+        ctx.fillStyle = raw.labelColor || raw.color || '#374151';
+        ctx.fillText(raw.name, tx, ty);
+      });
+    });
+    ctx.restore();
+  }
+};
+if (typeof Chart !== 'undefined') Chart.register(pointLabelPlugin);
+
 function makeChart(id, config) {
   if (CHARTS[id]) { CHARTS[id].destroy(); delete CHARTS[id]; }
   const ctx = document.getElementById(id);
@@ -352,7 +395,7 @@ function buildScatterIntelCost() {
   makeChart('scatterIntelCost', { type:'scatter',
     data:{ datasets:[{ data:points, backgroundColor:points.map(p=>p.color+'99'), borderColor:points.map(p=>p.color), borderWidth:1.5 }] },
     options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
+      plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
       scales:{ x:{ title:{display:true,text:'每任务成本 (USD)',font:{size:12}}, type:'logarithmic', ticks:{font:{size:11}} }, y:{ title:{display:true,text:'智力指数',font:{size:12}}, min:65, max:86, ticks:{font:{size:11}} } }
     }
   });
@@ -537,7 +580,7 @@ function renderCompareContent() {
     body.innerHTML = `<div style="padding:24px;color:var(--text-secondary);font-size:13px;line-height:1.7">当前未勾选 <strong>Artificial Analysis</strong>，智力 vs 成本散点仅来自 AA（API 实测）。<br>请在上方勾选「🧪 Artificial Analysis」查看该图。</div>`;
   } else {
     body.innerHTML = `<div class="chart-container"><canvas id="compareScatter"></canvas></div>`;
-    const bgData = DATA.models.map(m => ({ x:getMetricVal(m,'cost_per_task')||0.01, y:getMetricVal(m,'intelligence_index')||0, r:4, name:m.name, color:'#d1d5db' }));
+    const bgData = DATA.models.map(m => ({ x:getMetricVal(m,'cost_per_task')||0.01, y:getMetricVal(m,'intelligence_index')||0, r:4, name:m.name, color:'#d1d5db', skipLabel:true }));
     const selData = selected.map(m => ({ x:getMetricVal(m,'cost_per_task')||0.01, y:getMetricVal(m,'intelligence_index')||0, r:8, name:m.name, color:m.color }));
     makeChart('compareScatter', { type:'scatter',
       data:{ datasets:[
@@ -545,7 +588,7 @@ function renderCompareContent() {
         { data:selData, backgroundColor:selData.map(d=>d.color), borderColor:selData.map(d=>d.color), borderWidth:2, pointRadius:8 }
       ]},
       options:{ responsive:true, maintainAspectRatio:false,
-        plugins:{ tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
+        plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
         scales:{ x:{ title:{display:true,text:'每任务成本 (USD)',font:{size:12}}, type:'logarithmic', ticks:{font:{size:11}} }, y:{ title:{display:true,text:'智力指数 (来源: AA)',font:{size:12}}, min:65, max:86, ticks:{font:{size:11}} } }
       }
     });
@@ -612,7 +655,7 @@ function initCostScatter() {
   makeChart('costScatter', { type:'scatter',
     data:{ datasets:[{ data:points, backgroundColor:points.map(p=>p.color+'88'), borderColor:points.map(p=>p.color), borderWidth:1.5 }] },
     options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
+      plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
       scales:{ x:{ title:{display:true,text:'每任务成本 (USD) (来源: AA)',font:{size:12}}, type:'logarithmic', ticks:{font:{size:11}} }, y:{ title:{display:true,text:'智力指数 (来源: AA)',font:{size:12}}, min:65, max:86, ticks:{font:{size:11}} } }
     }
   });
@@ -637,7 +680,7 @@ function initCostSpeedIntel() {
   makeChart('costSpeedIntel', { type:'scatter',
     data:{ datasets:[{ data:points, backgroundColor:points.map(p=>p.color+'77'), borderColor:points.map(p=>p.color), borderWidth:1.5 }] },
     options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 速度 ${c.raw.y} t/s · 成本 $${c.raw.x.toFixed(3)} · 智力 ✓` } }, legend:{display:false} },
+      plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 速度 ${c.raw.y} t/s · 成本 $${c.raw.x.toFixed(3)} · 智力 ✓` } }, legend:{display:false} },
       scales:{ x:{ title:{display:true,text:'每任务成本 (USD) (来源: AA)',font:{size:12}}, type:'logarithmic', ticks:{font:{size:11}} }, y:{ title:{display:true,text:'输出速度 t/s (来源: AA)',font:{size:12}}, ticks:{font:{size:11}} } }
     }
   });
