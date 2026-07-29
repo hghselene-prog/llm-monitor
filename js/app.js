@@ -810,9 +810,34 @@ function renderMethodology() {
 // ========== EVOLUTION (US vs China Code Arena) ==========
 function initEvolution() {
   if (!EVOLUTION) return;
+  renderEvolutionMeta();
   buildEvolutionLine();
   buildEvolutionGap();
   renderEvolutionNodes();
+  renderEvolutionFooter();
+}
+
+// 表头：数据源 + 已证实截止时间 + 页面更新时间 + 灰色=未证实图例
+function renderEvolutionMeta() {
+  const el = document.getElementById('evolution-banner');
+  if (!el) return;
+  const m = EVOLUTION.meta || {};
+  const name = m.source_name || 'LMArena';
+  el.innerHTML = `
+    <div class="evo-banner-row">
+      <span class="evo-banner-item"><strong>数据源：</strong><a href="${m.source_url||'#'}" target="_blank" rel="noopener">${name}</a> <span class="source-badge Arena">Arena</span></span>
+      <span class="evo-banner-item"><strong>已证实截至：</strong>${m.as_of || '—'}</span>
+      <span class="evo-banner-item"><strong>页面更新：</strong>${(m.last_updated||'').slice(0,10)}</span>
+      <span class="evo-banner-item evo-banner-gray"><span class="evo-gray-swatch"></span>灰色虚线 = 预测 / 未证实（尚未发生）</span>
+    </div>`;
+}
+
+// 表底：数据真实性与预测声明
+function renderEvolutionFooter() {
+  const el = document.getElementById('evolution-footer');
+  if (!el) return;
+  const m = EVOLUTION.meta || {};
+  el.innerHTML = `<div class="evo-footer-note"><span class="evo-footer-icon">⚠️</span><div><strong>数据说明：</strong>${m.note || ''}</div></div>`;
 }
 
 function buildEvolutionSeries() {
@@ -829,16 +854,19 @@ function buildEvolutionSeries() {
       if (!byQ[n.quarter] || n.date > byQ[n.quarter].date) byQ[n.quarter] = n;
     });
     let lastScore = null;
+    let lastStatus = 'confirmed';
     const data = allQuarters.map(q => {
-      if (byQ[q]) lastScore = byQ[q].score;
+      if (byQ[q]) { lastScore = byQ[q].score; lastStatus = byQ[q].status || 'confirmed'; }
       return {
         x: q,
         y: lastScore,
         model: byQ[q]?.model || null,
         date: byQ[q]?.date || null,
-        labelColor: r.color
+        status: lastStatus,
+        labelColor: lastStatus === 'projected' ? '#94a3b8' : r.color
       };
     });
+    const PROJ = '#cbd5e1', PROJ_BORDER = '#94a3b8';
     return {
       label: r.name,
       data,
@@ -847,6 +875,19 @@ function buildEvolutionSeries() {
       borderWidth: 3,
       pointRadius: 4,
       pointHoverRadius: 7,
+      pointBackgroundColor: data.map(d => d.status === 'projected' ? PROJ : r.color),
+      pointBorderColor: data.map(d => d.status === 'projected' ? PROJ_BORDER : r.color),
+      pointBorderWidth: 2,
+      segment: {
+        borderColor: ctx => {
+          const d = data[ctx.p1DataIndex];
+          return (d && d.status === 'projected') ? PROJ : r.color;
+        },
+        borderDash: ctx => {
+          const d = data[ctx.p1DataIndex];
+          return (d && d.status === 'projected') ? [6, 4] : undefined;
+        }
+      },
       tension: 0.15,
       fill: false
     };
@@ -878,7 +919,8 @@ function buildEvolutionLine() {
             label: c => {
               const d = c.raw;
               const name = d.model ? `${d.model} · ${d.y}` : `${d.y}`;
-              return `${c.dataset.label}: ${name}`;
+              const tag = d.status === 'projected' ? '（预测·未证实）' : '';
+              return `${c.dataset.label}: ${name}${tag}`;
             }
           }
         }
@@ -915,8 +957,10 @@ function buildEvolutionGap() {
     y: g.gap,
     leader: g.leader,
     us: g.us_score,
-    cn: g.china_score
+    cn: g.china_score,
+    status: g.status || 'confirmed'
   }));
+  const PROJ = '#cbd5e1', PROJ_BORDER = '#94a3b8';
 
   makeChart('evolutionGap', {
     type: 'bar',
@@ -925,8 +969,8 @@ function buildEvolutionGap() {
       datasets: [{
         label: 'Gap (US − China)',
         data,
-        backgroundColor: data.map(d => d.y >= 0 ? '#22c55e' : '#ef4444'),
-        borderColor: data.map(d => d.y >= 0 ? '#16a34a' : '#dc2626'),
+        backgroundColor: data.map(d => d.status === 'projected' ? PROJ : (d.y >= 0 ? '#22c55e' : '#ef4444')),
+        borderColor: data.map(d => d.status === 'projected' ? PROJ_BORDER : (d.y >= 0 ? '#16a34a' : '#dc2626')),
         borderWidth: 1,
         borderRadius: 4
       }]
@@ -941,7 +985,8 @@ function buildEvolutionGap() {
             label: c => {
               const d = c.raw;
               const sign = d.y >= 0 ? 'US 领先' : 'China 领先';
-              return `${sign} ${Math.abs(d.y)} 分 · US ${d.us} / CN ${d.cn}`;
+              const tag = d.status === 'projected' ? '（预测·未证实）' : '';
+              return `${sign} ${Math.abs(d.y)} 分 · US ${d.us} / CN ${d.cn}${tag}`;
             }
           }
         },
@@ -976,13 +1021,20 @@ function renderEvolutionNodes() {
   const nodes = EVOLUTION.regions.flatMap(r => r.nodes.map(n => ({ ...n, region: r.name, color: r.color })))
     .sort((a, b) => a.date.localeCompare(b.date));
 
-  const cards = nodes.map(n => `
-    <div class="evolution-node" style="border-left:4px solid ${n.color}">
-      <div class="enode-date">${n.quarter} · ${n.date}</div>
-      <div class="enode-model" style="color:${n.color}">${n.model}</div>
+  const cards = nodes.map(n => {
+    const isProj = n.status === 'projected';
+    const badge = isProj
+      ? '<span class="evo-badge evo-badge-projected">预测 · 未证实</span>'
+      : '<span class="evo-badge evo-badge-confirmed">已证实</span>';
+    const leftColor = isProj ? '#cbd5e1' : n.color;
+    const modelColor = isProj ? '#94a3b8' : n.color;
+    return `
+    <div class="evolution-node${isProj ? ' evolved-projected' : ''}" style="border-left:4px solid ${leftColor}">
+      <div class="enode-date">${n.quarter} · ${n.date} ${badge}</div>
+      <div class="enode-model" style="color:${modelColor}">${n.model}</div>
       <div class="enode-meta"><span>${n.region}</span><span class="enode-score">${n.score}</span></div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 
   wrap.innerHTML = `
     <div class="evolution-grid" style="opacity:${showArena ? 1 : 0.4}">${cards}</div>

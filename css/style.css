@@ -254,3 +254,21 @@ tbody tr:hover{background:var(--bg-secondary)}
 [data-device="mobile"] .evolution-grid{grid-template-columns:repeat(2,1fr);gap:10px}
 [data-device="mobile"] .enode-model{font-size:13px}
 [data-device="mobile"] .enode-meta{font-size:11px}
+
+/* ===== Evolution data-source banner + projected styling ===== */
+.evo-banner{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding:10px 16px;background:var(--source-arena-bg);border:1px solid var(--source-arena);border-radius:8px;margin-bottom:16px;font-size:12.5px;color:var(--text-secondary)}
+.evo-banner-row{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;width:100%}
+.evo-banner-item{display:flex;align-items:center;gap:5px;white-space:nowrap}
+.evo-banner-item a{color:var(--source-arena);font-weight:600;text-decoration:none}
+.evo-banner-item a:hover{text-decoration:underline}
+.evo-banner-gray{color:#64748b;font-weight:600}
+.evo-gray-swatch{display:inline-block;width:22px;height:0;border-top:3px dashed #94a3b8;margin-right:4px;vertical-align:middle}
+.evo-badge{display:inline-block;padding:1px 6px;border-radius:4px;font-size:9.5px;font-weight:700;vertical-align:middle;margin-left:6px;white-space:nowrap}
+.evo-badge-confirmed{background:#dcfce7;color:#15803d}
+.evo-badge-projected{background:#e2e8f0;color:#475569}
+.evolution-node.evolved-projected{background:#f8fafc}
+.evo-footer{margin-top:20px}
+.evo-footer-note{display:flex;gap:10px;align-items:flex-start;padding:14px 16px;background:var(--bg);border:1px dashed var(--border);border-radius:8px;font-size:12.5px;line-height:1.7;color:var(--text-secondary)}
+.evo-footer-icon{flex-shrink:0;font-size:15px}
+[data-device="mobile"] .evo-banner{font-size:11px;gap:6px 12px;padding:8px 12px}
+[data-device="mobile"] .evo-banner-gray{flex-basis:100%}
