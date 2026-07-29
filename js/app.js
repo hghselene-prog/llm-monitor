@@ -130,10 +130,11 @@ const SUBTITLES = {
 // ——— Data Loading ———
 async function loadData() {
   try {
+    const fetchOpts = { cache: 'no-store' };
     const [modelsRes, methodRes, evoRes] = await Promise.all([
-      fetch('data/models.json'),
-      fetch('data/methodology.json'),
-      fetch('data/evolution.json')
+      fetch('data/models.json', fetchOpts),
+      fetch('data/methodology.json', fetchOpts),
+      fetch('data/evolution.json', fetchOpts)
     ]);
     DATA = await modelsRes.json();
     METHODOLOGY = await methodRes.json();
