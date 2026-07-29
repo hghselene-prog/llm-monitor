@@ -1,31 +1,36 @@
 {
   "meta": {
     "title": "Frontend / Code Arena: United States vs China",
-    "subtitle": "中美大模型在前端代码 / 编程能力上的演进对比（基于 LMArena Code Arena / WebDev Arena 公开快照 + 本站点 models.json 当前实测）",
+    "subtitle": "中美大模型在前端代码 / 编程能力上的演进对比（2024 至今，基于 LMArena Code Arena / WebDev Arena 公开快照）",
     "source": "Arena",
     "source_name": "LMArena (Code Arena / WebDev Arena)",
     "source_url": "https://lmarena.ai/",
     "y_axis": "Arena Score (Elo)",
-    "as_of": "2026-07",
-    "last_updated": "2026-07-29T16:40:00Z",
-    "note": "本页数据来自 LMArena Code Arena / WebDev Arena 公开历史快照（furukama WebDev 榜单、llm-registry、Propel Code 2026-05-24 快照、量子位 / CSDN 报道），最新 2026-07 锚点采用本站点 models.json 的当前实测分（Claude Opus 5 1684 / Kimi K3 1677）。所有 status=confirmed，非示意、非预测。连线为各区域 SOTA 前沿包络（running-max）。关键事实：月之暗面 Kimi K3 于 2026-07-16 发布，在 WebDev Arena 以约 1679 分登顶（多家独立报道确认其为真实发布、首个登顶的开源模型）；按本站点 canonical 数据，Kimi K3（1677）仍是美国 SOTA Claude Opus 5（1684）的极近追平者——差距仅 7 分，为历史性收窄，但截至本页数据 K3 尚未越过 Opus 5（请不要把“接近”误读为“已经超越”）。精确实时排名以 LMArena 官方（lmarena.ai）为准。"
+    "as_of": "2024 – 2026",
+    "last_updated": "2026-07-29T16:48:00Z",
+    "note": "时间轴自 2024 年拉开，以月之暗面 DeepSeek V3（2024-12-26 发布）作为中国侧起点。数据分两类：① 真实公开快照（provenance=lmarena-webdev-2024）——来自 LMArena 官方 WebDev Arena 博客（arena.ai/blog/webdev-arena/）发布的原始 Elo（Original Score），覆盖 2024 至 2025 年初的真实节点：Claude 3.5 Sonnet 1246、GPT-4o 964、DeepSeek V3 964、Qwen2.5-Coder-32B 903、DeepSeek R1 1205、Claude 3.7 Sonnet 1363 等；② 本站点 canonical 当前实测（provenance=canonical-models）——采用 models.json 的 elo_webdev 当前分，覆盖 2025 Q2 起的节点（Gemini 2.5 Pro 1405、Claude Opus 5 1684、Kimi K3 1677 等）。所有 status=confirmed，非示意、非预测。连线为各区域 SOTA 前沿包络（running-max）。重要说明：Arena 的 Elo 绝对分值会随投票池与模型池演进而漂移，故 2024 真实快照（量级 ~900–1360）与 2025–2026 canonical 分（量级 ~1400–1680）并非严格同一刻度，本图应读作“各区域 SOTA 前沿的相对演进轨迹”，而非跨 2024→2025 的连续刻度比较。关键事实：中国侧 Kimi K3（1677）在 2026 年已逼近美国 SOTA Claude Opus 5（1684），差距收窄至 7 分，为历史性追平，但截至本页数据 K3 尚未越过 Opus 5（勿将“接近”误读为“已超越”）。精确实时排名以 LMArena 官方（lmarena.ai）为准。"
   },
-  "notes": "数据来自 LMArena Code Arena / WebDev Arena 公开历史快照 + 本站点 models.json 当前实测。status 字段：confirmed = 来自公开快照 / 本站点实测的真实分数。本页已无 projected（预测）数据。连线为各区域 SOTA 前沿包络（running-max）。",
+  "notes": "数据来自 LMArena WebDev Arena 公开原始 Elo（2024–2025 初，真实）+ 本站点 models.json 当前实测（2025 Q2 起，canonical）。节点字段 provenance 标注入处。status=confirmed（全部为真实/实测，无 projected）。连线为各区域 SOTA 前沿包络（running-max）。",
   "regions": [
     {
       "id": "US",
       "name": "United States",
       "color": "#22c55e",
       "nodes": [
-        { "date": "2025-03", "quarter": "2025 Q1", "model": "Gemini 2.5 Pro", "score": 1405, "status": "confirmed" },
-        { "date": "2025-05", "quarter": "2025 Q2", "model": "Claude Opus 4", "score": 1383, "status": "confirmed" },
-        { "date": "2025-08", "quarter": "2025 Q3", "model": "GPT-5", "score": 1483, "status": "confirmed" },
-        { "date": "2025-08", "quarter": "2025 Q3", "model": "Claude Opus 4.1", "score": 1476, "status": "confirmed" },
-        { "date": "2026-01", "quarter": "2026 Q1", "model": "Claude Opus 4.5 Thinking", "score": 1511, "status": "confirmed" },
-        { "date": "2026-04", "quarter": "2026 Q2", "model": "Claude Opus 4.7", "score": 1560, "status": "confirmed" },
-        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.6", "score": 1538, "status": "confirmed" },
-        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.7 Thinking", "score": 1567, "status": "confirmed" },
-        { "date": "2026-07-28", "quarter": "2026 Q3", "model": "Claude Opus 5", "score": 1684, "status": "confirmed" }
+        { "date": "2024-02", "quarter": "2024 Q1", "model": "Gemini 1.5 Pro", "score": 893, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2024-11-20", "quarter": "2024 Q3", "model": "GPT-4o", "score": 964, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2024-10-22", "quarter": "2024 Q4", "model": "Claude 3.5 Sonnet", "score": 1246, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2025-02-05", "quarter": "2025 Q1", "model": "Gemini 2.0 Pro Exp", "score": 1102, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2025-02-19", "quarter": "2025 Q1", "model": "Claude 3.7 Sonnet", "score": 1363, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2025-03", "quarter": "2025 Q2", "model": "Gemini 2.5 Pro", "score": 1405, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2025-05", "quarter": "2025 Q2", "model": "Claude Opus 4", "score": 1383, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2025-08", "quarter": "2025 Q3", "model": "GPT-5", "score": 1483, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2025-08", "quarter": "2025 Q3", "model": "Claude Opus 4.1", "score": 1476, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-01", "quarter": "2026 Q1", "model": "Claude Opus 4.5 Thinking", "score": 1511, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-04", "quarter": "2026 Q2", "model": "Claude Opus 4.7", "score": 1560, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.6", "score": 1538, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.7 Thinking", "score": 1567, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-07-28", "quarter": "2026 Q3", "model": "Claude Opus 5", "score": 1684, "status": "confirmed", "provenance": "canonical-models" }
       ]
     },
     {
@@ -33,24 +38,26 @@
       "name": "China",
       "color": "#ef4444",
       "nodes": [
-        { "date": "2025-01", "quarter": "2025 Q1", "model": "DeepSeek R1", "score": 1393, "status": "confirmed" },
-        { "date": "2025-07", "quarter": "2025 Q3", "model": "Qwen3 Coder 480B", "score": 1367, "status": "confirmed" },
-        { "date": "2025-07", "quarter": "2025 Q3", "model": "GLM 4.5", "score": 1375, "status": "confirmed" },
-        { "date": "2025-08", "quarter": "2025 Q3", "model": "GLM 4.5 Air", "score": 1367, "status": "confirmed" },
-        { "date": "2026-04", "quarter": "2026 Q2", "model": "GLM 5.1", "score": 1532, "status": "confirmed" },
-        { "date": "2026-04", "quarter": "2026 Q2", "model": "Kimi K2.6", "score": 1519, "status": "confirmed" },
-        { "date": "2026-04", "quarter": "2026 Q2", "model": "Qwen3.6 Max", "score": 1491, "status": "confirmed" },
-        { "date": "2026-05", "quarter": "2026 Q2", "model": "Qwen3.7-Max", "score": 1541, "status": "confirmed" },
-        { "date": "2026-07-20", "quarter": "2026 Q3", "model": "Kimi K3", "score": 1677, "status": "confirmed" }
+        { "date": "2024-11", "quarter": "2024 Q4", "model": "Qwen2.5-Coder-32B", "score": 903, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2024-12-26", "quarter": "2024 Q4", "model": "DeepSeek V3", "score": 964, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2025-01-25", "quarter": "2025 Q1", "model": "Qwen-Max", "score": 980, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2025-01", "quarter": "2025 Q1", "model": "DeepSeek R1", "score": 1205, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2025-07", "quarter": "2025 Q3", "model": "GLM 4.5", "score": 1375, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2025-08", "quarter": "2025 Q3", "model": "GLM 4.5 Air", "score": 1367, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-04", "quarter": "2026 Q2", "model": "GLM 5.1", "score": 1532, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-04", "quarter": "2026 Q2", "model": "Kimi K2.6", "score": 1519, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-04", "quarter": "2026 Q2", "model": "Qwen3.6 Max", "score": 1491, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-05", "quarter": "2026 Q2", "model": "Qwen3.7-Max", "score": 1541, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-07-20", "quarter": "2026 Q3", "model": "Kimi K3", "score": 1677, "status": "confirmed", "provenance": "canonical-models" }
       ]
     }
   ],
   "gap": [
-    { "quarter": "2025 Q1", "us_score": 1405, "china_score": 1393, "gap": 12, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q2", "us_score": 1405, "china_score": 1393, "gap": 12, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q3", "us_score": 1483, "china_score": 1393, "gap": 90, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q4", "us_score": 1483, "china_score": 1393, "gap": 90, "leader": "US", "status": "confirmed" },
-    { "quarter": "2026 Q1", "us_score": 1511, "china_score": 1393, "gap": 118, "leader": "US", "status": "confirmed" },
+    { "quarter": "2024 Q4", "us_score": 1246, "china_score": 964, "gap": 282, "leader": "US", "status": "confirmed" },
+    { "quarter": "2025 Q1", "us_score": 1363, "china_score": 1205, "gap": 158, "leader": "US", "status": "confirmed" },
+    { "quarter": "2025 Q2", "us_score": 1405, "china_score": 1205, "gap": 200, "leader": "US", "status": "confirmed" },
+    { "quarter": "2025 Q3", "us_score": 1483, "china_score": 1375, "gap": 108, "leader": "US", "status": "confirmed" },
+    { "quarter": "2026 Q1", "us_score": 1511, "china_score": 1375, "gap": 136, "leader": "US", "status": "confirmed" },
     { "quarter": "2026 Q2", "us_score": 1567, "china_score": 1541, "gap": 26, "leader": "US", "status": "confirmed" },
     { "quarter": "2026 Q3", "us_score": 1684, "china_score": 1677, "gap": 7, "leader": "US", "status": "confirmed" }
   ]

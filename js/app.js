@@ -849,10 +849,10 @@ function buildEvolutionSeries() {
   allQuarters.sort((a, b) => quarterOrder(a) - quarterOrder(b));
 
   const datasets = EVOLUTION.regions.map(r => {
-    // 按 quarter 分组，取该 quarter 最后（date 最大）一个节点
+    // 按 quarter 分组，取该 quarter 最高分（SOTA 前沿）的节点；跨季度 running-max 不回退
     const byQ = {};
     r.nodes.forEach(n => {
-      if (!byQ[n.quarter] || n.date > byQ[n.quarter].date) byQ[n.quarter] = n;
+      if (!byQ[n.quarter] || n.score > byQ[n.quarter].score) byQ[n.quarter] = n;
     });
     let lastScore = null;
     let lastStatus = 'confirmed';
