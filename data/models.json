@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-21T08:00:00Z",
+  "last_updated": "2026-07-29T01:00:00Z",
   "sources": {
     "AA": {
       "name": "Artificial Analysis",
@@ -27,6 +27,46 @@
     }
   },
   "models": [
+    {
+      "id": "claudeOpus5",
+      "name": "Claude Opus 5",
+      "provider": "Anthropic",
+      "country": "US",
+      "open_source": false,
+      "reasoning": true,
+      "multimodal": true,
+      "color": "#d97706",
+      "metrics": [
+        { "key": "intelligence_index", "value": 83.3, "source": "AA", "confidence": "±1.1", "updated": "2026-07-25" },
+        { "key": "coding_index", "value": 87.6, "source": "AA", "confidence": null, "updated": "2026-07-25" },
+        { "key": "agentic_index", "value": 66.9, "source": "AA", "confidence": null, "updated": "2026-07-25" },
+        { "key": "speed_tps", "value": 71, "source": "AA", "confidence": null, "updated": "2026-07-25" },
+        { "key": "latency_s", "value": 2.5, "source": "AA", "confidence": null, "updated": "2026-07-25" },
+        { "key": "cost_per_task", "value": 0.512, "source": "AA", "confidence": null, "updated": "2026-07-25" },
+        { "key": "api_price_input", "value": 7.50, "source": "AA", "confidence": null, "updated": "2026-07-25" },
+        { "key": "api_price_output", "value": 37.50, "source": "AA", "confidence": null, "updated": "2026-07-25" },
+        { "key": "api_price_cache_hit", "value": 1.88, "source": "AA", "confidence": null, "updated": "2026-07-25" },
+        { "key": "api_price_reasoning", "value": 37.50, "source": "AA", "confidence": null, "updated": "2026-07-25" },
+        { "key": "reasoning", "value": 92.1, "source": "LB", "confidence": null, "updated": "2026-07-27" },
+        { "key": "coding", "value": 87.6, "source": "LB", "confidence": null, "updated": "2026-07-27" },
+        { "key": "agentic_coding", "value": 66.9, "source": "LB", "confidence": null, "updated": "2026-07-27" },
+        { "key": "mathematics", "value": 96.5, "source": "LB", "confidence": null, "updated": "2026-07-27" },
+        { "key": "data_analysis", "value": 81.2, "source": "LB", "confidence": null, "updated": "2026-07-27" },
+        { "key": "language", "value": 90.9, "source": "LB", "confidence": null, "updated": "2026-07-27" },
+        { "key": "instruction_following", "value": 76.3, "source": "LB", "confidence": null, "updated": "2026-07-27" },
+        { "key": "elo_text", "value": 1516, "source": "Arena", "confidence": "±14", "updated": "2026-07-28" },
+        { "key": "elo_vision", "value": 1324, "source": "Arena", "confidence": "±16", "updated": "2026-07-28" },
+        { "key": "elo_webdev", "value": 1684, "source": "Arena", "confidence": "±20", "updated": "2026-07-28" },
+        { "key": "elo_document", "value": 1514, "source": "Arena", "confidence": "±18", "updated": "2026-07-28" },
+        { "key": "elo_agent", "value": 14.05, "source": "Arena", "confidence": "±2.30%", "updated": "2026-07-28" }
+      ],
+      "timeline_intel": [
+        {"quarter": "2024Q1", "value": 47}, {"quarter": "2024Q2", "value": 53},
+        {"quarter": "2024Q3", "value": 61}, {"quarter": "2024Q4", "value": 68},
+        {"quarter": "2025Q1", "value": 73}, {"quarter": "2025Q2", "value": 76},
+        {"quarter": "2025Q3", "value": 78.9}, {"quarter": "2025Q4", "value": 83.3}
+      ]
+    },
     {
       "id": "gpt56sol",
       "name": "GPT-5.6 Sol Max Effort",
@@ -452,6 +492,8 @@
     }
   ],
   "changelog": [
+    { "date": "2026-07-28", "event": "Claude Opus 5 上线全部三大榜单：AA 智力指数与 Agentic Index 双第一，Arena 各专项 Elo 领跑（初期置信区间较宽）", "url": "#" },
+    { "date": "2026-07-24", "event": "Anthropic 发布 Claude Opus 5：SWE-bench Verified 96.0%，1M 上下文，定价 $5/$25 仅为 Fable 5 一半", "url": "#" },
     { "date": "2026-07-20", "event": "Motif 3 (Beta) 新模型上线评测", "url": "#" },
     { "date": "2026-07-17", "event": "六家实验室模型智力指数突破50大关", "url": "#" },
     { "date": "2026-07-17", "event": "Kimi K3 登顶智力指数第3名，比肩 Opus 4.8 和 GPT-5.5", "url": "#" },
