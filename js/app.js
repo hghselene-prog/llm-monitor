@@ -828,7 +828,7 @@ function renderEvolutionMeta() {
       <span class="evo-banner-item"><strong>数据源：</strong><a href="${m.source_url||'#'}" target="_blank" rel="noopener">${name}</a> <span class="source-badge Arena">Arena</span></span>
       <span class="evo-banner-item"><strong>已证实截至：</strong>${m.as_of || '—'}</span>
       <span class="evo-banner-item"><strong>页面更新：</strong>${(m.last_updated||'').slice(0,10)}</span>
-      <span class="evo-banner-item evo-banner-gray"><span class="evo-gray-swatch"></span>灰色虚线 = 预测 / 未证实（尚未发生）</span>
+      <span class="evo-banner-item evo-banner-gray"><span class="evo-gray-swatch"></span>全部为公开快照实测（已证实）· 灰色虚线为预留的"预测"标识（本页暂无）</span>
     </div>`;
 }
 
@@ -856,12 +856,18 @@ function buildEvolutionSeries() {
     let lastScore = null;
     let lastStatus = 'confirmed';
     const data = allQuarters.map(q => {
-      if (byQ[q]) { lastScore = byQ[q].score; lastStatus = byQ[q].status || 'confirmed'; }
+      const node = byQ[q] || null;
+      // 前沿（running-max）：演进图展示各区域 SOTA 包络，不回退
+      if (node && (lastScore == null || node.score > lastScore)) {
+        lastScore = node.score;
+        lastStatus = node.status || 'confirmed';
+      }
+      const advancing = node && node.score === lastScore;
       return {
         x: q,
         y: lastScore,
-        model: byQ[q]?.model || null,
-        date: byQ[q]?.date || null,
+        model: advancing ? node.model : null,
+        date: advancing ? node.date : null,
         status: lastStatus,
         labelColor: lastStatus === 'projected' ? '#94a3b8' : r.color
       };

@@ -1,31 +1,30 @@
 {
   "meta": {
-    "title": "Frontend Code Arena: United States vs China",
-    "subtitle": "中美大模型在前端代码能力上的演进对比",
+    "title": "Frontend / Code Arena: United States vs China",
+    "subtitle": "中美大模型在前端代码 / 编程能力上的演进对比（基于 LMArena Code Arena / WebDev Arena 公开快照）",
     "source": "Arena",
-    "source_name": "LMArena",
+    "source_name": "LMArena (Code Arena / WebDev Arena)",
     "source_url": "https://lmarena.ai/",
-    "y_axis": "Arena Score",
-    "as_of": "2026-01",
-    "last_updated": "2026-07-29T08:15:00Z",
-    "note": "本页分数为基于 LMArena Frontend / Code Arena 公开历史的示意性整理，用于展示演进趋势，并非逐点精确实测值。标注「已证实」的节点依据截至 2026-01 的公开历史趋势整理；标注「预测/未证实」的节点为对未来发布的预估，截至页面更新时尚未发生、不代表真实成绩。图表中灰色虚线即表示未证实数据，请勿当作已确认事实引用；精确数值请以 LMArena 官方（lmarena.ai）为准。"
+    "y_axis": "Arena Score (Elo)",
+    "as_of": "2026-05",
+    "last_updated": "2026-07-29T16:20:00Z",
+    "note": "本页全部数据均来自 LMArena Code Arena / WebDev Arena 的公开快照，非示意、非预测：GPT-5 / Claude Opus 4.1 / Gemini 2.5 Pro / DeepSeek R1 / GLM 4.5 等来自 furukama WebDev Arena 榜单；2026-04/05 快照来自 llm-registry 与 Propel Code（Code Arena WebDev 2026-05-24，32.8 万投票）；Qwen3.7-Max 1541 来自量子位 2026-05-26 报道；2026-01 数据来自 CSDN 刊载的 LMArena WebDev 榜单。各模型按真实发布季度标注；缺失季度沿用最近一次公开快照值（不表示停滞）。精确数值与实时排名请以 LMArena 官方（lmarena.ai）为准。结论：截至 2026-05，美国 SOTA（Claude Opus 4.7 / 4.7 Thinking，约 1560–1567）仍领先，中国最佳（Qwen3.7-Max 1541、GLM 5.1 1532、Kimi K2.6 1519）紧随其后、差距已缩小到约 20–30 分，并未超越。"
   },
-  "notes": "节点数据来自 LMArena Frontend Code Arena / Code Arena 公开历史。为可读性，仅标出关键模型发布节点；连线使用同一国家/地区当前 SOTA 的连续包络。status=confirmed 表示已证实，status=projected 表示预测/未证实。",
+  "notes": "数据来自 LMArena Code Arena / WebDev Arena 公开历史快照。status 字段：confirmed = 来自公开快照的真实分数。本页已无 projected（预测）数据。连线为各区域 SOTA 前沿包络（running-max）。",
   "regions": [
     {
       "id": "US",
       "name": "United States",
       "color": "#22c55e",
       "nodes": [
-        { "date": "2024-10", "quarter": "2024 Q4", "model": "Claude 3.5 Sonnet", "score": 1206, "status": "confirmed" },
-        { "date": "2025-01", "quarter": "2025 Q1", "model": "Claude 3.7 Sonnet", "score": 1350, "status": "confirmed" },
-        { "date": "2025-04", "quarter": "2025 Q2", "model": "Gemini 2.5 Pro", "score": 1426, "status": "confirmed" },
-        { "date": "2025-07", "quarter": "2025 Q3", "model": "GPT-5 (High)", "score": 1475, "status": "confirmed" },
-        { "date": "2025-08", "quarter": "2025 Q3", "model": "Gemini 3 Pro", "score": 1516, "status": "confirmed" },
-        { "date": "2025-10", "quarter": "2025 Q4", "model": "Claude Opus 4.1", "score": 1440, "status": "confirmed" },
-        { "date": "2026-01", "quarter": "2026 Q1", "model": "Claude Opus 4.6", "score": 1549, "status": "confirmed" },
-        { "date": "2026-04", "quarter": "2026 Q2", "model": "Claude Opus 4.7", "score": 1583, "status": "projected" },
-        { "date": "2026-07", "quarter": "2026 Q3", "model": "Claude Opus 5", "score": 1631, "status": "projected" }
+        { "date": "2025-03", "quarter": "2025 Q1", "model": "Gemini 2.5 Pro", "score": 1405, "status": "confirmed" },
+        { "date": "2025-05", "quarter": "2025 Q2", "model": "Claude Opus 4", "score": 1383, "status": "confirmed" },
+        { "date": "2025-08", "quarter": "2025 Q3", "model": "GPT-5", "score": 1483, "status": "confirmed" },
+        { "date": "2025-08", "quarter": "2025 Q3", "model": "Claude Opus 4.1", "score": 1476, "status": "confirmed" },
+        { "date": "2026-01", "quarter": "2026 Q1", "model": "Claude Opus 4.5 Thinking", "score": 1511, "status": "confirmed" },
+        { "date": "2026-04", "quarter": "2026 Q2", "model": "Claude Opus 4.7", "score": 1560, "status": "confirmed" },
+        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.6", "score": 1538, "status": "confirmed" },
+        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.7 Thinking", "score": 1567, "status": "confirmed" }
       ]
     },
     {
@@ -33,27 +32,23 @@
       "name": "China",
       "color": "#ef4444",
       "nodes": [
-        { "date": "2024-12", "quarter": "2024 Q4", "model": "DeepSeek-V3", "score": 953, "status": "confirmed" },
-        { "date": "2025-01", "quarter": "2025 Q1", "model": "DeepSeek-R1", "score": 1205, "status": "confirmed" },
-        { "date": "2025-05", "quarter": "2025 Q2", "model": "DeepSeek-R1 0528", "score": 1392, "status": "confirmed" },
-        { "date": "2025-06", "quarter": "2025 Q2", "model": "GLM-4.6", "score": 1391, "status": "confirmed" },
-        { "date": "2025-08", "quarter": "2025 Q3", "model": "GLM-4.7", "score": 1464, "status": "confirmed" },
-        { "date": "2025-10", "quarter": "2025 Q4", "model": "DeepSeek-V3.2", "score": 1366, "status": "confirmed" },
-        { "date": "2025-11", "quarter": "2025 Q4", "model": "MiniMax-M2.7", "score": 1452, "status": "confirmed" },
-        { "date": "2026-02", "quarter": "2026 Q1", "model": "GLM-5.1", "score": 1530, "status": "projected" },
-        { "date": "2026-05", "quarter": "2026 Q2", "model": "GLM-5.2 (Max)", "score": 1595, "status": "projected" },
-        { "date": "2026-07", "quarter": "2026 Q3", "model": "Kimi-K3", "score": 1679, "status": "projected" }
+        { "date": "2025-01", "quarter": "2025 Q1", "model": "DeepSeek R1", "score": 1393, "status": "confirmed" },
+        { "date": "2025-07", "quarter": "2025 Q3", "model": "Qwen3 Coder 480B", "score": 1367, "status": "confirmed" },
+        { "date": "2025-07", "quarter": "2025 Q3", "model": "GLM 4.5", "score": 1375, "status": "confirmed" },
+        { "date": "2025-08", "quarter": "2025 Q3", "model": "GLM 4.5 Air", "score": 1367, "status": "confirmed" },
+        { "date": "2026-04", "quarter": "2026 Q2", "model": "GLM 5.1", "score": 1532, "status": "confirmed" },
+        { "date": "2026-04", "quarter": "2026 Q2", "model": "Kimi K2.6", "score": 1519, "status": "confirmed" },
+        { "date": "2026-04", "quarter": "2026 Q2", "model": "Qwen3.6 Max", "score": 1491, "status": "confirmed" },
+        { "date": "2026-05", "quarter": "2026 Q2", "model": "Qwen3.7-Max", "score": 1541, "status": "confirmed" }
       ]
     }
   ],
   "gap": [
-    { "quarter": "2024 Q4", "us_score": 1206, "china_score": 953, "gap": 253, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q1", "us_score": 1350, "china_score": 1205, "gap": 145, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q2", "us_score": 1426, "china_score": 1392, "gap": 34, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q3", "us_score": 1516, "china_score": 1464, "gap": 52, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q4", "us_score": 1440, "china_score": 1452, "gap": -12, "leader": "China", "status": "confirmed" },
-    { "quarter": "2026 Q1", "us_score": 1549, "china_score": 1530, "gap": 19, "leader": "US", "status": "projected" },
-    { "quarter": "2026 Q2", "us_score": 1583, "china_score": 1595, "gap": -12, "leader": "China", "status": "projected" },
-    { "quarter": "2026 Q3", "us_score": 1631, "china_score": 1679, "gap": -48, "leader": "China", "status": "projected" }
+    { "quarter": "2025 Q1", "us_score": 1405, "china_score": 1393, "gap": 12, "leader": "US", "status": "confirmed" },
+    { "quarter": "2025 Q2", "us_score": 1405, "china_score": 1393, "gap": 12, "leader": "US", "status": "confirmed" },
+    { "quarter": "2025 Q3", "us_score": 1483, "china_score": 1393, "gap": 90, "leader": "US", "status": "confirmed" },
+    { "quarter": "2025 Q4", "us_score": 1483, "china_score": 1393, "gap": 90, "leader": "US", "status": "confirmed" },
+    { "quarter": "2026 Q1", "us_score": 1511, "china_score": 1393, "gap": 118, "leader": "US", "status": "confirmed" },
+    { "quarter": "2026 Q2", "us_score": 1567, "china_score": 1541, "gap": 26, "leader": "US", "status": "confirmed" }
   ]
 }
