@@ -620,6 +620,56 @@ function renderCompareContent() {
       }
     });
   }
+  buildPriceMultiple(selected);
+}
+
+// 价格倍数：以 DeepSeek V4 Pro 为基准(1.0×)，展示所有模型相对其每任务成本的倍数
+function buildPriceMultiple(selected) {
+  const base = DATA.models.find(m => m.id === 'deepseekV4');
+  const canvas = document.getElementById('priceMultipleChart');
+  if (!canvas) return;
+  const card = canvas.closest('.card');
+  if (!base) { if (card) card.style.display = 'none'; return; }
+  const baseCost = getMetricVal(base, 'cost_per_task');
+  if (!baseCost) { if (card) card.style.display = 'none'; return; }
+  const rows = DATA.models
+    .map(m => {
+      const c = getMetricVal(m, 'cost_per_task');
+      return {
+        name: m.name, id: m.id,
+        mult: c ? c / baseCost : null,
+        sel: selected.some(s => s.id === m.id),
+        isBase: m.id === 'deepseekV4'
+      };
+    })
+    .filter(r => r.mult != null)
+    .sort((a, b) => b.mult - a.mult);
+  makeChart('priceMultipleChart', {
+    type: 'bar',
+    data: {
+      labels: rows.map(r => r.name),
+      datasets: [{
+        label: '价格倍数 (× DeepSeek V4 Pro)',
+        data: rows.map(r => r.mult),
+        backgroundColor: rows.map(r => r.isBase ? '#f59e0b' : (r.sel ? '#6366f1' : 'rgba(148,163,184,.45)')),
+        borderColor: rows.map(r => r.isBase ? '#d97706' : (r.sel ? '#4f46e5' : 'rgba(148,163,184,.8)')),
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: c => `${c.raw.toFixed(1)}× 基准 · $${(c.raw * baseCost).toFixed(3)}/任务` } }
+      },
+      scales: {
+        x: { type: 'logarithmic', title: { display: true, text: '相对 DeepSeek V4 Pro 的成本倍数 (×)', font: { size: 12 } }, ticks: { font: { size: 11 } } },
+        y: { ticks: { font: { size: 11 } } }
+      }
+    }
+  });
 }
 
 // ========== TRENDS ==========
