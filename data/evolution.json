@@ -1,16 +1,16 @@
 {
   "meta": {
     "title": "Frontend / Code Arena: United States vs China",
-    "subtitle": "中美大模型在前端代码 / 编程能力上的演进对比（基于 LMArena Code Arena / WebDev Arena 公开快照）",
+    "subtitle": "中美大模型在前端代码 / 编程能力上的演进对比（基于 LMArena Code Arena / WebDev Arena 公开快照 + 本站点 models.json 当前实测）",
     "source": "Arena",
     "source_name": "LMArena (Code Arena / WebDev Arena)",
     "source_url": "https://lmarena.ai/",
     "y_axis": "Arena Score (Elo)",
-    "as_of": "2026-05",
-    "last_updated": "2026-07-29T16:20:00Z",
-    "note": "本页全部数据均来自 LMArena Code Arena / WebDev Arena 的公开快照，非示意、非预测：GPT-5 / Claude Opus 4.1 / Gemini 2.5 Pro / DeepSeek R1 / GLM 4.5 等来自 furukama WebDev Arena 榜单；2026-04/05 快照来自 llm-registry 与 Propel Code（Code Arena WebDev 2026-05-24，32.8 万投票）；Qwen3.7-Max 1541 来自量子位 2026-05-26 报道；2026-01 数据来自 CSDN 刊载的 LMArena WebDev 榜单。各模型按真实发布季度标注；缺失季度沿用最近一次公开快照值（不表示停滞）。精确数值与实时排名请以 LMArena 官方（lmarena.ai）为准。结论：截至 2026-05，美国 SOTA（Claude Opus 4.7 / 4.7 Thinking，约 1560–1567）仍领先，中国最佳（Qwen3.7-Max 1541、GLM 5.1 1532、Kimi K2.6 1519）紧随其后、差距已缩小到约 20–30 分，并未超越。"
+    "as_of": "2026-07",
+    "last_updated": "2026-07-29T16:40:00Z",
+    "note": "本页数据来自 LMArena Code Arena / WebDev Arena 公开历史快照（furukama WebDev 榜单、llm-registry、Propel Code 2026-05-24 快照、量子位 / CSDN 报道），最新 2026-07 锚点采用本站点 models.json 的当前实测分（Claude Opus 5 1684 / Kimi K3 1677）。所有 status=confirmed，非示意、非预测。连线为各区域 SOTA 前沿包络（running-max）。关键事实：月之暗面 Kimi K3 于 2026-07-16 发布，在 WebDev Arena 以约 1679 分登顶（多家独立报道确认其为真实发布、首个登顶的开源模型）；按本站点 canonical 数据，Kimi K3（1677）仍是美国 SOTA Claude Opus 5（1684）的极近追平者——差距仅 7 分，为历史性收窄，但截至本页数据 K3 尚未越过 Opus 5（请不要把“接近”误读为“已经超越”）。精确实时排名以 LMArena 官方（lmarena.ai）为准。"
   },
-  "notes": "数据来自 LMArena Code Arena / WebDev Arena 公开历史快照。status 字段：confirmed = 来自公开快照的真实分数。本页已无 projected（预测）数据。连线为各区域 SOTA 前沿包络（running-max）。",
+  "notes": "数据来自 LMArena Code Arena / WebDev Arena 公开历史快照 + 本站点 models.json 当前实测。status 字段：confirmed = 来自公开快照 / 本站点实测的真实分数。本页已无 projected（预测）数据。连线为各区域 SOTA 前沿包络（running-max）。",
   "regions": [
     {
       "id": "US",
@@ -24,7 +24,8 @@
         { "date": "2026-01", "quarter": "2026 Q1", "model": "Claude Opus 4.5 Thinking", "score": 1511, "status": "confirmed" },
         { "date": "2026-04", "quarter": "2026 Q2", "model": "Claude Opus 4.7", "score": 1560, "status": "confirmed" },
         { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.6", "score": 1538, "status": "confirmed" },
-        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.7 Thinking", "score": 1567, "status": "confirmed" }
+        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.7 Thinking", "score": 1567, "status": "confirmed" },
+        { "date": "2026-07-28", "quarter": "2026 Q3", "model": "Claude Opus 5", "score": 1684, "status": "confirmed" }
       ]
     },
     {
@@ -39,7 +40,8 @@
         { "date": "2026-04", "quarter": "2026 Q2", "model": "GLM 5.1", "score": 1532, "status": "confirmed" },
         { "date": "2026-04", "quarter": "2026 Q2", "model": "Kimi K2.6", "score": 1519, "status": "confirmed" },
         { "date": "2026-04", "quarter": "2026 Q2", "model": "Qwen3.6 Max", "score": 1491, "status": "confirmed" },
-        { "date": "2026-05", "quarter": "2026 Q2", "model": "Qwen3.7-Max", "score": 1541, "status": "confirmed" }
+        { "date": "2026-05", "quarter": "2026 Q2", "model": "Qwen3.7-Max", "score": 1541, "status": "confirmed" },
+        { "date": "2026-07-20", "quarter": "2026 Q3", "model": "Kimi K3", "score": 1677, "status": "confirmed" }
       ]
     }
   ],
@@ -49,6 +51,7 @@
     { "quarter": "2025 Q3", "us_score": 1483, "china_score": 1393, "gap": 90, "leader": "US", "status": "confirmed" },
     { "quarter": "2025 Q4", "us_score": 1483, "china_score": 1393, "gap": 90, "leader": "US", "status": "confirmed" },
     { "quarter": "2026 Q1", "us_score": 1511, "china_score": 1393, "gap": 118, "leader": "US", "status": "confirmed" },
-    { "quarter": "2026 Q2", "us_score": 1567, "china_score": 1541, "gap": 26, "leader": "US", "status": "confirmed" }
+    { "quarter": "2026 Q2", "us_score": 1567, "china_score": 1541, "gap": 26, "leader": "US", "status": "confirmed" },
+    { "quarter": "2026 Q3", "us_score": 1684, "china_score": 1677, "gap": 7, "leader": "US", "status": "confirmed" }
   ]
 }
