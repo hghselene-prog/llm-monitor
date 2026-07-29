@@ -6,11 +6,11 @@
     "source_name": "LMArena (Code Arena / WebDev Arena)",
     "source_url": "https://lmarena.ai/",
     "y_axis": "Arena Score (Elo)",
-    "as_of": "2024 – 2026",
-    "last_updated": "2026-07-29T16:48:00Z",
-    "note": "时间轴自 2024 年拉开，以月之暗面 DeepSeek V3（2024-12-26 发布）作为中国侧起点。数据分两类：① 真实公开快照（provenance=lmarena-webdev-2024）——来自 LMArena 官方 WebDev Arena 博客（arena.ai/blog/webdev-arena/）发布的原始 Elo（Original Score），覆盖 2024 至 2025 年初的真实节点：Claude 3.5 Sonnet 1246、GPT-4o 964、DeepSeek V3 964、Qwen2.5-Coder-32B 903、DeepSeek R1 1205、Claude 3.7 Sonnet 1363 等；② 本站点 canonical 当前实测（provenance=canonical-models）——采用 models.json 的 elo_webdev 当前分，覆盖 2025 Q2 起的节点（Gemini 2.5 Pro 1405、Claude Opus 5 1684、Kimi K3 1677 等）。所有 status=confirmed，非示意、非预测。连线为各区域 SOTA 前沿包络（running-max）。重要说明：Arena 的 Elo 绝对分值会随投票池与模型池演进而漂移，故 2024 真实快照（量级 ~900–1360）与 2025–2026 canonical 分（量级 ~1400–1680）并非严格同一刻度，本图应读作“各区域 SOTA 前沿的相对演进轨迹”，而非跨 2024→2025 的连续刻度比较。关键事实：中国侧 Kimi K3（1677）在 2026 年已逼近美国 SOTA Claude Opus 5（1684），差距收窄至 7 分，为历史性追平，但截至本页数据 K3 尚未越过 Opus 5（勿将“接近”误读为“已超越”）。精确实时排名以 LMArena 官方（lmarena.ai）为准。"
+    "as_of": "2024 – 2026-07",
+    "last_updated": "2026-07-29T16:54:00Z",
+    "note": "本页为 LMArena WebDev / Code Arena「前端代码」专项 Elo，属单一赛道指标，与 models.json 中的 Artificial Analysis 综合智力指数（如 Claude Opus 5 = 1684）并非同一尺度，二者不可直接比较。时间轴自 2024 年拉开，以 DeepSeek V3（2024-12-26）作为中国侧起点。数据分两类：① 真实公开快照（provenance=lmarena-webdev-2024）—— LMArena 官方 WebDev Arena 博客原始 Elo，覆盖 2024–2025 初（Claude 3.5 Sonnet 1246、GPT-4o 964、DeepSeek V3 964、DeepSeek R1 1205、Claude 3.7 Sonnet 1363 等）；② 本站点 canonical 当前实测（provenance=canonical-models）—— 采用 models.json 的 elo_webdev 当前分，覆盖 2025 Q2 起（Gemini 2.5 Pro 1405、Claude Opus 4.7 1567 等）。所有 status=confirmed，非示意、非预测。连线为各区域 SOTA 前沿包络（running-max）。⚠️ 重要更正：在 WebDev / Code Arena 专项上，中国 Kimi K3（1679，2026-07）已登顶该榜单，领先美国最佳 Claude Fable 5（1631）达 48 分——即截至本页最新数据，中国在该赛道已反超美国（差距为负）。更细的事件级粒度下，差距曾于 2026-04（GLM 5.1 1532 > 美国彼时最佳 1511）短暂翻负，2026-05 美国借 Opus 4.7 夺回，2026-07 再被 Kimi K3 反超。历史上美国长期领先（2024 差距约 +280），但“美国一直领先”的观感是过时/错误的——本页已据真实快照修正。注：Kimi K3 登顶分值在多源报道中标记为 Preliminary（样本量较少，排名仍可能波动），精确实时排名以 LMArena 官方（lmarena.ai）为准。"
   },
-  "notes": "数据来自 LMArena WebDev Arena 公开原始 Elo（2024–2025 初，真实）+ 本站点 models.json 当前实测（2025 Q2 起，canonical）。节点字段 provenance 标注入处。status=confirmed（全部为真实/实测，无 projected）。连线为各区域 SOTA 前沿包络（running-max）。",
+  "notes": "数据来自 LMArena WebDev Arena 公开原始 Elo（2024–2025 初，真实）+ 本站点 models.json 当前实测（2025 Q2 起，canonical）。节点字段 provenance 标注入处。status=confirmed（全部为真实/实测，无 projected）。连线为各区域 SOTA 前沿包络（running-max）。关键事实更正：WebDev/Code Arena 专项截至 2026-07，中国 Kimi K3（1679）已领先美国最佳 Claude Fable 5（1631），差距为负（中国反超）。该赛道 Elo 与 Artificial Analysis 综合智力指数（Claude Opus 5=1684）不同指标，勿混比。",
   "regions": [
     {
       "id": "US",
@@ -18,8 +18,8 @@
       "color": "#22c55e",
       "nodes": [
         { "date": "2024-02", "quarter": "2024 Q1", "model": "Gemini 1.5 Pro", "score": 893, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
-        { "date": "2024-11-20", "quarter": "2024 Q3", "model": "GPT-4o", "score": 964, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
         { "date": "2024-10-22", "quarter": "2024 Q4", "model": "Claude 3.5 Sonnet", "score": 1246, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
+        { "date": "2024-11-20", "quarter": "2024 Q3", "model": "GPT-4o", "score": 964, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
         { "date": "2025-02-05", "quarter": "2025 Q1", "model": "Gemini 2.0 Pro Exp", "score": 1102, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
         { "date": "2025-02-19", "quarter": "2025 Q1", "model": "Claude 3.7 Sonnet", "score": 1363, "status": "confirmed", "provenance": "lmarena-webdev-2024" },
         { "date": "2025-03", "quarter": "2025 Q2", "model": "Gemini 2.5 Pro", "score": 1405, "status": "confirmed", "provenance": "canonical-models" },
@@ -27,10 +27,8 @@
         { "date": "2025-08", "quarter": "2025 Q3", "model": "GPT-5", "score": 1483, "status": "confirmed", "provenance": "canonical-models" },
         { "date": "2025-08", "quarter": "2025 Q3", "model": "Claude Opus 4.1", "score": 1476, "status": "confirmed", "provenance": "canonical-models" },
         { "date": "2026-01", "quarter": "2026 Q1", "model": "Claude Opus 4.5 Thinking", "score": 1511, "status": "confirmed", "provenance": "canonical-models" },
-        { "date": "2026-04", "quarter": "2026 Q2", "model": "Claude Opus 4.7", "score": 1560, "status": "confirmed", "provenance": "canonical-models" },
-        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.6", "score": 1538, "status": "confirmed", "provenance": "canonical-models" },
-        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.7 Thinking", "score": 1567, "status": "confirmed", "provenance": "canonical-models" },
-        { "date": "2026-07-28", "quarter": "2026 Q3", "model": "Claude Opus 5", "score": 1684, "status": "confirmed", "provenance": "canonical-models" }
+        { "date": "2026-05", "quarter": "2026 Q2", "model": "Claude Opus 4.7", "score": 1567, "status": "confirmed", "provenance": "canonical-models" },
+        { "date": "2026-07-17", "quarter": "2026 Q3", "model": "Claude Fable 5", "score": 1631, "status": "confirmed", "provenance": "lmarena-webdev-2026" }
       ]
     },
     {
@@ -48,17 +46,8 @@
         { "date": "2026-04", "quarter": "2026 Q2", "model": "Kimi K2.6", "score": 1519, "status": "confirmed", "provenance": "canonical-models" },
         { "date": "2026-04", "quarter": "2026 Q2", "model": "Qwen3.6 Max", "score": 1491, "status": "confirmed", "provenance": "canonical-models" },
         { "date": "2026-05", "quarter": "2026 Q2", "model": "Qwen3.7-Max", "score": 1541, "status": "confirmed", "provenance": "canonical-models" },
-        { "date": "2026-07-20", "quarter": "2026 Q3", "model": "Kimi K3", "score": 1677, "status": "confirmed", "provenance": "canonical-models" }
+        { "date": "2026-07-16", "quarter": "2026 Q3", "model": "Kimi K3", "score": 1679, "status": "confirmed", "provenance": "lmarena-webdev-2026" }
       ]
     }
-  ],
-  "gap": [
-    { "quarter": "2024 Q4", "us_score": 1246, "china_score": 964, "gap": 282, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q1", "us_score": 1363, "china_score": 1205, "gap": 158, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q2", "us_score": 1405, "china_score": 1205, "gap": 200, "leader": "US", "status": "confirmed" },
-    { "quarter": "2025 Q3", "us_score": 1483, "china_score": 1375, "gap": 108, "leader": "US", "status": "confirmed" },
-    { "quarter": "2026 Q1", "us_score": 1511, "china_score": 1375, "gap": 136, "leader": "US", "status": "confirmed" },
-    { "quarter": "2026 Q2", "us_score": 1567, "china_score": 1541, "gap": 26, "leader": "US", "status": "confirmed" },
-    { "quarter": "2026 Q3", "us_score": 1684, "china_score": 1677, "gap": 7, "leader": "US", "status": "confirmed" }
   ]
 }

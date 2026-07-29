@@ -956,63 +956,114 @@ function buildEvolutionLine() {
   if (canvas) canvas.style.opacity = dimmed ? '0.35' : '1';
 }
 
+// 零分界插件：在 y=0 处画一条虚线，区分“美国领先 / 中国领先”
+const zeroLinePlugin = {
+  id: 'zeroLine',
+  afterDraw(chart) {
+    const y = chart.scales.y;
+    if (!y) return;
+    const yZero = y.getPixelForValue(0);
+    const { ctx, chartArea: { left, right } } = chart;
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(left, yZero);
+    ctx.lineTo(right, yZero);
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(100,116,139,0.7)';
+    ctx.setLineDash([5, 4]);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = 'rgba(100,116,139,0.9)';
+    ctx.font = '11px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText('0 · 分界', right - 4, yZero - 4);
+    ctx.restore();
+  }
+};
+
 function buildEvolutionGap() {
   const showArena = STATE.sources.has('Arena');
-  const labels = EVOLUTION.gap.map(g => g.quarter);
-  const data = EVOLUTION.gap.map(g => ({
-    x: g.quarter,
-    y: g.gap,
-    leader: g.leader,
-    us: g.us_score,
-    cn: g.china_score,
-    status: g.status || 'confirmed'
-  }));
-  const PROJ = '#cbd5e1', PROJ_BORDER = '#94a3b8';
+  const usNodes = EVOLUTION.regions[0].nodes;
+  const cnNodes = EVOLUTION.regions[1].nodes;
+  const parse = s => (s.length <= 7 ? new Date(s + '-01').getTime() : new Date(s).getTime());
+  // 某时间点 t 之前该区域 SOTA 前沿（running-max）
+  const frontAt = (nodes, t) => {
+    let best = null;
+    nodes.forEach(n => { const tt = parse(n.date); if (tt <= t && (best === null || n.score > best)) best = n.score; });
+    return best;
+  };
+  // 事件级时间轴：两区域并集，按时间排序；从“中国首次出现”起算，避免此前无意义的大差距
+  const cnStart = Math.min(...cnNodes.map(n => parse(n.date)));
+  const times = [...new Set([...usNodes, ...cnNodes].map(n => parse(n.date)))]
+    .filter(t => t >= cnStart).sort((a, b) => a - b);
+  const data = times.map(t => {
+    const us = frontAt(usNodes, t), cn = frontAt(cnNodes, t);
+    return { x: t, y: us - cn, us, cn, leader: (us - cn) >= 0 ? 'US' : 'China' };
+  });
+  const GREEN = '#22c55e', GREEN_B = '#16a34a', RED = '#ef4444', RED_B = '#dc2626';
 
   makeChart('evolutionGap', {
-    type: 'bar',
+    type: 'line',
     data: {
-      labels,
       datasets: [{
-        label: 'Gap (US − China)',
+        label: '中美差距 (US − China)',
         data,
-        backgroundColor: data.map(d => d.status === 'projected' ? PROJ : (d.y >= 0 ? '#22c55e' : '#ef4444')),
-        borderColor: data.map(d => d.status === 'projected' ? PROJ_BORDER : (d.y >= 0 ? '#16a34a' : '#dc2626')),
-        borderWidth: 1,
-        borderRadius: 4
+        borderColor: GREEN,
+        borderWidth: 2.5,
+        stepped: 'before',
+        pointRadius: 4,
+        pointHoverRadius: 7,
+        pointBackgroundColor: data.map(d => d.y >= 0 ? GREEN : RED),
+        pointBorderColor: data.map(d => d.y >= 0 ? GREEN_B : RED_B),
+        pointBorderWidth: 2,
+        fill: false,
+        segment: {
+          borderColor: ctx => {
+            const p0 = data[ctx.p0DataIndex], p1 = data[ctx.p1DataIndex];
+            const avg = ((p0 ? p0.y : 0) + (p1 ? p1.y : 0)) / 2;
+            return avg >= 0 ? GREEN : RED;
+          }
+        }
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
       plugins: {
         legend: { display: false },
         tooltip: {
           callbacks: {
+            title: c => { const d = new Date(c[0].parsed.x); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; },
             label: c => {
               const d = c.raw;
-              const sign = d.y >= 0 ? 'US 领先' : 'China 领先';
-              const tag = d.status === 'projected' ? '（预测·未证实）' : '';
-              return `${sign} ${Math.abs(d.y)} 分 · US ${d.us} / CN ${d.cn}${tag}`;
+              const sign = d.y >= 0 ? '🇺🇸 US 领先' : '🇨🇳 China 领先';
+              return `${sign} ${Math.abs(d.y)} 分 · US ${d.us} / CN ${d.cn}`;
             }
           }
-        },
+        }
       },
       scales: {
         x: {
-          title: { display: true, text: '季度', font: { size: 12 } },
+          type: 'linear',
+          title: { display: true, text: '时间（事件级粒度）', font: { size: 12 } },
           grid: { display: false },
-          ticks: { font: { size: 11 } }
+          ticks: {
+            font: { size: 11 },
+            maxTicksLimit: 12,
+            callback: function (v) { const d = new Date(v); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`; }
+          }
         },
         y: {
-          title: { display: true, text: 'Gap (US − China)', font: { size: 12 } },
-          min: -150,
-          max: 350,
+          title: { display: true, text: '差距 (US − China)', font: { size: 12 } },
+          suggestedMin: -80,
+          suggestedMax: 380,
           ticks: { font: { size: 11 } },
-          grid: { color: 'rgba(0,0,0,.05)' }
+          grid: { color: ctx => (ctx.tick.value === 0 ? 'rgba(100,116,139,0.45)' : 'rgba(0,0,0,.05)') }
         }
       }
-    }
+    },
+    plugins: [zeroLinePlugin]
   });
 
   const canvas = document.getElementById('evolutionGap');
