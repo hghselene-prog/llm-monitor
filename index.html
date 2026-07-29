@@ -59,6 +59,9 @@
         <button class="nav-item" data-page="trends">
           <span class="nav-item-icon">📈</span> 趋势分析
         </button>
+        <button class="nav-item" data-page="evolution">
+          <span class="nav-item-icon">🌏</span> 中美演进
+        </button>
         <button class="nav-item" data-page="cost">
           <span class="nav-item-icon">💰</span> 成本分析
         </button>
@@ -262,6 +265,40 @@
       </div>
     </div>
 
+    <!-- ===== EVOLUTION ===== -->
+    <div class="page" id="page-evolution">
+      <div class="header">
+        <div class="header-left">
+          <h1>🌏 中美 Code Arena 演进</h1>
+          <p>Frontend Code Arena 分数走势 · 美国 vs 中国 · 下方 Gap 图显示领先差距变化 · 来源: LMArena</p>
+        </div>
+      </div>
+      <div class="source-legend">
+        <span style="font-weight:600">数据来源：</span>
+        <span class="source-legend-item"><span class="source-legend-dot" style="background:#22c55e"></span>United States（Arena WebDev/Code Arena 美国 SOTA）</span>
+        <span class="source-legend-item"><span class="source-legend-dot" style="background:#ef4444"></span>China（Arena WebDev/Code Arena 中国 SOTA）</span>
+        <span class="source-legend-item"><span class="source-badge Arena">Arena</span> LMArena 公开历史数据</span>
+      </div>
+      <div class="card grid-full">
+        <div class="card-header">
+          <h3>Frontend Code Arena: United States vs China <span class="source-badge Arena">Arena</span></h3>
+          <span style="font-size:12px;color:var(--text-muted)">关键节点标注模型名与 Arena Score · 来源: ARENA WEBDEV AND CODE ARENA PUBLIC HISTORIES</span>
+        </div>
+        <div class="card-body"><div class="chart-container tall" style="height:520px"><canvas id="evolutionChart"></canvas></div></div>
+      </div>
+      <div class="card grid-full" style="margin-top:20px">
+        <div class="card-header">
+          <h3>中美领先差距 Gap <span class="source-badge Arena">Arena</span></h3>
+          <span style="font-size:12px;color:var(--text-muted)">绿色 = 美国领先 · 红色 = 中国领先</span>
+        </div>
+        <div class="card-body"><div class="chart-container" style="height:260px"><canvas id="evolutionGap"></canvas></div></div>
+      </div>
+      <div class="card grid-full" style="margin-top:20px">
+        <div class="card-header"><h3>关键发布节点</h3></div>
+        <div class="card-body"><div id="evolution-nodes"></div></div>
+      </div>
+    </div>
+
     <!-- ===== COST ===== -->
     <div class="page" id="page-cost">
       <div class="header">
@@ -379,6 +416,7 @@
     <button class="mobile-nav-item" data-page="leaderboard"><span class="mi-icon">🏆</span><span class="mi-label">排行榜</span></button>
     <button class="mobile-nav-item" data-page="compare"><span class="mi-icon">⚖️</span><span class="mi-label">对比</span></button>
     <button class="mobile-nav-item" data-page="trends"><span class="mi-icon">📈</span><span class="mi-label">趋势</span></button>
+    <button class="mobile-nav-item" data-page="evolution"><span class="mi-icon">🌏</span><span class="mi-label">演进</span></button>
     <button class="mobile-nav-item" data-page="cost"><span class="mi-icon">💰</span><span class="mi-label">成本</span></button>
     <button class="mobile-nav-item" data-page="coding"><span class="mi-icon">💻</span><span class="mi-label">编程</span></button>
     <button class="mobile-nav-item" data-page="multimodal"><span class="mi-icon">🎨</span><span class="mi-label">多模态</span></button>

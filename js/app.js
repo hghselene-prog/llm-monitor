@@ -1,6 +1,7 @@
 // ===== LLM Monitor — Core Logic =====
 let DATA = null;
 let METHODOLOGY = null;
+let EVOLUTION = null;
 let compareModels = [];
 let CURRENT_PAGE = 'dashboard';
 const STATE = { sources: new Set(['AA','LB','Arena']) };
@@ -129,12 +130,14 @@ const SUBTITLES = {
 // ——— Data Loading ———
 async function loadData() {
   try {
-    const [modelsRes, methodRes] = await Promise.all([
+    const [modelsRes, methodRes, evoRes] = await Promise.all([
       fetch('data/models.json'),
-      fetch('data/methodology.json')
+      fetch('data/methodology.json'),
+      fetch('data/evolution.json')
     ]);
     DATA = await modelsRes.json();
     METHODOLOGY = await methodRes.json();
+    EVOLUTION = await evoRes.json();
     initApp();
   } catch(e) {
     console.error('Data load failed:', e);
@@ -186,9 +189,10 @@ const pointLabelPlugin = {
       if (meta.hidden) return;
       meta.data.forEach((el, i) => {
         const raw = ds.data[i];
-        if (!raw || !raw.name || raw.skipLabel) return;
+        const label = raw?.name || raw?.model;
+        if (!raw || !label || raw.skipLabel) return;
         const r = (el.options && el.options.radius) || raw.r || 4;
-        const w = ctx.measureText(raw.name).width;
+        const w = ctx.measureText(label).width;
         let align = 'left', tx = el.x + r + 5, ty = el.y + 3;
         if (tx + w > chartArea.right - 2) { align = 'right'; tx = el.x - r - 5; }
         // 防重叠：与已放置的标签冲突时向下挪
@@ -203,9 +207,9 @@ const pointLabelPlugin = {
         ctx.textAlign = align;
         ctx.lineWidth = 3;
         ctx.strokeStyle = 'rgba(255,255,255,.85)';
-        ctx.strokeText(raw.name, tx, ty);
+        ctx.strokeText(label, tx, ty);
         ctx.fillStyle = raw.labelColor || raw.color || '#374151';
-        ctx.fillText(raw.name, tx, ty);
+        ctx.fillText(label, tx, ty);
       });
     });
     ctx.restore();
@@ -292,6 +296,7 @@ function switchPage(name) {
   if (name==='leaderboard') { renderLeaderboard(); updateSubtitle('leaderboard'); }
   else if (name==='compare') { initCompare(); updateSubtitle('compare'); }
   else if (name==='trends') initTrends();
+  else if (name==='evolution') initEvolution();
   else if (name==='cost') initCost();
   else if (name==='coding') initCoding();
   else if (name==='multimodal') initMultimodal();
@@ -800,6 +805,189 @@ function renderMethodology() {
   }
 
   container.innerHTML = html;
+}
+
+// ========== EVOLUTION (US vs China Code Arena) ==========
+function initEvolution() {
+  if (!EVOLUTION) return;
+  buildEvolutionLine();
+  buildEvolutionGap();
+  renderEvolutionNodes();
+}
+
+function buildEvolutionSeries() {
+  // 把所有 quarter 排序作为 X 轴
+  const allQuarters = [...new Set(EVOLUTION.regions.flatMap(r => r.nodes.map(n => n.quarter)))];
+  // 按年份+季度排序
+  const quarterOrder = q => { const [y, qn] = q.split(' '); return parseInt(y) * 10 + parseInt(qn.replace('Q','')); };
+  allQuarters.sort((a, b) => quarterOrder(a) - quarterOrder(b));
+
+  const datasets = EVOLUTION.regions.map(r => {
+    // 按 quarter 分组，取该 quarter 最后（date 最大）一个节点
+    const byQ = {};
+    r.nodes.forEach(n => {
+      if (!byQ[n.quarter] || n.date > byQ[n.quarter].date) byQ[n.quarter] = n;
+    });
+    let lastScore = null;
+    const data = allQuarters.map(q => {
+      if (byQ[q]) lastScore = byQ[q].score;
+      return {
+        x: q,
+        y: lastScore,
+        model: byQ[q]?.model || null,
+        date: byQ[q]?.date || null,
+        labelColor: r.color
+      };
+    });
+    return {
+      label: r.name,
+      data,
+      borderColor: r.color,
+      backgroundColor: r.color,
+      borderWidth: 3,
+      pointRadius: 4,
+      pointHoverRadius: 7,
+      tension: 0.15,
+      fill: false
+    };
+  });
+  return { labels: allQuarters, datasets };
+}
+
+function buildEvolutionLine() {
+  const { labels, datasets } = buildEvolutionSeries();
+  const showArena = STATE.sources.has('Arena');
+  const dimmed = !showArena;
+
+  makeChart('evolutionChart', {
+    type: 'line',
+    data: { labels, datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        pointLabels: { enabled: true },
+        legend: {
+          position: 'top',
+          align: 'end',
+          labels: { usePointStyle: true, boxWidth: 8, font: { size: 12 } }
+        },
+        tooltip: {
+          callbacks: {
+            label: c => {
+              const d = c.raw;
+              const name = d.model ? `${d.model} · ${d.y}` : `${d.y}`;
+              return `${c.dataset.label}: ${name}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          title: { display: true, text: '季度', font: { size: 12 } },
+          grid: { display: false },
+          ticks: { font: { size: 11 } }
+        },
+        y: {
+          title: { display: true, text: 'Arena Score', font: { size: 12 } },
+          min: 800,
+          max: 1900,
+          ticks: { font: { size: 11 }, stepSize: 200 },
+          grid: { color: 'rgba(0,0,0,.05)' }
+        }
+      },
+      layout: { padding: { top: 10, right: 90, bottom: 10, left: 10 } }
+    },
+    plugins: [pointLabelPlugin]
+  });
+
+  // 如果 Arena 被筛选掉，给图表加视觉提示
+  const canvas = document.getElementById('evolutionChart');
+  if (canvas) canvas.style.opacity = dimmed ? '0.35' : '1';
+}
+
+function buildEvolutionGap() {
+  const showArena = STATE.sources.has('Arena');
+  const labels = EVOLUTION.gap.map(g => g.quarter);
+  const data = EVOLUTION.gap.map(g => ({
+    x: g.quarter,
+    y: g.gap,
+    leader: g.leader,
+    us: g.us_score,
+    cn: g.china_score
+  }));
+
+  makeChart('evolutionGap', {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Gap (US − China)',
+        data,
+        backgroundColor: data.map(d => d.y >= 0 ? '#22c55e' : '#ef4444'),
+        borderColor: data.map(d => d.y >= 0 ? '#16a34a' : '#dc2626'),
+        borderWidth: 1,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: c => {
+              const d = c.raw;
+              const sign = d.y >= 0 ? 'US 领先' : 'China 领先';
+              return `${sign} ${Math.abs(d.y)} 分 · US ${d.us} / CN ${d.cn}`;
+            }
+          }
+        },
+      },
+      scales: {
+        x: {
+          title: { display: true, text: '季度', font: { size: 12 } },
+          grid: { display: false },
+          ticks: { font: { size: 11 } }
+        },
+        y: {
+          title: { display: true, text: 'Gap (US − China)', font: { size: 12 } },
+          min: -150,
+          max: 350,
+          ticks: { font: { size: 11 } },
+          grid: { color: 'rgba(0,0,0,.05)' }
+        }
+      }
+    }
+  });
+
+  const canvas = document.getElementById('evolutionGap');
+  if (canvas) canvas.style.opacity = showArena ? '1' : '0.35';
+}
+
+function renderEvolutionNodes() {
+  const showArena = STATE.sources.has('Arena');
+  const wrap = document.getElementById('evolution-nodes');
+  if (!wrap) return;
+
+  // 合并所有关键节点，按时间排序
+  const nodes = EVOLUTION.regions.flatMap(r => r.nodes.map(n => ({ ...n, region: r.name, color: r.color })))
+    .sort((a, b) => a.date.localeCompare(b.date));
+
+  const cards = nodes.map(n => `
+    <div class="evolution-node" style="border-left:4px solid ${n.color}">
+      <div class="enode-date">${n.quarter} · ${n.date}</div>
+      <div class="enode-model" style="color:${n.color}">${n.model}</div>
+      <div class="enode-meta"><span>${n.region}</span><span class="enode-score">${n.score}</span></div>
+    </div>
+  `).join('');
+
+  wrap.innerHTML = `
+    <div class="evolution-grid" style="opacity:${showArena ? 1 : 0.4}">${cards}</div>
+    ${!showArena ? '<div style="margin-top:12px;color:var(--text-secondary);font-size:13px">⚠️ 当前数据源筛选未包含 LMArena，演进图已置灰。点击顶部「🏟️ LMArena」或「🌐 全部」恢复显示。</div>' : ''}
+  `;
 }
 
 // ========== Bootstrap ==========
