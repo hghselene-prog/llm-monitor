@@ -561,7 +561,7 @@ function renderCompareContent() {
   // Detail table
   const tableWrap = document.getElementById('compare-table-wrap');
   tableWrap.innerHTML = `<table>
-    <thead><tr><th>指标</th><th>数据来源</th>${selected.map(m=>`<th>${m.name}</th>`).join('')}</tr></thead>
+    <thead><tr><th>指标</th><th>数据来源</th>${selected.map(m=>`<th>${m.name}<div style="font-weight:400;font-size:11px;color:#9ca3af">${m.provider}</div></th>`).join('')}</tr></thead>
     <tbody>
       ${metrics.map(cm => {
         let cells;
@@ -666,7 +666,7 @@ function renderCostTable() {
     const inp = getMetricVal(m,'api_price_input'), out = getMetricVal(m,'api_price_output');
     const cache = getMetricVal(m,'api_price_cache_hit'), reas = getMetricVal(m,'api_price_reasoning');
     return `<tr>
-      <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><span style="font-size:12px;font-weight:600">${m.name}</span></div></td>
+      <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><div><div class="model-name" style="font-size:12px">${m.name}</div><div class="model-provider">${m.provider}</div></div></div></td>
       <td>$${inp?.toFixed(2)||'—'}</td><td>$${out?.toFixed(2)||'—'}</td><td>$${cache?.toFixed(2)||'—'}</td>
       <td>${(reas&&reas>0)?'$'+reas.toFixed(2):'—'}</td>
     </tr>`;
@@ -694,7 +694,7 @@ function initCoding() {
     const eloWeb = getMetricVal(m,'elo_webdev');
     return `<tr>
       <td><span class="rank-num ${i<3?'top3':''}">${i+1}</span></td>
-      <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><span style="font-size:12px;font-weight:600">${m.name}</span></div></td>
+      <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><div><div class="model-name" style="font-size:12px">${m.name}</div><div class="model-provider">${m.provider}</div></div></div></td>
       <td class="source-cell"><span class="score">${code||'—'}</span>${formatSourceBadge('LB')}</td>
       <td class="source-cell"><span class="score">${agent||'—'}</span>${formatSourceBadge('LB')}</td>
       <td class="source-cell"><span class="score">${eloWeb||'—'}</span>${formatSourceBadge('Arena')}${getMetric(m,'elo_webdev')?.confidence?` <small style="color:#9ca3af">${getMetric(m,'elo_webdev').confidence}</small>`:''}</td>
@@ -726,7 +726,7 @@ function initMultimodal() {
     const vis = getMetric(m,'elo_vision'), doc = getMetric(m,'elo_document');
     return `<tr>
       <td><span class="rank-num ${i<3?'top3':''}">${i+1}</span></td>
-      <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><span style="font-size:12px;font-weight:600">${m.name}</span></div></td>
+      <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><div><div class="model-name" style="font-size:12px">${m.name}</div><div class="model-provider">${m.provider}</div></div></div></td>
       <td class="source-cell"><span class="score">${vis?.value||'—'}</span>${formatSourceBadge('Arena')}${vis?.confidence?` <small style="color:#9ca3af">${vis.confidence}</small>`:''}</td>
       <td class="source-cell"><span class="score">${doc?.value||'—'}</span>${formatSourceBadge('Arena')}${doc?.confidence?` <small style="color:#9ca3af">${doc.confidence}</small>`:''}</td>
       <td class="source-cell"><span class="score">${getMetricVal(m,'elo_webdev')||'—'}</span>${formatSourceBadge('Arena')}</td>
@@ -734,18 +734,18 @@ function initMultimodal() {
   }).join('');
 
   const genModels = [
-    { name:'GPT Image 2', t2i:1385, ie:1465, t2v:null, color:'#2563eb' },
-    { name:'Reve 2.1', t2i:1302, ie:1383, t2v:null, color:'#8b5cf6' },
-    { name:'Gemini 3.1 Flash Image', t2i:1261, ie:1385, t2v:null, color:'#10b981' },
-    { name:'Seedream 5.0 Pro', t2i:1250, ie:1393, t2v:null, color:'#f59e0b' },
-    { name:'Gemini Omni Flash', t2i:null, ie:null, t2v:1527, color:'#10b981' },
-    { name:'Dreamina Seedance 2', t2i:null, ie:null, t2v:1482, color:'#ec4899' },
-    { name:'Muse Video', t2i:null, ie:null, t2v:1459, color:'#ef4444' },
-    { name:'Sora 2 Pro', t2i:null, ie:null, t2v:1366, color:'#6366f1' },
+    { name:'GPT Image 2', provider:'OpenAI', t2i:1385, ie:1465, t2v:null, color:'#2563eb' },
+    { name:'Reve 2.1', provider:'Reve', t2i:1302, ie:1383, t2v:null, color:'#8b5cf6' },
+    { name:'Gemini 3.1 Flash Image', provider:'Google', t2i:1261, ie:1385, t2v:null, color:'#10b981' },
+    { name:'Seedream 5.0 Pro', provider:'字节跳动', t2i:1250, ie:1393, t2v:null, color:'#f59e0b' },
+    { name:'Gemini Omni Flash', provider:'Google', t2i:null, ie:null, t2v:1527, color:'#10b981' },
+    { name:'Dreamina Seedance 2', provider:'字节跳动', t2i:null, ie:null, t2v:1482, color:'#ec4899' },
+    { name:'Muse Video', provider:'Meta', t2i:null, ie:null, t2v:1459, color:'#ef4444' },
+    { name:'Sora 2 Pro', provider:'OpenAI', t2i:null, ie:null, t2v:1366, color:'#6366f1' },
   ];
   document.getElementById('gen-table').innerHTML = genModels.map((g,i)=>`<tr>
     <td><span class="rank-num ${i<3?'top3':''}">${i+1}</span></td>
-    <td><div class="model-cell"><div class="model-icon" style="background:${g.color};width:22px;height:22px;font-size:10px">${g.name[0]}</div><span style="font-size:12px;font-weight:600">${g.name}</span></div></td>
+    <td><div class="model-cell"><div class="model-icon" style="background:${g.color};width:22px;height:22px;font-size:10px">${g.name[0]}</div><div><div class="model-name" style="font-size:12px">${g.name}</div><div class="model-provider">${g.provider}</div></div></div></td>
     <td class="source-cell">${g.t2i?`<span class="score">${g.t2i}</span>${formatSourceBadge('Arena')}`:'—'}</td>
     <td class="source-cell">${g.ie?`<span class="score">${g.ie}</span>${formatSourceBadge('Arena')}`:'—'}</td>
     <td class="source-cell">${g.t2v?`<span class="score">${g.t2v}</span>${formatSourceBadge('Arena')}`:'—'}</td>
