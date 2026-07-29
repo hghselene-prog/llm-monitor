@@ -174,42 +174,58 @@ function getMetricVal(m, key) { const met = getMetric(m, key); return met ? met.
 function formatSourceBadge(source) { if(!source) return ''; return `<span class="source-badge ${source}" title="${DATA.sources[source]?.desc || ''}">${source}</span>`; }
 function getSourceColor(source) { return DATA.sources[source]?.color || '#999'; }
 
-// ——— 散点图点旁模型名标注插件（带简单防重叠）———
+// ——— 散点/气泡图点旁模型名标注插件（主题自适应描边 + 防重叠）———
+function _bgLuminance(c) {
+  const m = String(c).match(/(\d+\.?\d*)/g);
+  if (!m || m.length < 3) return 255;
+  const [r, g, b] = m.map(Number);
+  return 0.299 * r + 0.587 * g + 0.114 * b;
+}
 const pointLabelPlugin = {
   id: 'pointLabels',
   afterDatasetsDraw(chart) {
     const opt = chart.options.plugins?.pointLabels;
-    if (!opt?.enabled) return;
+    if (!opt || opt.enabled === false) return;
     const { ctx, chartArea } = chart;
     const isMobile = document.documentElement.dataset.device === 'mobile';
+    const lum = _bgLuminance(getComputedStyle(document.body).backgroundColor);
+    const dark = lum < 128;
+    const stroke = dark ? 'rgba(15,23,42,.82)' : 'rgba(255,255,255,.92)';
     ctx.save();
-    ctx.font = `600 ${isMobile ? 9 : 10.5}px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC",sans-serif`;
+    ctx.font = `600 ${isMobile ? 10 : 11.5}px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC",sans-serif`;
+    ctx.textBaseline = 'middle';
     const placed = [];
     chart.data.datasets.forEach((ds, di) => {
       const meta = chart.getDatasetMeta(di);
       if (meta.hidden) return;
       meta.data.forEach((el, i) => {
         const raw = ds.data[i];
-        const label = raw?.name || raw?.model;
-        if (!raw || !label || raw.skipLabel) return;
-        const r = (el.options && el.options.radius) || raw.r || 4;
+        if (!raw || raw.skipLabel) return;
+        const label = raw.name || raw.model;
+        if (!label) return;
+        const r = (typeof raw.r === 'number' && raw.r > 0) ? raw.r : (el.options?.radius || 4);
         const w = ctx.measureText(label).width;
-        let align = 'left', tx = el.x + r + 5, ty = el.y + 3;
-        if (tx + w > chartArea.right - 2) { align = 'right'; tx = el.x - r - 5; }
-        // 防重叠：与已放置的标签冲突时向下挪
-        let box = { x: align === 'left' ? tx : tx - w, y: ty - 9, w, h: 12 };
+        let align = 'left', tx = el.x + r + 6, ty = el.y;
+        if (tx + w > chartArea.right - 2) { align = 'right'; tx = el.x - r - 6; }
+        let box = { x: align === 'left' ? tx : tx - w, y: ty - 6, w, h: 12 };
         let tries = 0;
-        while (tries < 6 && placed.some(p => !(box.x + box.w < p.x || p.x + p.w < box.x || box.y + box.h < p.y || p.y + p.h < box.y))) {
-          ty += 12; box.y += 12; tries++;
+        while (tries < 8 && placed.some(p => !(box.x + box.w < p.x || p.x + p.w < box.x || box.y + box.h < p.y || p.y + p.h < box.y))) {
+          ty += 13; box.y += 13; tries++;
         }
-        if (ty > chartArea.bottom - 2) ty = el.y - r - 5; // 兜底：挪不开就放到点上方
+        // 若被推到图底外，改放到点上方
+        if (ty > chartArea.bottom - 6) {
+          ty = el.y - r - 8; box.y = ty - 6;
+          let t2 = 0;
+          while (t2 < 8 && placed.some(p => !(box.x + box.w < p.x || p.x + p.w < box.x || box.y + box.h < p.y || p.y + p.h < box.y))) {
+            ty -= 13; box.y -= 13; t2++;
+          }
+        }
         placed.push(box);
-        // 白色描边提升可读性
         ctx.textAlign = align;
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = 'rgba(255,255,255,.85)';
+        ctx.lineWidth = 3.5;
+        ctx.strokeStyle = stroke;
         ctx.strokeText(label, tx, ty);
-        ctx.fillStyle = raw.labelColor || raw.color || '#374151';
+        ctx.fillStyle = raw.labelColor || raw.color || (dark ? '#e5e7eb' : '#374151');
         ctx.fillText(label, tx, ty);
       });
     });
@@ -658,7 +674,7 @@ function initCostScatter() {
     const intel = getMetricVal(m,'intelligence_index'), cost = getMetricVal(m,'cost_per_task'), speed = getMetricVal(m,'speed_tps');
     return { x:cost||0.01, y:intel||0, r:Math.max(4,(speed||50)/20), name:m.name, color:m.color };
   });
-  makeChart('costScatter', { type:'scatter',
+  makeChart('costScatter', { type:'bubble',
     data:{ datasets:[{ data:points, backgroundColor:points.map(p=>p.color+'88'), borderColor:points.map(p=>p.color), borderWidth:1.5 }] },
     options:{ responsive:true, maintainAspectRatio:false,
       plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
@@ -681,9 +697,9 @@ function renderCostTable() {
 function initCostSpeedIntel() {
   const points = DATA.models.map(m => {
     const cost = getMetricVal(m,'cost_per_task'), speed = getMetricVal(m,'speed_tps'), intel = getMetricVal(m,'intelligence_index');
-    return { x:cost||0.01, y:speed||0, r:Math.max(6,(intel||70)/3), name:m.name, color:m.color };
+    return { x:cost||0.01, y:speed||0, r:Math.max(7,(intel||70)/5), name:m.name, color:m.color };
   });
-  makeChart('costSpeedIntel', { type:'scatter',
+  makeChart('costSpeedIntel', { type:'bubble',
     data:{ datasets:[{ data:points, backgroundColor:points.map(p=>p.color+'77'), borderColor:points.map(p=>p.color), borderWidth:1.5 }] },
     options:{ responsive:true, maintainAspectRatio:false,
       plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 速度 ${c.raw.y} t/s · 成本 $${c.raw.x.toFixed(3)} · 智力 ✓` } }, legend:{display:false} },
