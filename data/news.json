@@ -2,35 +2,38 @@
   "meta": {
     "title": "大模型新闻速递",
     "updated": "2026-07-30",
-    "description": "收集各厂商大模型最新进展，偏财经 / 新闻方向（发布、融资/IPO、政策监管、财报、算力基建等）。条目均来自公开媒体报道并附原始链接，非本站原创。",
+    "description": "收集国内外各厂商大模型最新进展，偏财经 / 新闻方向（发布、融资/IPO、政策监管、财报、算力基建等）。按「国内 / 海外」分区，条目均来自公开媒体报道并附原始链接，非本站原创。",
     "disclaimer": "新闻时效性强，本页为快照式收录；如需更新需重新抓取并覆盖本文件（无后台自动拉取，零运行成本）。"
   },
   "news": [
     {
       "id": "kimi-k3-launch",
       "date": "2026-07-17",
+      "region": "domestic",
       "category": "发布",
       "company": "月之暗面 (Moonshot AI)",
       "model": "Kimi K3",
       "title": "月之暗面发布 Kimi K3：2.8 万亿参数，全球首个开源 3T 级模型",
-      "summary": "7 月 17 日凌晨，月之暗面正式发布新一代旗舰大模型 Kimi K3，总参数量 2.8 万亿（每 token 激活 16/896 专家、激活参数 1040 亿），基于 MoE 架构，原生支持视觉理解与 100 万 token 上下文。在 Frontend Code Arena 以 1679 分登顶全球第一，综合能力位列全球前三。发布后用户请求量超预期，7 月 19 日暂停 C 端新用户订阅。",
+      "summary": "7 月 17 日凌晨，月之暗面正式发布新一代旗舰大模型 Kimi K3，总参数量 2.8 万亿（每 token 激活 16/896 专家、激活参数 1040 亿），基于 MoE 架构，原生支持视觉理解与 100 万 token 上下文。在 Frontend Code Arena 以 1679 分登顶全球第一。发布后请求量超预期，7 月 19 日暂停 C 端新用户订阅。",
       "source": "今日头条 / 南方都市报",
       "url": "https://www.toutiao.com/article/7665230581462008363/"
     },
     {
       "id": "moonshot-f-round",
       "date": "2026-07-29",
+      "region": "domestic",
       "category": "融资/IPO",
       "company": "月之暗面 (Moonshot AI)",
       "model": "Kimi K3",
-      "title": "月之暗面完成 35 亿美元 F 轮，投后估值 350 亿，Pre-IPO 轮提前开启冲 500 亿",
-      "summary": "7 月 29 日，月之暗面完成超 35 亿美元 F 轮融资（认购超额 3 倍以上、提前关闭），投后估值升至 350 亿美元；原定 8 月启动的 G 轮（Pre-IPO）提前开启，投前估值升至 500 亿美元。成立三年累计融资超 370 亿元人民币，股东含阿里、腾讯、美团龙珠、红杉中国、IDG 及中国移动产业基金等。公司已启动红筹 VIE 重组，计划最快 6 个月内按港交所 18C 规则递表。",
+      "title": "月之暗面完成 35 亿美元 F 轮，Pre-IPO 冲 500 亿美元估值",
+      "summary": "7 月 29 日，月之暗面完成超 35 亿美元 F 轮融资（认购超额 3 倍以上、提前关闭），投后估值升至 350 亿美元；原定 8 月启动的 G 轮（Pre-IPO）提前开启，投前估值升至 500 亿美元。成立三年累计融资超 370 亿元人民币，股东含阿里、腾讯、美团龙珠、红杉中国、IDG 及中国移动产业基金等。公司计划最快 6 个月内按港交所 18C 规则递表。",
       "source": "证券时报 / 第一财经 / 南方都市报",
       "url": "https://www.163.com/dy/article/L31LC5S40519DDQ2.html"
     },
     {
       "id": "deepseek-ipo-prep",
       "date": "2026-07-22",
+      "region": "domestic",
       "category": "融资/IPO",
       "company": "DeepSeek",
       "model": "DeepSeek V4 Pro",
@@ -42,6 +45,7 @@
     {
       "id": "minimax-funding",
       "date": "2026-07-20",
+      "region": "domestic",
       "category": "融资/IPO",
       "company": "MiniMax",
       "model": "—",
@@ -53,6 +57,7 @@
     {
       "id": "state-council-ai-plan",
       "date": "2026-07-10",
+      "region": "domestic",
       "category": "政策",
       "company": "国务院",
       "model": "—",
@@ -64,6 +69,7 @@
     {
       "id": "personification-rule",
       "date": "2026-07-15",
+      "region": "domestic",
       "category": "监管",
       "company": "国家网信办等五部门",
       "model": "—",
@@ -75,6 +81,7 @@
     {
       "id": "ondevice-ai-filing",
       "date": "2026-07-15",
+      "region": "domestic",
       "category": "监管",
       "company": "国家网信办 / 七家手机厂商",
       "model": "—",
@@ -86,6 +93,7 @@
     {
       "id": "ai-chip-earnings",
       "date": "2026-07-16",
+      "region": "domestic",
       "category": "财报",
       "company": "摩尔线程 / 海光信息",
       "model": "—",
@@ -95,19 +103,9 @@
       "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260716204625a6d76f0a"
     },
     {
-      "id": "meta-louisiana-datacenter",
-      "date": "2026-07-13",
-      "category": "算力",
-      "company": "Meta",
-      "model": "—",
-      "title": "Meta 路易斯安那 AI 数据中心扩至 5GW，区域总投资超 500 亿美元",
-      "summary": "7 月 13 日，Meta 宣布扩大美国路易斯安那州里奇兰教区 AI 数据中心规模，规划算力容量由超 2GW 提升至 5GW，区域总投资预计超 500 亿美元，并投入超 10 亿美元用于当地电力、供水及电网配套，以支持下一代 AI 模型训练与推理。",
-      "source": "腾讯财经（招商计算机周观察）",
-      "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260719195936a6db6be7"
-    },
-    {
       "id": "qwen38-max",
       "date": "2026-07-19",
+      "region": "domestic",
       "category": "发布",
       "company": "阿里巴巴 (阿里通义)",
       "model": "Qwen3.8-Max",
@@ -119,6 +117,7 @@
     {
       "id": "waic-2026",
       "date": "2026-07-26",
+      "region": "domestic",
       "category": "产业",
       "company": "WAIC / 多家厂商",
       "model": "—",
@@ -130,6 +129,7 @@
     {
       "id": "kimi-k3-open-source",
       "date": "2026-07-27",
+      "region": "domestic",
       "category": "生态",
       "company": "月之暗面 (Moonshot AI)",
       "model": "Kimi K3",
@@ -137,6 +137,102 @@
       "summary": "7 月 27 日晚，月之暗面在 Hugging Face 正式发布 Kimi K3 完整模型权重与技术报告，并开源支撑训练的关键 Infra 技术 MoonEP、FlashKDA 和 AgentEnv。发布后 48 小时调用请求指数级增长，多家平台（阿里云灵骏、摩尔线程、海光 DCU 等）宣布适配。",
       "source": "南方都市报 / 第一财经",
       "url": "https://www.163.com/dy/article/L31PFE7K05129QAF.html"
+    },
+    {
+      "id": "anthropic-opus5",
+      "date": "2026-07-24",
+      "region": "overseas",
+      "category": "发布",
+      "company": "Anthropic",
+      "model": "Claude Opus 5",
+      "title": "Anthropic 发布 Claude Opus 5，刷新编程与多模态 SOTA",
+      "summary": "7 月 24 日，Anthropic 发布旗舰模型 Claude Opus 5，创下多项已验证 API 实测记录，在编程、长文本推理与多模态任务上刷新 SOTA，引发行业对模型迁移路径与 API 定价体系的重新评估。这正值各大实验室发布节奏明显加快的窗口期。",
+      "source": "benchr / tldl.io",
+      "url": "https://benchr.org/recent-releases"
+    },
+    {
+      "id": "openai-gpt56",
+      "date": "2026-07-09",
+      "region": "overseas",
+      "category": "发布",
+      "company": "OpenAI",
+      "model": "GPT-5.6 (Sol / Terra / Luna)",
+      "title": "OpenAI GPT-5.6 系列全面开放，此前因政府安全审查推迟",
+      "summary": "7 月 9 日，OpenAI 将 GPT-5.6 系列（Sol / Terra / Luna 三档）正式发布至 API；旗舰 Sol 在复杂推理与代码任务（如 Terminal-Bench）上取得 SOTA，并引入 \"max\" / \"ultra\" 模式。该系列曾因政府安全审查而推迟发布，体现前沿模型部署与监管协调的常态化。",
+      "source": "tldl.io / riskinfo.ai",
+      "url": "https://www.tldl.io/guides/latest-model-releases"
+    },
+    {
+      "id": "google-gemini36",
+      "date": "2026-07-22",
+      "region": "overseas",
+      "category": "发布",
+      "company": "Google DeepMind",
+      "model": "Gemini 3.6 Flash / 3.5 Flash-Lite / 3.5 Flash Cyber",
+      "title": "谷歌发布三款 Gemini 新模型，旗舰 Pro 再度延期",
+      "summary": "7 月 22 日，Google DeepMind 发布 Gemini 3.6 Flash、3.5 Flash-Lite 与 3.5 Flash Cyber 三款模型；3.6 Flash 为主力模型、Token 用量最高降 17%。但外界期待的旗舰 Gemini 3.5 Pro 因代码生成未达内部指标再度延期，Alphabet 股价盘中跌约 0.8%。",
+      "source": "腾讯新闻 / 财联社",
+      "url": "https://new.qq.com/rain/a/20260722A07H3O00"
+    },
+    {
+      "id": "xai-grok45",
+      "date": "2026-07-08",
+      "region": "overseas",
+      "category": "发布",
+      "company": "xAI",
+      "model": "Grok 4.5",
+      "title": "xAI 发布 Grok 4.5，50 万上下文、xAI API 上线",
+      "summary": "7 月 8 日，xAI 将 Grok 4.5 发布至 xAI API；模型具备 50 万 token 上下文，定价为输入 $2 / 输出 $6（每百万 token），尚未公布官方基准表与最大输出限制，标志 xAI 在长上下文推理上的进一步推进。",
+      "source": "benchr / riskinfo.ai",
+      "url": "https://benchr.org/recent-releases"
+    },
+    {
+      "id": "anthropic-fable5-mythos5",
+      "date": "2026-07-01",
+      "region": "overseas",
+      "category": "发布",
+      "company": "Anthropic",
+      "model": "Claude Fable 5 / Mythos 5",
+      "title": "Anthropic 推出 Fable 5 与 Mythos 5，前沿能力以约半价开放",
+      "summary": "Anthropic 推出 Mythos 级模型 Claude Fable 5（最高 70B 参数，7 月 1 日恢复访问），在代码、推理与多模态上匹配或超越 Opus 4.8，而每 token 成本约减半；针对受信网络安全客户另推无限制版 Mythos 5。同期 Claude Sonnet 5 成为全球默认模型。",
+      "source": "tldl.io / riskinfo.ai",
+      "url": "https://www.tldl.io/guides/latest-model-releases"
+    },
+    {
+      "id": "openai-broadcom-chip",
+      "date": "2026-07-15",
+      "region": "overseas",
+      "category": "算力",
+      "company": "OpenAI / Broadcom",
+      "model": "—",
+      "title": "OpenAI 联手 Broadcom 自研推理芯片 \"Jalapeño\"",
+      "summary": "OpenAI 宣布与 Broadcom 联合开发定制 LLM 推理芯片 \"Jalapeño\"，早期硅片测试显示每瓦性能显著优于现有 GPU，计划 2026 年内规模部署，标志 OpenAI 向全栈自研硬件战略迈进，有望重塑数据中心 economics。",
+      "source": "riskinfo.ai",
+      "url": "https://www.riskinfo.ai/post/ai-insights-key-global-developments-in-july-2026"
+    },
+    {
+      "id": "meta-muse",
+      "date": "2026-07-07",
+      "region": "overseas",
+      "category": "发布",
+      "company": "Meta",
+      "model": "Muse Image / Muse Video / Muse Spark 1.1",
+      "title": "Meta 推出 Muse 多模态家族：图像、视频与百万上下文 Spark",
+      "summary": "7 月 7 日，Meta 推出 Muse Image 与 Muse Video（已接入 Meta AI），并预览 Muse Spark 1.1——一款百万 token 多模态长上下文模型，通过 Meta Model API 公开预览，定位长上下文创意工作流。",
+      "source": "benchr",
+      "url": "https://benchr.org/recent-releases"
+    },
+    {
+      "id": "meta-louisiana-datacenter",
+      "date": "2026-07-13",
+      "region": "overseas",
+      "category": "算力",
+      "company": "Meta",
+      "model": "—",
+      "title": "Meta 路易斯安那 AI 数据中心扩至 5GW，区域总投资超 500 亿美元",
+      "summary": "7 月 13 日，Meta 宣布扩大美国路易斯安那州里奇兰教区 AI 数据中心规模，规划算力容量由超 2GW 提升至 5GW，区域总投资预计超 500 亿美元，并投入超 10 亿美元用于当地电力、供水及电网配套，以支持下一代 AI 模型训练与推理。",
+      "source": "腾讯财经（招商计算机周观察）",
+      "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260719195936a6db6be7"
     }
   ]
 }

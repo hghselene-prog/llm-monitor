@@ -896,29 +896,54 @@ function initNews() {
     '监管': '#ef4444', '财报': '#8b5cf6', '算力': '#0ea5e9',
     '产业': '#64748b', '生态': '#14b8a6'
   };
+  const domesticCount = items.filter(n => n.region === 'domestic').length;
+  const overseasCount = items.filter(n => n.region === 'overseas').length;
+  let activeRegion = 'all';
+
+  function renderGrid() {
+    const grid = wrap.querySelector('#news-grid');
+    if (!grid) return;
+    const filtered = activeRegion === 'all' ? items : items.filter(n => n.region === activeRegion);
+    grid.innerHTML = filtered.map(n => `
+      <a class="news-card" href="${n.url}" target="_blank" rel="noopener">
+        <div class="news-card-top">
+          <span class="news-cat" style="background:${catColor[n.category] || '#64748b'}">${n.category}</span>
+          <span class="news-tags">
+            <span class="news-region ${n.region || 'domestic'}">${n.region === 'overseas' ? '海外' : '国内'}</span>
+            <span class="news-date">${n.date}</span>
+          </span>
+        </div>
+        <div class="news-title">${n.title}</div>
+        <div class="news-summary">${n.summary}</div>
+        <div class="news-foot">
+          <span class="news-company">${n.company || ''}${n.model && n.model !== '—' ? ` · ${n.model}` : ''}</span>
+          <span class="news-source">来源：${n.source || '公开报道'} ↗</span>
+        </div>
+      </a>
+    `).join('');
+  }
+
   wrap.innerHTML = `
     <div class="news-meta">
       <span class="news-updated">更新：${meta.updated || '—'}</span>
       <span class="news-desc">${meta.description || ''}</span>
     </div>
-    <div class="news-grid">
-      ${items.map(n => `
-        <a class="news-card" href="${n.url}" target="_blank" rel="noopener">
-          <div class="news-card-top">
-            <span class="news-cat" style="background:${catColor[n.category] || '#64748b'}">${n.category}</span>
-            <span class="news-date">${n.date}</span>
-          </div>
-          <div class="news-title">${n.title}</div>
-          <div class="news-summary">${n.summary}</div>
-          <div class="news-foot">
-            <span class="news-company">${n.company || ''}${n.model && n.model !== '—' ? ` · ${n.model}` : ''}</span>
-            <span class="news-source">来源：${n.source || '公开报道'} ↗</span>
-          </div>
-        </a>
-      `).join('')}
+    <div class="news-tabs">
+      <button class="news-tab active" data-region="all">全部 ${items.length}</button>
+      <button class="news-tab" data-region="domestic">国内 ${domesticCount}</button>
+      <button class="news-tab" data-region="overseas">海外 ${overseasCount}</button>
     </div>
+    <div class="news-grid" id="news-grid"></div>
     ${meta.disclaimer ? `<div class="news-disclaimer">ⓘ ${meta.disclaimer}</div>` : ''}
   `;
+  renderGrid();
+  wrap.querySelectorAll('.news-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeRegion = btn.dataset.region;
+      wrap.querySelectorAll('.news-tab').forEach(b => b.classList.toggle('active', b === btn));
+      renderGrid();
+    });
+  });
 }
 
 function initEvolution() {
