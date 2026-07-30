@@ -2,6 +2,7 @@
 let DATA = null;
 let METHODOLOGY = null;
 let EVOLUTION = null;
+let NEWS = null;
 let compareModels = [];
 let CURRENT_PAGE = 'dashboard';
 const STATE = { sources: new Set(['AA','LB','Arena']) };
@@ -131,14 +132,16 @@ const SUBTITLES = {
 async function loadData() {
   try {
     const fetchOpts = { cache: 'no-store' };
-    const [modelsRes, methodRes, evoRes] = await Promise.all([
+    const [modelsRes, methodRes, evoRes, newsRes] = await Promise.all([
       fetch('data/models.json', fetchOpts),
       fetch('data/methodology.json', fetchOpts),
-      fetch('data/evolution.json', fetchOpts)
+      fetch('data/evolution.json', fetchOpts),
+      fetch('data/news.json', fetchOpts)
     ]);
     DATA = await modelsRes.json();
     METHODOLOGY = await methodRes.json();
     EVOLUTION = await evoRes.json();
+    NEWS = await newsRes.json();
     initApp();
   } catch(e) {
     console.error('Data load failed:', e);
@@ -317,6 +320,7 @@ function switchPage(name) {
   else if (name==='cost') initCost();
   else if (name==='coding') initCoding();
   else if (name==='multimodal') initMultimodal();
+  else if (name==='news') initNews();
   else if (name==='methodology') renderMethodology();
   else { initDashboard(); updateSubtitle('dashboard'); }
 }
@@ -880,6 +884,43 @@ function renderMethodology() {
 }
 
 // ========== EVOLUTION (US vs China Code Arena) ==========
+// ========== NEWS ==========
+function initNews() {
+  const wrap = document.getElementById('news-list');
+  if (!wrap) return;
+  if (!NEWS) { wrap.innerHTML = '<div style="padding:24px;color:var(--text-secondary)">新闻数据加载失败，请检查 data/news.json。</div>'; return; }
+  const meta = NEWS.meta || {};
+  const items = (NEWS.news || []).slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+  const catColor = {
+    '发布': '#6366f1', '融资/IPO': '#f59e0b', '政策': '#10b981',
+    '监管': '#ef4444', '财报': '#8b5cf6', '算力': '#0ea5e9',
+    '产业': '#64748b', '生态': '#14b8a6'
+  };
+  wrap.innerHTML = `
+    <div class="news-meta">
+      <span class="news-updated">更新：${meta.updated || '—'}</span>
+      <span class="news-desc">${meta.description || ''}</span>
+    </div>
+    <div class="news-grid">
+      ${items.map(n => `
+        <a class="news-card" href="${n.url}" target="_blank" rel="noopener">
+          <div class="news-card-top">
+            <span class="news-cat" style="background:${catColor[n.category] || '#64748b'}">${n.category}</span>
+            <span class="news-date">${n.date}</span>
+          </div>
+          <div class="news-title">${n.title}</div>
+          <div class="news-summary">${n.summary}</div>
+          <div class="news-foot">
+            <span class="news-company">${n.company || ''}${n.model && n.model !== '—' ? ` · ${n.model}` : ''}</span>
+            <span class="news-source">来源：${n.source || '公开报道'} ↗</span>
+          </div>
+        </a>
+      `).join('')}
+    </div>
+    ${meta.disclaimer ? `<div class="news-disclaimer">ⓘ ${meta.disclaimer}</div>` : ''}
+  `;
+}
+
 function initEvolution() {
   if (!EVOLUTION) return;
   renderEvolutionMeta();

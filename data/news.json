@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "title": "大模型新闻速递",
+    "updated": "2026-07-30",
+    "description": "收集各厂商大模型最新进展，偏财经 / 新闻方向（发布、融资/IPO、政策监管、财报、算力基建等）。条目均来自公开媒体报道并附原始链接，非本站原创。",
+    "disclaimer": "新闻时效性强，本页为快照式收录；如需更新需重新抓取并覆盖本文件（无后台自动拉取，零运行成本）。"
+  },
+  "news": [
+    {
+      "id": "kimi-k3-launch",
+      "date": "2026-07-17",
+      "category": "发布",
+      "company": "月之暗面 (Moonshot AI)",
+      "model": "Kimi K3",
+      "title": "月之暗面发布 Kimi K3：2.8 万亿参数，全球首个开源 3T 级模型",
+      "summary": "7 月 17 日凌晨，月之暗面正式发布新一代旗舰大模型 Kimi K3，总参数量 2.8 万亿（每 token 激活 16/896 专家、激活参数 1040 亿），基于 MoE 架构，原生支持视觉理解与 100 万 token 上下文。在 Frontend Code Arena 以 1679 分登顶全球第一，综合能力位列全球前三。发布后用户请求量超预期，7 月 19 日暂停 C 端新用户订阅。",
+      "source": "今日头条 / 南方都市报",
+      "url": "https://www.toutiao.com/article/7665230581462008363/"
+    },
+    {
+      "id": "moonshot-f-round",
+      "date": "2026-07-29",
+      "category": "融资/IPO",
+      "company": "月之暗面 (Moonshot AI)",
+      "model": "Kimi K3",
+      "title": "月之暗面完成 35 亿美元 F 轮，投后估值 350 亿，Pre-IPO 轮提前开启冲 500 亿",
+      "summary": "7 月 29 日，月之暗面完成超 35 亿美元 F 轮融资（认购超额 3 倍以上、提前关闭），投后估值升至 350 亿美元；原定 8 月启动的 G 轮（Pre-IPO）提前开启，投前估值升至 500 亿美元。成立三年累计融资超 370 亿元人民币，股东含阿里、腾讯、美团龙珠、红杉中国、IDG 及中国移动产业基金等。公司已启动红筹 VIE 重组，计划最快 6 个月内按港交所 18C 规则递表。",
+      "source": "证券时报 / 第一财经 / 南方都市报",
+      "url": "https://www.163.com/dy/article/L31LC5S40519DDQ2.html"
+    },
+    {
+      "id": "deepseek-ipo-prep",
+      "date": "2026-07-22",
+      "category": "融资/IPO",
+      "company": "DeepSeek",
+      "model": "DeepSeek V4 Pro",
+      "title": "DeepSeek 被曝启动 IPO 筹备并开启新一轮融资，目标估值超 5000 亿元",
+      "summary": "据 AI 大模型周报披露，DeepSeek 已启动 IPO 筹备并开启新一轮融资，目标估值超过 5000 亿元人民币，成为国产大模型头部企业中又一冲刺上市的案例（继智谱、MiniMax 之后）。",
+      "source": "今日头条（AI 大模型周报）",
+      "url": "https://www.toutiao.com/article/7665230581462008363/"
+    },
+    {
+      "id": "minimax-funding",
+      "date": "2026-07-20",
+      "category": "融资/IPO",
+      "company": "MiniMax",
+      "model": "—",
+      "title": "MiniMax 完成 160 亿港元融资，重点投入 AI 基础设施",
+      "summary": "7 月，MiniMax 完成 160 亿港元融资，资金重点用于 AI 基础设施搭建。同期 MiniMax 作为已上市大模型企业（00100.HK），受股权解禁影响股价出现回调，行业进入资本预期与现实的再平衡期。",
+      "source": "网经社",
+      "url": "https://www.100ec.cn/detail--6662063.html"
+    },
+    {
+      "id": "state-council-ai-plan",
+      "date": "2026-07-10",
+      "category": "政策",
+      "company": "国务院",
+      "model": "—",
+      "title": "国务院印发《AI 赋能新型工业化三年行动计划 (2026–2028 年)》",
+      "summary": "国务院正式印发《AI 赋能新型工业化三年行动计划（2026-2028 年）》，明确以 AI 全面赋能新型工业化、加速培育工业领域新质生产力。同期四部门（工信部、网信办、发改委、数据局）联合印发《关于推动互联网基础资源高质量发展的指导意见》，适配 AI 时代数字经济需求。",
+      "source": "网经社",
+      "url": "https://www.100ec.cn/detail--6662063.html"
+    },
+    {
+      "id": "personification-rule",
+      "date": "2026-07-15",
+      "category": "监管",
+      "company": "国家网信办等五部门",
+      "model": "—",
+      "title": "《人工智能拟人化互动服务管理暂行办法》施行，豆包、千问下线自建智能体",
+      "summary": "7 月 15 日，由国家网信办、国家发改委、工信部等五部门联合出台的《人工智能拟人化互动服务管理暂行办法》正式施行。字节豆包、阿里千问、腾讯元宝、网易妙时等平台集中下线 C 端用户自建智能体功能，智能体行业进入强监管合规调整期。",
+      "source": "网易 / 网经社",
+      "url": "https://dy.163.com/article/L1T2859R05118I96.html"
+    },
+    {
+      "id": "ondevice-ai-filing",
+      "date": "2026-07-15",
+      "category": "监管",
+      "company": "国家网信办 / 七家手机厂商",
+      "model": "—",
+      "title": "七款手机端侧 AI 完成备案，端侧大模型监管正式落地",
+      "summary": "7 月 15 日，国家互联网信息办公室公布 7 款提供手机端侧生成式 AI 服务的备案信息，涉及苹果（Apple 智能）、华为（小艺）、OPPO（AndesGPT）、vivo（蓝心）、小米（澎湃）、三星（盖乐世 AI）、努比亚（豆包手机版），备案时间统一为 7 月 8 日，标志国内端侧 AI 进入合规落地阶段。",
+      "source": "今日头条 / 腾讯财经",
+      "url": "https://www.toutiao.com/article/7665230581462008363/"
+    },
+    {
+      "id": "ai-chip-earnings",
+      "date": "2026-07-16",
+      "category": "财报",
+      "company": "摩尔线程 / 海光信息",
+      "model": "—",
+      "title": "国产 AI 芯片业绩预增：摩尔线程上半年营收增超 135%，海光增超 55%",
+      "summary": "7 月 16 日晚，摩尔线程（688795.SH）预告上半年营收 16.5–17.5 亿元，同比增长 135%–149%；海光信息（688041.SH）预告营收 85–93 亿元，同比增长 55.6%–70.2%，净利 17–18.3 亿元。两家均受益于 AI 大模型迭代、Agent 规模化落地与国产化进程加速。",
+      "source": "腾讯财经",
+      "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260716204625a6d76f0a"
+    },
+    {
+      "id": "meta-louisiana-datacenter",
+      "date": "2026-07-13",
+      "category": "算力",
+      "company": "Meta",
+      "model": "—",
+      "title": "Meta 路易斯安那 AI 数据中心扩至 5GW，区域总投资超 500 亿美元",
+      "summary": "7 月 13 日，Meta 宣布扩大美国路易斯安那州里奇兰教区 AI 数据中心规模，规划算力容量由超 2GW 提升至 5GW，区域总投资预计超 500 亿美元，并投入超 10 亿美元用于当地电力、供水及电网配套，以支持下一代 AI 模型训练与推理。",
+      "source": "腾讯财经（招商计算机周观察）",
+      "url": "https://gu.qq.com/resources/shy/news/detail-v2/index.html?t=1#/index?_tentrees_trans=0&id=SN20260719195936a6db6be7"
+    },
+    {
+      "id": "qwen38-max",
+      "date": "2026-07-19",
+      "category": "发布",
+      "company": "阿里巴巴 (阿里通义)",
+      "model": "Qwen3.8-Max",
+      "title": "阿里巴巴发布 Qwen3.8-Max 预览版：约 2.4 万亿参数旗舰模型",
+      "summary": "7 月 19 日，阿里巴巴发布千问旗舰模型 Qwen3.8-Max-Preview，参数规模约 2.4 万亿，作为对 Kimi K3 发布的回应密集亮相 WAIC 2026 期间。技术报告称其在多项基准上达到前沿水平，定价与顶尖模型梯队靠拢。",
+      "source": "南方都市报 / 今日头条",
+      "url": "https://www.163.com/dy/article/L31PFE7K05129QAF.html"
+    },
+    {
+      "id": "waic-2026",
+      "date": "2026-07-26",
+      "category": "产业",
+      "company": "WAIC / 多家厂商",
+      "model": "—",
+      "title": "WAIC 2026 集中爆发：展览首破 10 万㎡，腾讯混元 Hy3 登顶 OpenRouter",
+      "summary": "2026 世界人工智能大会（WAIC）展览面积首破 10 万㎡，1100 余家企业、3000 余项前沿展品、超 300 款全球首发。腾讯混元 Hy3 登顶 OpenRouter 全球调用量榜首；商汤、MiniMax、百川、面壁智能等密集发布新品，面壁智能进入三星供应链。",
+      "source": "今日头条",
+      "url": "https://www.toutiao.com/article/7665230581462008363/"
+    },
+    {
+      "id": "kimi-k3-open-source",
+      "date": "2026-07-27",
+      "category": "生态",
+      "company": "月之暗面 (Moonshot AI)",
+      "model": "Kimi K3",
+      "title": "Kimi K3 全链条开源：权重 + 技术报告 + MoonEP / FlashKDA / AgentEnv",
+      "summary": "7 月 27 日晚，月之暗面在 Hugging Face 正式发布 Kimi K3 完整模型权重与技术报告，并开源支撑训练的关键 Infra 技术 MoonEP、FlashKDA 和 AgentEnv。发布后 48 小时调用请求指数级增长，多家平台（阿里云灵骏、摩尔线程、海光 DCU 等）宣布适配。",
+      "source": "南方都市报 / 第一财经",
+      "url": "https://www.163.com/dy/article/L31PFE7K05129QAF.html"
+    }
+  ]
+}

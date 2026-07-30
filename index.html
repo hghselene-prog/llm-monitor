@@ -76,6 +76,12 @@
         </button>
       </div>
       <div class="nav-section">
+        <div class="nav-section-title">资讯</div>
+        <button class="nav-item" data-page="news">
+          <span class="nav-item-icon">📰</span> 新闻速递
+        </button>
+      </div>
+      <div class="nav-section">
         <div class="nav-section-title">关于</div>
         <button class="nav-item" data-page="methodology">
           <span class="nav-item-icon">📋</span> 数据来源与方法论
@@ -404,6 +410,15 @@
     </div>
 
     <!-- ===== METHODOLOGY ===== -->
+    <div class="page" id="page-news">
+      <div class="header">
+        <div class="header-left"><h1>📰 新闻速递</h1><p>各厂商大模型最新进展 · 偏财经 / 新闻方向</p></div>
+      </div>
+      <div class="card grid-full">
+        <div class="card-body"><div id="news-list"></div></div>
+      </div>
+    </div>
+
     <div class="page" id="page-methodology">
       <div class="header">
         <div class="header-left"><h1>📋 数据来源与方法论</h1><p>了解每个评分的来源、评测方式和局限性</p></div>
@@ -429,6 +444,7 @@
     <button class="mobile-nav-item" data-page="cost"><span class="mi-icon">💰</span><span class="mi-label">成本</span></button>
     <button class="mobile-nav-item" data-page="coding"><span class="mi-icon">💻</span><span class="mi-label">编程</span></button>
     <button class="mobile-nav-item" data-page="multimodal"><span class="mi-icon">🎨</span><span class="mi-label">多模态</span></button>
+    <button class="mobile-nav-item" data-page="news"><span class="mi-icon">📰</span><span class="mi-label">新闻</span></button>
     <button class="mobile-nav-item" data-page="methodology"><span class="mi-icon">📋</span><span class="mi-label">方法</span></button>
   </nav>
 </div>

@@ -272,3 +272,23 @@ tbody tr:hover{background:var(--bg-secondary)}
 .evo-footer-icon{flex-shrink:0;font-size:15px}
 [data-device="mobile"] .evo-banner{font-size:11px;gap:6px 12px;padding:8px 12px}
 [data-device="mobile"] .evo-banner-gray{flex-basis:100%}
+
+/* ===== News digest (新闻速递) ===== */
+.news-meta{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;padding:10px 4px 16px;font-size:12.5px;color:var(--text-secondary)}
+.news-updated{font-weight:600;color:var(--text)}
+.news-desc{color:var(--text-muted)}
+.news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+.news-card{display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;transition:transform .12s,box-shadow .12s,border-color .12s}
+.news-card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.07);border-color:var(--accent,#6366f1)}
+.news-card-top{display:flex;align-items:center;justify-content:space-between}
+.news-cat{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11px;font-weight:700;color:#fff;letter-spacing:.2px}
+.news-date{font-size:12px;color:var(--text-muted);font-variant-numeric:tabular-nums}
+.news-title{font-size:15.5px;font-weight:700;line-height:1.4;color:var(--text)}
+.news-summary{font-size:13px;line-height:1.65;color:var(--text-secondary);flex:1}
+.news-foot{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;justify-content:space-between;font-size:11.5px;color:var(--text-muted);border-top:1px dashed var(--border);padding-top:9px;margin-top:2px}
+.news-company{font-weight:600;color:var(--text-secondary)}
+.news-source{color:var(--source-arena,#6366f1)}
+.news-disclaimer{margin-top:18px;padding:12px 16px;background:var(--bg);border:1px dashed var(--border);border-radius:8px;font-size:12px;line-height:1.6;color:var(--text-muted)}
+[data-device="mobile"] .news-grid{grid-template-columns:1fr;gap:12px}
+[data-device="mobile"] .news-title{font-size:14.5px}
+[data-device="mobile"] .news-summary{font-size:12.5px}
