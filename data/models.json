@@ -7,7 +7,17 @@
       "icon": "🧪",
       "color": "#6366f1",
       "desc": "独立 API 级性能测量 — 智力指数、速度、成本",
-      "metrics": ["intelligence_index", "coding_index", "agentic_index", "speed", "latency", "cost_per_task", "api_price", "context_window", "capability_indices"]
+      "metrics": [
+        "intelligence_index",
+        "coding_index",
+        "agentic_index",
+        "speed",
+        "latency",
+        "cost_per_task",
+        "api_price",
+        "context_window",
+        "capability_indices"
+      ]
     },
     "LB": {
       "name": "LiveBench",
@@ -15,7 +25,15 @@
       "icon": "🔬",
       "color": "#10b981",
       "desc": "防污染客观 Benchmark — 每6月刷新题目",
-      "metrics": ["reasoning", "coding", "agentic_coding", "mathematics", "data_analysis", "language", "instruction_following"]
+      "metrics": [
+        "reasoning",
+        "coding",
+        "agentic_coding",
+        "mathematics",
+        "data_analysis",
+        "language",
+        "instruction_following"
+      ]
     },
     "Arena": {
       "name": "LMArena",
@@ -23,12 +41,22 @@
       "icon": "🏟️",
       "color": "#f59e0b",
       "desc": "匿名盲测人类偏好投票 — Elo 评分 + 置信区间",
-      "metrics": ["elo_text", "elo_vision", "elo_webdev", "elo_document", "elo_image_gen", "elo_video_gen", "elo_search", "elo_agent"]
+      "metrics": [
+        "elo_text",
+        "elo_vision",
+        "elo_webdev",
+        "elo_document",
+        "elo_image_gen",
+        "elo_video_gen",
+        "elo_search",
+        "elo_agent"
+      ]
     }
   },
   "models": [
     {
       "id": "claudeOpus5",
+      "tier": "top",
       "name": "Claude Opus 5",
       "provider": "Anthropic",
       "country": "US",
@@ -37,38 +65,199 @@
       "multimodal": true,
       "color": "#d97706",
       "metrics": [
-        { "key": "intelligence_index", "value": 83.3, "source": "AA", "confidence": "±1.1", "updated": "2026-07-25" },
-        { "key": "coding_index", "value": 87.6, "source": "AA", "confidence": null, "updated": "2026-07-25" },
-        { "key": "agentic_index", "value": 66.9, "source": "AA", "confidence": null, "updated": "2026-07-25" },
-        { "key": "speed_tps", "value": 71, "source": "AA", "confidence": null, "updated": "2026-07-25" },
-        { "key": "latency_s", "value": 2.5, "source": "AA", "confidence": null, "updated": "2026-07-25" },
-        { "key": "cost_per_task", "value": 0.512, "source": "AA", "confidence": null, "updated": "2026-07-25" },
-        { "key": "api_price_input", "value": 7.50, "source": "AA", "confidence": null, "updated": "2026-07-25" },
-        { "key": "api_price_output", "value": 37.50, "source": "AA", "confidence": null, "updated": "2026-07-25" },
-        { "key": "api_price_cache_hit", "value": 1.88, "source": "AA", "confidence": null, "updated": "2026-07-25" },
-        { "key": "api_price_reasoning", "value": 37.50, "source": "AA", "confidence": null, "updated": "2026-07-25" },
-        { "key": "reasoning", "value": 92.1, "source": "LB", "confidence": null, "updated": "2026-07-27" },
-        { "key": "coding", "value": 87.6, "source": "LB", "confidence": null, "updated": "2026-07-27" },
-        { "key": "agentic_coding", "value": 66.9, "source": "LB", "confidence": null, "updated": "2026-07-27" },
-        { "key": "mathematics", "value": 96.5, "source": "LB", "confidence": null, "updated": "2026-07-27" },
-        { "key": "data_analysis", "value": 81.2, "source": "LB", "confidence": null, "updated": "2026-07-27" },
-        { "key": "language", "value": 90.9, "source": "LB", "confidence": null, "updated": "2026-07-27" },
-        { "key": "instruction_following", "value": 76.3, "source": "LB", "confidence": null, "updated": "2026-07-27" },
-        { "key": "elo_text", "value": 1516, "source": "Arena", "confidence": "±14", "updated": "2026-07-28" },
-        { "key": "elo_vision", "value": 1324, "source": "Arena", "confidence": "±16", "updated": "2026-07-28" },
-        { "key": "elo_webdev", "value": 1684, "source": "Arena", "confidence": "±20", "updated": "2026-07-28" },
-        { "key": "elo_document", "value": 1514, "source": "Arena", "confidence": "±18", "updated": "2026-07-28" },
-        { "key": "elo_agent", "value": 14.05, "source": "Arena", "confidence": "±2.30%", "updated": "2026-07-28" }
+        {
+          "key": "intelligence_index",
+          "value": 83.3,
+          "source": "AA",
+          "confidence": "±1.1",
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "coding_index",
+          "value": 87.6,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "agentic_index",
+          "value": 66.9,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "speed_tps",
+          "value": 71,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.512,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "api_price_input",
+          "value": 7.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "api_price_output",
+          "value": 37.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 1.88,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 37.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-25"
+        },
+        {
+          "key": "reasoning",
+          "value": 92.1,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-07-27"
+        },
+        {
+          "key": "coding",
+          "value": 87.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-07-27"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 66.9,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-07-27"
+        },
+        {
+          "key": "mathematics",
+          "value": 96.5,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-07-27"
+        },
+        {
+          "key": "data_analysis",
+          "value": 81.2,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-07-27"
+        },
+        {
+          "key": "language",
+          "value": 90.9,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-07-27"
+        },
+        {
+          "key": "instruction_following",
+          "value": 76.3,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-07-27"
+        },
+        {
+          "key": "elo_text",
+          "value": 1516,
+          "source": "Arena",
+          "confidence": "±14",
+          "updated": "2026-07-28"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1324,
+          "source": "Arena",
+          "confidence": "±16",
+          "updated": "2026-07-28"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1684,
+          "source": "Arena",
+          "confidence": "±20",
+          "updated": "2026-07-28"
+        },
+        {
+          "key": "elo_document",
+          "value": 1514,
+          "source": "Arena",
+          "confidence": "±18",
+          "updated": "2026-07-28"
+        },
+        {
+          "key": "elo_agent",
+          "value": 14.05,
+          "source": "Arena",
+          "confidence": "±2.30%",
+          "updated": "2026-07-28"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 47}, {"quarter": "2024Q2", "value": 53},
-        {"quarter": "2024Q3", "value": 61}, {"quarter": "2024Q4", "value": 68},
-        {"quarter": "2025Q1", "value": 73}, {"quarter": "2025Q2", "value": 76},
-        {"quarter": "2025Q3", "value": 78.9}, {"quarter": "2025Q4", "value": 83.3}
+        {
+          "quarter": "2024Q1",
+          "value": 47
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 53
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 61
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 68
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 73
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 76
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 78.9
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 83.3
+        }
       ]
     },
     {
       "id": "gpt56sol",
+      "tier": "top",
       "name": "GPT-5.6 Sol Max Effort",
       "provider": "OpenAI",
       "country": "US",
@@ -77,38 +266,199 @@
       "multimodal": false,
       "color": "#2563eb",
       "metrics": [
-        { "key": "intelligence_index", "value": 82.4, "source": "AA", "confidence": "±1.2", "updated": "2026-07-19" },
-        { "key": "coding_index", "value": 83.9, "source": "AA", "confidence": null, "updated": "2026-07-19" },
-        { "key": "agentic_index", "value": 65.6, "source": "AA", "confidence": null, "updated": "2026-07-19" },
-        { "key": "speed_tps", "value": 89, "source": "AA", "confidence": null, "updated": "2026-07-19" },
-        { "key": "latency_s", "value": 1.8, "source": "AA", "confidence": null, "updated": "2026-07-19" },
-        { "key": "cost_per_task", "value": 0.589, "source": "AA", "confidence": null, "updated": "2026-07-19" },
-        { "key": "api_price_input", "value": 15.00, "source": "AA", "confidence": null, "updated": "2026-07-19" },
-        { "key": "api_price_output", "value": 60.00, "source": "AA", "confidence": null, "updated": "2026-07-19" },
-        { "key": "api_price_cache_hit", "value": 3.75, "source": "AA", "confidence": null, "updated": "2026-07-19" },
-        { "key": "api_price_reasoning", "value": 60.00, "source": "AA", "confidence": null, "updated": "2026-07-19" },
-        { "key": "reasoning", "value": 91.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 83.9, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 65.6, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 96.2, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 79.8, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 87.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 71.8, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1486, "source": "Arena", "confidence": "±8", "updated": "2026-07-20" },
-        { "key": "elo_vision", "value": 1280, "source": "Arena", "confidence": "±9", "updated": "2026-07-20" },
-        { "key": "elo_webdev", "value": 1633, "source": "Arena", "confidence": "±11", "updated": "2026-07-20" },
-        { "key": "elo_document", "value": 1470, "source": "Arena", "confidence": "±7", "updated": "2026-07-20" },
-        { "key": "elo_agent", "value": 9.86, "source": "Arena", "confidence": "±1.66%", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 82.4,
+          "source": "AA",
+          "confidence": "±1.2",
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "coding_index",
+          "value": 83.9,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "agentic_index",
+          "value": 65.6,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "speed_tps",
+          "value": 89,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "latency_s",
+          "value": 1.8,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.589,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "api_price_input",
+          "value": 15.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "api_price_output",
+          "value": 60.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 3.75,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 60.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-19"
+        },
+        {
+          "key": "reasoning",
+          "value": 91.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 83.9,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 65.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 96.2,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 79.8,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 87.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 71.8,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1486,
+          "source": "Arena",
+          "confidence": "±8",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1280,
+          "source": "Arena",
+          "confidence": "±9",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1633,
+          "source": "Arena",
+          "confidence": "±11",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_document",
+          "value": 1470,
+          "source": "Arena",
+          "confidence": "±7",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_agent",
+          "value": 9.86,
+          "source": "Arena",
+          "confidence": "±1.66%",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 52}, {"quarter": "2024Q2", "value": 58},
-        {"quarter": "2024Q3", "value": 65}, {"quarter": "2024Q4", "value": 71},
-        {"quarter": "2025Q1", "value": 75}, {"quarter": "2025Q2", "value": 79},
-        {"quarter": "2025Q3", "value": 81}, {"quarter": "2025Q4", "value": 82.4}
+        {
+          "quarter": "2024Q1",
+          "value": 52
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 58
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 65
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 71
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 75
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 79
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 81
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 82.4
+        }
       ]
     },
     {
       "id": "claudeFable",
+      "tier": "top",
       "name": "Claude Fable 5 Max Effort",
       "provider": "Anthropic",
       "country": "US",
@@ -117,38 +467,199 @@
       "multimodal": true,
       "color": "#8b5cf6",
       "metrics": [
-        { "key": "intelligence_index", "value": 80.8, "source": "AA", "confidence": "±1.0", "updated": "2026-07-15" },
-        { "key": "coding_index", "value": 86.0, "source": "AA", "confidence": null, "updated": "2026-07-15" },
-        { "key": "agentic_index", "value": 46.9, "source": "AA", "confidence": null, "updated": "2026-07-15" },
-        { "key": "speed_tps", "value": 78, "source": "AA", "confidence": null, "updated": "2026-07-15" },
-        { "key": "latency_s", "value": 2.1, "source": "AA", "confidence": null, "updated": "2026-07-15" },
-        { "key": "cost_per_task", "value": 1.573, "source": "AA", "confidence": null, "updated": "2026-07-15" },
-        { "key": "api_price_input", "value": 15.00, "source": "AA", "confidence": null, "updated": "2026-07-15" },
-        { "key": "api_price_output", "value": 75.00, "source": "AA", "confidence": null, "updated": "2026-07-15" },
-        { "key": "api_price_cache_hit", "value": 3.75, "source": "AA", "confidence": null, "updated": "2026-07-15" },
-        { "key": "api_price_reasoning", "value": 75.00, "source": "AA", "confidence": null, "updated": "2026-07-15" },
-        { "key": "reasoning", "value": 89.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 86.0, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 46.9, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 96.0, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 80.5, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 90.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 75.8, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1507, "source": "Arena", "confidence": "±7", "updated": "2026-07-20" },
-        { "key": "elo_vision", "value": 1318, "source": "Arena", "confidence": "±11", "updated": "2026-07-20" },
-        { "key": "elo_webdev", "value": 1636, "source": "Arena", "confidence": "±12", "updated": "2026-07-20" },
-        { "key": "elo_document", "value": 1507, "source": "Arena", "confidence": "±12", "updated": "2026-07-20" },
-        { "key": "elo_agent", "value": 13.22, "source": "Arena", "confidence": "±1.98%", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 80.8,
+          "source": "AA",
+          "confidence": "±1.0",
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "coding_index",
+          "value": 86.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "agentic_index",
+          "value": 46.9,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "speed_tps",
+          "value": 78,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.1,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 1.573,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "api_price_input",
+          "value": 15.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "api_price_output",
+          "value": 75.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 3.75,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 75.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-15"
+        },
+        {
+          "key": "reasoning",
+          "value": 89.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 86.0,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 46.9,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 96.0,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 80.5,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 90.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 75.8,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1507,
+          "source": "Arena",
+          "confidence": "±7",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1318,
+          "source": "Arena",
+          "confidence": "±11",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1636,
+          "source": "Arena",
+          "confidence": "±12",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_document",
+          "value": 1507,
+          "source": "Arena",
+          "confidence": "±12",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_agent",
+          "value": 13.22,
+          "source": "Arena",
+          "confidence": "±1.98%",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 48}, {"quarter": "2024Q2", "value": 54},
-        {"quarter": "2024Q3", "value": 62}, {"quarter": "2024Q4", "value": 69},
-        {"quarter": "2025Q1", "value": 74}, {"quarter": "2025Q2", "value": 77},
-        {"quarter": "2025Q3", "value": 79}, {"quarter": "2025Q4", "value": 80.8}
+        {
+          "quarter": "2024Q1",
+          "value": 48
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 54
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 62
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 69
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 74
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 77
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 79
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 80.8
+        }
       ]
     },
     {
       "id": "kimiK3",
+      "tier": "top",
       "name": "Kimi K3",
       "provider": "月之暗面",
       "country": "CN",
@@ -158,38 +669,199 @@
       "multimodal": false,
       "color": "#ec4899",
       "metrics": [
-        { "key": "intelligence_index", "value": 78.5, "source": "AA", "confidence": "±1.8", "updated": "2026-07-16" },
-        { "key": "coding_index", "value": 81.4, "source": "AA", "confidence": null, "updated": "2026-07-16" },
-        { "key": "agentic_index", "value": 57.6, "source": "AA", "confidence": null, "updated": "2026-07-16" },
-        { "key": "speed_tps", "value": 72, "source": "AA", "confidence": null, "updated": "2026-07-16" },
-        { "key": "latency_s", "value": 2.4, "source": "AA", "confidence": null, "updated": "2026-07-16" },
-        { "key": "cost_per_task", "value": 0.379, "source": "AA", "confidence": null, "updated": "2026-07-16" },
-        { "key": "api_price_input", "value": 5.50, "source": "AA", "confidence": null, "updated": "2026-07-16" },
-        { "key": "api_price_output", "value": 22.00, "source": "AA", "confidence": null, "updated": "2026-07-16" },
-        { "key": "api_price_cache_hit", "value": 1.40, "source": "AA", "confidence": null, "updated": "2026-07-16" },
-        { "key": "api_price_reasoning", "value": 22.00, "source": "AA", "confidence": null, "updated": "2026-07-16" },
-        { "key": "reasoning", "value": 90.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 81.4, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 57.6, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 84.4, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 78.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 85.5, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 71.4, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1487, "source": "Arena", "confidence": "±10", "updated": "2026-07-20" },
-        { "key": "elo_webdev", "value": 1677, "source": "Arena", "confidence": "±17", "updated": "2026-07-20" },
-        { "key": "elo_vision", "value": 1260, "source": "Arena", "confidence": "±12", "updated": "2026-07-20" },
-        { "key": "elo_document", "value": 1430, "source": "Arena", "confidence": "±10", "updated": "2026-07-20" },
-        { "key": "elo_agent", "value": 9.62, "source": "Arena", "confidence": "±1.87%", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 78.5,
+          "source": "AA",
+          "confidence": "±1.8",
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "coding_index",
+          "value": 81.4,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "agentic_index",
+          "value": 57.6,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "speed_tps",
+          "value": 72,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.4,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.379,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "api_price_input",
+          "value": 5.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "api_price_output",
+          "value": 22.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 1.4,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 22.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-16"
+        },
+        {
+          "key": "reasoning",
+          "value": 90.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 81.4,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 57.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 84.4,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 78.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 85.5,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 71.4,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1487,
+          "source": "Arena",
+          "confidence": "±10",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1677,
+          "source": "Arena",
+          "confidence": "±17",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1260,
+          "source": "Arena",
+          "confidence": "±12",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_document",
+          "value": 1430,
+          "source": "Arena",
+          "confidence": "±10",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_agent",
+          "value": 9.62,
+          "source": "Arena",
+          "confidence": "±1.87%",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 38}, {"quarter": "2024Q2", "value": 48},
-        {"quarter": "2024Q3", "value": 58}, {"quarter": "2024Q4", "value": 67},
-        {"quarter": "2025Q1", "value": 72}, {"quarter": "2025Q2", "value": 75},
-        {"quarter": "2025Q3", "value": 77}, {"quarter": "2025Q4", "value": 78.5}
+        {
+          "quarter": "2024Q1",
+          "value": 38
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 48
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 58
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 67
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 72
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 75
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 77
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 78.5
+        }
       ]
     },
     {
       "id": "gemini31",
+      "tier": "fast",
       "name": "Gemini 3.1 Pro Preview",
       "provider": "Google",
       "country": "US",
@@ -198,37 +870,192 @@
       "multimodal": true,
       "color": "#10b981",
       "metrics": [
-        { "key": "intelligence_index", "value": 77.1, "source": "AA", "confidence": "±1.5", "updated": "2026-07-18" },
-        { "key": "coding_index", "value": 76.5, "source": "AA", "confidence": null, "updated": "2026-07-18" },
-        { "key": "agentic_index", "value": 45.4, "source": "AA", "confidence": null, "updated": "2026-07-18" },
-        { "key": "speed_tps", "value": 155, "source": "AA", "confidence": null, "updated": "2026-07-18" },
-        { "key": "latency_s", "value": 0.4, "source": "AA", "confidence": null, "updated": "2026-07-18" },
-        { "key": "cost_per_task", "value": 0.262, "source": "AA", "confidence": null, "updated": "2026-07-18" },
-        { "key": "api_price_input", "value": 2.50, "source": "AA", "confidence": null, "updated": "2026-07-18" },
-        { "key": "api_price_output", "value": 10.00, "source": "AA", "confidence": null, "updated": "2026-07-18" },
-        { "key": "api_price_cache_hit", "value": 0.60, "source": "AA", "confidence": null, "updated": "2026-07-18" },
-        { "key": "api_price_reasoning", "value": 0, "source": "AA", "confidence": null, "updated": "2026-07-18" },
-        { "key": "reasoning", "value": 84.0, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 76.5, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 45.4, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 91.0, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 78.5, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 85.4, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 79.1, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1480, "source": "Arena", "confidence": "±6", "updated": "2026-07-20" },
-        { "key": "elo_vision", "value": 1289, "source": "Arena", "confidence": "±8", "updated": "2026-07-20" },
-        { "key": "elo_webdev", "value": 1420, "source": "Arena", "confidence": "±10", "updated": "2026-07-20" },
-        { "key": "elo_document", "value": 1450, "source": "Arena", "confidence": "±7", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 77.1,
+          "source": "AA",
+          "confidence": "±1.5",
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "coding_index",
+          "value": 76.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "agentic_index",
+          "value": 45.4,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "speed_tps",
+          "value": 155,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "latency_s",
+          "value": 0.4,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.262,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "api_price_input",
+          "value": 2.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "api_price_output",
+          "value": 10.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.6,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-18"
+        },
+        {
+          "key": "reasoning",
+          "value": 84.0,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 76.5,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 45.4,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 91.0,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 78.5,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 85.4,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 79.1,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1480,
+          "source": "Arena",
+          "confidence": "±6",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1289,
+          "source": "Arena",
+          "confidence": "±8",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1420,
+          "source": "Arena",
+          "confidence": "±10",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_document",
+          "value": 1450,
+          "source": "Arena",
+          "confidence": "±7",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 45}, {"quarter": "2024Q2", "value": 52},
-        {"quarter": "2024Q3", "value": 60}, {"quarter": "2024Q4", "value": 68},
-        {"quarter": "2025Q1", "value": 72}, {"quarter": "2025Q2", "value": 74},
-        {"quarter": "2025Q3", "value": 76}, {"quarter": "2025Q4", "value": 77.1}
+        {
+          "quarter": "2024Q1",
+          "value": 45
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 52
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 60
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 68
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 72
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 74
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 76
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 77.1
+        }
       ]
     },
     {
       "id": "grok45",
+      "tier": "fast",
       "name": "Grok 4.5",
       "provider": "xAI",
       "country": "US",
@@ -237,36 +1064,185 @@
       "multimodal": true,
       "color": "#6366f1",
       "metrics": [
-        { "key": "intelligence_index", "value": 76.3, "source": "AA", "confidence": "±1.4", "updated": "2026-07-12" },
-        { "key": "coding_index", "value": 68.6, "source": "AA", "confidence": null, "updated": "2026-07-12" },
-        { "key": "agentic_index", "value": 59.8, "source": "AA", "confidence": null, "updated": "2026-07-12" },
-        { "key": "speed_tps", "value": 110, "source": "AA", "confidence": null, "updated": "2026-07-12" },
-        { "key": "latency_s", "value": 1.2, "source": "AA", "confidence": null, "updated": "2026-07-12" },
-        { "key": "cost_per_task", "value": 0.128, "source": "AA", "confidence": null, "updated": "2026-07-12" },
-        { "key": "api_price_input", "value": 3.00, "source": "AA", "confidence": null, "updated": "2026-07-12" },
-        { "key": "api_price_output", "value": 12.00, "source": "AA", "confidence": null, "updated": "2026-07-12" },
-        { "key": "api_price_cache_hit", "value": 0.75, "source": "AA", "confidence": null, "updated": "2026-07-12" },
-        { "key": "api_price_reasoning", "value": 12.00, "source": "AA", "confidence": null, "updated": "2026-07-12" },
-        { "key": "reasoning", "value": 87.2, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 68.6, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 59.8, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 90.8, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 73.0, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 82.8, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 71.5, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1430, "source": "Arena", "confidence": "±9", "updated": "2026-07-20" },
-        { "key": "elo_webdev", "value": 1556, "source": "Arena", "confidence": "±12", "updated": "2026-07-20" },
-        { "key": "elo_vision", "value": 1258, "source": "Arena", "confidence": "±10", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 76.3,
+          "source": "AA",
+          "confidence": "±1.4",
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "coding_index",
+          "value": 68.6,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "agentic_index",
+          "value": 59.8,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "speed_tps",
+          "value": 110,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "latency_s",
+          "value": 1.2,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.128,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "api_price_input",
+          "value": 3.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "api_price_output",
+          "value": 12.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.75,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 12.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-12"
+        },
+        {
+          "key": "reasoning",
+          "value": 87.2,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 68.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 59.8,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 90.8,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 73.0,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 82.8,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 71.5,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1430,
+          "source": "Arena",
+          "confidence": "±9",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1556,
+          "source": "Arena",
+          "confidence": "±12",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1258,
+          "source": "Arena",
+          "confidence": "±10",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 40}, {"quarter": "2024Q2", "value": 48},
-        {"quarter": "2024Q3", "value": 57}, {"quarter": "2024Q4", "value": 65},
-        {"quarter": "2025Q1", "value": 70}, {"quarter": "2025Q2", "value": 73},
-        {"quarter": "2025Q3", "value": 75}, {"quarter": "2025Q4", "value": 76.3}
+        {
+          "quarter": "2024Q1",
+          "value": 40
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 48
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 57
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 65
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 70
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 73
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 75
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 76.3
+        }
       ]
     },
     {
       "id": "museSpark",
+      "tier": "balanced",
       "name": "Muse Spark 1.1",
       "provider": "Meta",
       "country": "US",
@@ -276,35 +1252,178 @@
       "multimodal": true,
       "color": "#ef4444",
       "metrics": [
-        { "key": "intelligence_index", "value": 76.2, "source": "AA", "confidence": "±2.0", "updated": "2026-07-10" },
-        { "key": "coding_index", "value": 77.2, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "agentic_index", "value": 65.1, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "speed_tps", "value": 68, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "latency_s", "value": 3.0, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "cost_per_task", "value": 0.234, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "api_price_input", "value": 4.00, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "api_price_output", "value": 16.00, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "api_price_cache_hit", "value": 1.00, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "api_price_reasoning", "value": 16.00, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "reasoning", "value": 87.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 77.2, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 65.1, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 87.1, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 72.5, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 74.3, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 69.6, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1495, "source": "Arena", "confidence": "±8", "updated": "2026-07-20" },
-        { "key": "elo_vision", "value": 1295, "source": "Arena", "confidence": "±10", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 76.2,
+          "source": "AA",
+          "confidence": "±2.0",
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "coding_index",
+          "value": 77.2,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "agentic_index",
+          "value": 65.1,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "speed_tps",
+          "value": 68,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "latency_s",
+          "value": 3.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.234,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "api_price_input",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "api_price_output",
+          "value": 16.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 1.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 16.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "reasoning",
+          "value": 87.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 77.2,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 65.1,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 87.1,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 72.5,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 74.3,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 69.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1495,
+          "source": "Arena",
+          "confidence": "±8",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1295,
+          "source": "Arena",
+          "confidence": "±10",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 42}, {"quarter": "2024Q2", "value": 50},
-        {"quarter": "2024Q3", "value": 58}, {"quarter": "2024Q4", "value": 64},
-        {"quarter": "2025Q1", "value": 68}, {"quarter": "2025Q2", "value": 71},
-        {"quarter": "2025Q3", "value": 74}, {"quarter": "2025Q4", "value": 76.2}
+        {
+          "quarter": "2024Q1",
+          "value": 42
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 50
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 58
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 64
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 68
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 71
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 74
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 76.2
+        }
       ]
     },
     {
       "id": "deepseekV4",
+      "tier": "balanced",
       "name": "DeepSeek V4 Pro",
       "provider": "DeepSeek",
       "country": "CN",
@@ -314,35 +1433,178 @@
       "multimodal": false,
       "color": "#f59e0b",
       "metrics": [
-        { "key": "intelligence_index", "value": 71.6, "source": "AA", "confidence": "±1.1", "updated": "2026-07-08" },
-        { "key": "coding_index", "value": 70.0, "source": "AA", "confidence": null, "updated": "2026-07-08" },
-        { "key": "agentic_index", "value": 42.6, "source": "AA", "confidence": null, "updated": "2026-07-08" },
-        { "key": "speed_tps", "value": 82, "source": "AA", "confidence": null, "updated": "2026-07-08" },
-        { "key": "latency_s", "value": 1.9, "source": "AA", "confidence": null, "updated": "2026-07-08" },
-        { "key": "cost_per_task", "value": 0.050, "source": "AA", "confidence": null, "updated": "2026-07-08" },
-        { "key": "api_price_input", "value": 0.55, "source": "AA", "confidence": null, "updated": "2026-07-08" },
-        { "key": "api_price_output", "value": 2.19, "source": "AA", "confidence": null, "updated": "2026-07-08" },
-        { "key": "api_price_cache_hit", "value": 0.14, "source": "AA", "confidence": null, "updated": "2026-07-08" },
-        { "key": "api_price_reasoning", "value": 2.19, "source": "AA", "confidence": null, "updated": "2026-07-08" },
-        { "key": "reasoning", "value": 82.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 70.0, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 42.6, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 90.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 74.5, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 78.1, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 62.4, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1410, "source": "Arena", "confidence": "±6", "updated": "2026-07-20" },
-        { "key": "elo_webdev", "value": 1293, "source": "Arena", "confidence": "±15", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 71.6,
+          "source": "AA",
+          "confidence": "±1.1",
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "coding_index",
+          "value": 70.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "agentic_index",
+          "value": 42.6,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "speed_tps",
+          "value": 82,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "latency_s",
+          "value": 1.9,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.05,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "api_price_input",
+          "value": 0.55,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "api_price_output",
+          "value": 2.19,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.14,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 2.19,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-08"
+        },
+        {
+          "key": "reasoning",
+          "value": 82.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 70.0,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 42.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 90.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 74.5,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 78.1,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 62.4,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1410,
+          "source": "Arena",
+          "confidence": "±6",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1293,
+          "source": "Arena",
+          "confidence": "±15",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 35}, {"quarter": "2024Q2", "value": 44},
-        {"quarter": "2024Q3", "value": 53}, {"quarter": "2024Q4", "value": 60},
-        {"quarter": "2025Q1", "value": 64}, {"quarter": "2025Q2", "value": 67},
-        {"quarter": "2025Q3", "value": 69}, {"quarter": "2025Q4", "value": 71.6}
+        {
+          "quarter": "2024Q1",
+          "value": 35
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 44
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 53
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 60
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 64
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 67
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 69
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 71.6
+        }
       ]
     },
     {
       "id": "qwen37max",
+      "tier": "balanced",
       "name": "Qwen 3.7 Max",
       "provider": "阿里",
       "country": "CN",
@@ -351,35 +1613,178 @@
       "multimodal": true,
       "color": "#f97316",
       "metrics": [
-        { "key": "intelligence_index", "value": 73.1, "source": "AA", "confidence": "±1.3", "updated": "2026-07-14" },
-        { "key": "coding_index", "value": 74.2, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "agentic_index", "value": 43.6, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "speed_tps", "value": 90, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "latency_s", "value": 1.5, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "cost_per_task", "value": 0.182, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "api_price_input", "value": 3.50, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "api_price_output", "value": 14.00, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "api_price_cache_hit", "value": 0.90, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "api_price_reasoning", "value": 0, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "reasoning", "value": 83.3, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 74.2, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 43.6, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 85.2, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 71.8, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 79.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 74.0, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1420, "source": "Arena", "confidence": "±7", "updated": "2026-07-20" },
-        { "key": "elo_vision", "value": 1220, "source": "Arena", "confidence": "±10", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 73.1,
+          "source": "AA",
+          "confidence": "±1.3",
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "coding_index",
+          "value": 74.2,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "agentic_index",
+          "value": 43.6,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "speed_tps",
+          "value": 90,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "latency_s",
+          "value": 1.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.182,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "api_price_input",
+          "value": 3.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "api_price_output",
+          "value": 14.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.9,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "reasoning",
+          "value": 83.3,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 74.2,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 43.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 85.2,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 71.8,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 79.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 74.0,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1420,
+          "source": "Arena",
+          "confidence": "±7",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1220,
+          "source": "Arena",
+          "confidence": "±10",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 40}, {"quarter": "2024Q2", "value": 48},
-        {"quarter": "2024Q3", "value": 56}, {"quarter": "2024Q4", "value": 63},
-        {"quarter": "2025Q1", "value": 67}, {"quarter": "2025Q2", "value": 69},
-        {"quarter": "2025Q3", "value": 71}, {"quarter": "2025Q4", "value": 73.1}
+        {
+          "quarter": "2024Q1",
+          "value": 40
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 48
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 56
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 63
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 67
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 69
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 71
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 73.1
+        }
       ]
     },
     {
       "id": "glm52",
+      "tier": "balanced",
       "name": "GLM-5.2",
       "provider": "智谱",
       "country": "CN",
@@ -389,34 +1794,171 @@
       "multimodal": false,
       "color": "#06b6d4",
       "metrics": [
-        { "key": "intelligence_index", "value": 73.2, "source": "AA", "confidence": "±1.5", "updated": "2026-07-10" },
-        { "key": "coding_index", "value": 79.7, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "agentic_index", "value": 51.9, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "speed_tps", "value": 75, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "latency_s", "value": 2.0, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "cost_per_task", "value": 0.195, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "api_price_input", "value": 3.00, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "api_price_output", "value": 12.00, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "api_price_cache_hit", "value": 0.75, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "api_price_reasoning", "value": 12.00, "source": "AA", "confidence": null, "updated": "2026-07-10" },
-        { "key": "reasoning", "value": 78.6, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 79.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 51.9, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 89.8, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 73.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 76.2, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 62.3, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1415, "source": "Arena", "confidence": "±8", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 73.2,
+          "source": "AA",
+          "confidence": "±1.5",
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "coding_index",
+          "value": 79.7,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "agentic_index",
+          "value": 51.9,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "speed_tps",
+          "value": 75,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.195,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "api_price_input",
+          "value": 3.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "api_price_output",
+          "value": 12.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.75,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 12.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-10"
+        },
+        {
+          "key": "reasoning",
+          "value": 78.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 79.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 51.9,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 89.8,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 73.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 76.2,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 62.3,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1415,
+          "source": "Arena",
+          "confidence": "±8",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 36}, {"quarter": "2024Q2", "value": 45},
-        {"quarter": "2024Q3", "value": 55}, {"quarter": "2024Q4", "value": 62},
-        {"quarter": "2025Q1", "value": 66}, {"quarter": "2025Q2", "value": 69},
-        {"quarter": "2025Q3", "value": 71}, {"quarter": "2025Q4", "value": 73.2}
+        {
+          "quarter": "2024Q1",
+          "value": 36
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 45
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 55
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 62
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 66
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 69
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 71
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 73.2
+        }
       ]
     },
     {
       "id": "gemini35flash",
+      "tier": "fast",
       "name": "Gemini 3.5 Flash",
       "provider": "Google",
       "country": "US",
@@ -425,35 +1967,178 @@
       "multimodal": true,
       "color": "#34d399",
       "metrics": [
-        { "key": "intelligence_index", "value": 74.6, "source": "AA", "confidence": "±1.6", "updated": "2026-07-11" },
-        { "key": "coding_index", "value": 78.2, "source": "AA", "confidence": null, "updated": "2026-07-11" },
-        { "key": "agentic_index", "value": 49.0, "source": "AA", "confidence": null, "updated": "2026-07-11" },
-        { "key": "speed_tps", "value": 185, "source": "AA", "confidence": null, "updated": "2026-07-11" },
-        { "key": "latency_s", "value": 0.5, "source": "AA", "confidence": null, "updated": "2026-07-11" },
-        { "key": "cost_per_task", "value": 0.249, "source": "AA", "confidence": null, "updated": "2026-07-11" },
-        { "key": "api_price_input", "value": 0.50, "source": "AA", "confidence": null, "updated": "2026-07-11" },
-        { "key": "api_price_output", "value": 2.00, "source": "AA", "confidence": null, "updated": "2026-07-11" },
-        { "key": "api_price_cache_hit", "value": 0.10, "source": "AA", "confidence": null, "updated": "2026-07-11" },
-        { "key": "api_price_reasoning", "value": 0, "source": "AA", "confidence": null, "updated": "2026-07-11" },
-        { "key": "reasoning", "value": 82.0, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 78.2, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 49.0, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 88.2, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 64.9, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 84.6, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 75.6, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1450, "source": "Arena", "confidence": "±6", "updated": "2026-07-20" },
-        { "key": "elo_vision", "value": 1286, "source": "Arena", "confidence": "±12", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 74.6,
+          "source": "AA",
+          "confidence": "±1.6",
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "coding_index",
+          "value": 78.2,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "agentic_index",
+          "value": 49.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "speed_tps",
+          "value": 185,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "latency_s",
+          "value": 0.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.249,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "api_price_input",
+          "value": 0.5,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "api_price_output",
+          "value": 2.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.1,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-11"
+        },
+        {
+          "key": "reasoning",
+          "value": 82.0,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 78.2,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 49.0,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 88.2,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 64.9,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 84.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 75.6,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1450,
+          "source": "Arena",
+          "confidence": "±6",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1286,
+          "source": "Arena",
+          "confidence": "±12",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 44}, {"quarter": "2024Q2", "value": 50},
-        {"quarter": "2024Q3", "value": 58}, {"quarter": "2024Q4", "value": 65},
-        {"quarter": "2025Q1", "value": 69}, {"quarter": "2025Q2", "value": 72},
-        {"quarter": "2025Q3", "value": 73.5}, {"quarter": "2025Q4", "value": 74.6}
+        {
+          "quarter": "2024Q1",
+          "value": 44
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 50
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 58
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 65
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 69
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 72
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 73.5
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 74.6
+        }
       ]
     },
     {
       "id": "claude48",
+      "tier": "top",
       "name": "Claude 4.8 Opus Thinking",
       "provider": "Anthropic",
       "country": "US",
@@ -462,46 +2147,234 @@
       "multimodal": true,
       "color": "#a78bfa",
       "metrics": [
-        { "key": "intelligence_index", "value": 78.9, "source": "AA", "confidence": "±1.2", "updated": "2026-07-14" },
-        { "key": "coding_index", "value": 79.3, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "agentic_index", "value": 56.1, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "speed_tps", "value": 65, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "latency_s", "value": 3.2, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "cost_per_task", "value": 0.688, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "api_price_input", "value": 12.00, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "api_price_output", "value": 48.00, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "api_price_cache_hit", "value": 3.00, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "api_price_reasoning", "value": 48.00, "source": "AA", "confidence": null, "updated": "2026-07-14" },
-        { "key": "reasoning", "value": 89.7, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "coding", "value": 79.3, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "agentic_coding", "value": 56.1, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "mathematics", "value": 95.3, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "data_analysis", "value": 78.3, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "language", "value": 81.4, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "instruction_following", "value": 72.4, "source": "LB", "confidence": null, "updated": "2026-06-25" },
-        { "key": "elo_text", "value": 1490, "source": "Arena", "confidence": "±5", "updated": "2026-07-20" },
-        { "key": "elo_vision", "value": 1286, "source": "Arena", "confidence": "±9", "updated": "2026-07-20" },
-        { "key": "elo_webdev", "value": 1564, "source": "Arena", "confidence": "±8", "updated": "2026-07-20" }
+        {
+          "key": "intelligence_index",
+          "value": 78.9,
+          "source": "AA",
+          "confidence": "±1.2",
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "coding_index",
+          "value": 79.3,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "agentic_index",
+          "value": 56.1,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "speed_tps",
+          "value": 65,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "latency_s",
+          "value": 3.2,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.688,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "api_price_input",
+          "value": 12.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "api_price_output",
+          "value": 48.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 3.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 48.0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-14"
+        },
+        {
+          "key": "reasoning",
+          "value": 89.7,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "coding",
+          "value": 79.3,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 56.1,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "mathematics",
+          "value": 95.3,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "data_analysis",
+          "value": 78.3,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "language",
+          "value": 81.4,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "instruction_following",
+          "value": 72.4,
+          "source": "LB",
+          "confidence": null,
+          "updated": "2026-06-25"
+        },
+        {
+          "key": "elo_text",
+          "value": 1490,
+          "source": "Arena",
+          "confidence": "±5",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1286,
+          "source": "Arena",
+          "confidence": "±9",
+          "updated": "2026-07-20"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1564,
+          "source": "Arena",
+          "confidence": "±8",
+          "updated": "2026-07-20"
+        }
       ],
       "timeline_intel": [
-        {"quarter": "2024Q1", "value": 47}, {"quarter": "2024Q2", "value": 53},
-        {"quarter": "2024Q3", "value": 61}, {"quarter": "2024Q4", "value": 68},
-        {"quarter": "2025Q1", "value": 73}, {"quarter": "2025Q2", "value": 76},
-        {"quarter": "2025Q3", "value": 77.5}, {"quarter": "2025Q4", "value": 78.9}
+        {
+          "quarter": "2024Q1",
+          "value": 47
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 53
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 61
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 68
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 73
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 76
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 77.5
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 78.9
+        }
       ]
     }
   ],
   "changelog": [
-    { "date": "2026-07-28", "event": "Claude Opus 5 上线全部三大榜单：AA 智力指数与 Agentic Index 双第一，Arena 各专项 Elo 领跑（初期置信区间较宽）", "url": "#" },
-    { "date": "2026-07-24", "event": "Anthropic 发布 Claude Opus 5：SWE-bench Verified 96.0%，1M 上下文，定价 $5/$25 仅为 Fable 5 一半", "url": "#" },
-    { "date": "2026-07-20", "event": "Motif 3 (Beta) 新模型上线评测", "url": "#" },
-    { "date": "2026-07-17", "event": "六家实验室模型智力指数突破50大关", "url": "#" },
-    { "date": "2026-07-17", "event": "Kimi K3 登顶智力指数第3名，比肩 Opus 4.8 和 GPT-5.5", "url": "#" },
-    { "date": "2026-07-15", "event": "Thinking Machines 发布 Inkling — 开源模型新标杆", "url": "#" },
-    { "date": "2026-07-13", "event": "GPT-5.6 Sol/Terra/Luna 智力 vs 成本全解析", "url": "#" },
-    { "date": "2026-07-10", "event": "Muse Spark 1.1：Meta 三个月智力指数暴涨8分", "url": "#" },
-    { "date": "2026-07-09", "event": "GPT-5.6 全系列登陆排行榜", "url": "#" },
-    { "date": "2026-06-25", "event": "LiveBench 发布最新版本 (2026-06-25)，题目已完成半年刷新", "url": "#" }
+    {
+      "date": "2026-07-28",
+      "event": "Claude Opus 5 上线全部三大榜单：AA 智力指数与 Agentic Index 双第一，Arena 各专项 Elo 领跑（初期置信区间较宽）",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-24",
+      "event": "Anthropic 发布 Claude Opus 5：SWE-bench Verified 96.0%，1M 上下文，定价 $5/$25 仅为 Fable 5 一半",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-20",
+      "event": "Motif 3 (Beta) 新模型上线评测",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-17",
+      "event": "六家实验室模型智力指数突破50大关",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-17",
+      "event": "Kimi K3 登顶智力指数第3名，比肩 Opus 4.8 和 GPT-5.5",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-15",
+      "event": "Thinking Machines 发布 Inkling — 开源模型新标杆",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-13",
+      "event": "GPT-5.6 Sol/Terra/Luna 智力 vs 成本全解析",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-10",
+      "event": "Muse Spark 1.1：Meta 三个月智力指数暴涨8分",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-09",
+      "event": "GPT-5.6 全系列登陆排行榜",
+      "url": "#"
+    },
+    {
+      "date": "2026-06-25",
+      "event": "LiveBench 发布最新版本 (2026-06-25)，题目已完成半年刷新",
+      "url": "#"
+    }
   ],
   "update_frequency": {
     "AA": "持续更新，新模型评测通常在发布后 1-3 天内上线",

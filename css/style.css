@@ -125,6 +125,30 @@ tbody tr:hover{background:var(--bg-secondary)}
 .compare-chip .remove:hover{opacity:1}
 .compare-empty{color:var(--text-muted);font-size:13px;padding:8px 0}
 
+/* 对比页分类快捷按钮 */
+.compare-tier-bar{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px}
+.tier-btn{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:10px 16px;border-radius:10px;border:1.5px solid var(--border);background:var(--bg);color:var(--text);cursor:pointer;font-family:var(--font);text-align:left;transition:transform .08s ease,box-shadow .12s ease,border-color .12s ease;min-width:128px}
+.tier-btn:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.10)}
+.tier-btn:active{transform:translateY(0)}
+.tier-btn-label{font-size:14px;font-weight:700;display:flex;align-items:center;gap:6px}
+.tier-btn-count{position:absolute;top:8px;right:10px;font-size:11px;font-weight:700;background:rgba(0,0,0,.06);color:var(--text-secondary);border-radius:10px;padding:1px 7px}
+.tier-btn{position:relative}
+.tier-btn-desc{font-size:11px;color:var(--text-muted)}
+.tier-btn.tier-top{border-color:#d97706}
+.tier-btn.tier-top:hover{border-color:#b45309;box-shadow:0 4px 14px rgba(217,119,6,.18)}
+.tier-btn.tier-top .tier-btn-label{color:#b45309}
+.tier-btn.tier-balanced{border-color:#10b981}
+.tier-btn.tier-balanced:hover{border-color:#059669;box-shadow:0 4px 14px rgba(16,185,129,.18)}
+.tier-btn.tier-balanced .tier-btn-label{color:#059669}
+.tier-btn.tier-fast{border-color:#6366f1}
+.tier-btn.tier-fast:hover{border-color:#4f46e5;box-shadow:0 4px 14px rgba(99,102,241,.18)}
+.tier-btn.tier-fast .tier-btn-label{color:#4f46e5}
+.tier-btn.tier-clear{border-style:dashed;justify-content:center;min-width:auto;padding:10px 18px;color:var(--text-muted)}
+.tier-btn.tier-clear .tier-btn-label{font-size:13px}
+[data-device="mobile"] .compare-tier-bar{gap:8px}
+[data-device="mobile"] .tier-btn{flex:1 1 calc(50% - 8px);min-width:0;padding:9px 12px}
+[data-device="mobile"] .tier-btn.tier-clear{flex:1 1 100%}
+
 /* Trending */
 .trend-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px}
 .trend-legend{display:flex;gap:16px;flex-wrap:wrap}

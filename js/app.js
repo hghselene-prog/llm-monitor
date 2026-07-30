@@ -533,10 +533,52 @@ function filterLeaderboard() { renderLeaderboard(); }
 // ========== COMPARE ==========
 function initCompare() {
   const sel = document.getElementById('compare-select');
+  const tierGroups = [
+    { key:'top', label:'🏆 顶级模型' },
+    { key:'balanced', label:'⚖️ 均衡模型' },
+    { key:'fast', label:'⚡ 极速模型' }
+  ];
   sel.innerHTML = '<option value="">+ 添加模型（多选）</option>' +
-    DATA.models.map(m => `<option value="${m.id}">${m.name} — ${m.provider}</option>`).join('');
+    tierGroups.map(g => {
+      const opts = DATA.models.filter(m => m.tier === g.key)
+        .map(m => `<option value="${m.id}">${m.name} — ${m.provider}</option>`).join('');
+      return `<optgroup label="${g.label}">${opts}</optgroup>`;
+    }).join('');
+  renderTierBar();
   renderCompareChips();
   if (compareModels.length > 0) renderCompareContent();
+}
+
+function renderTierBar() {
+  const bar = document.getElementById('compare-tier-bar');
+  if (!bar) return;
+  const tiers = [
+    { key:'top', label:'🏆 顶级模型', desc:'最强综合智力', cls:'tier-top' },
+    { key:'balanced', label:'⚖️ 均衡模型', desc:'性价比均衡', cls:'tier-balanced' },
+    { key:'fast', label:'⚡ 极速模型', desc:'最高输出速度', cls:'tier-fast' }
+  ];
+  bar.innerHTML = tiers.map(t => {
+    const list = DATA.models.filter(m => m.tier === t.key);
+    return `<button class="tier-btn ${t.cls}" onclick="addCompareTier('${t.key}')">
+        <span class="tier-btn-label">${t.label}</span>
+        <span class="tier-btn-count">${list.length}</span>
+        <span class="tier-btn-desc">${t.desc}</span>
+      </button>`;
+  }).join('') + '<button class="tier-btn tier-clear" onclick="clearCompareModels()">清空选择</button>';
+}
+
+function addCompareTier(tier) {
+  const ids = DATA.models.filter(m => m.tier === tier).map(m => m.id);
+  ids.forEach(id => { if (!compareModels.includes(id)) compareModels.push(id); });
+  renderCompareChips();
+  renderCompareContent();
+}
+
+function clearCompareModels() {
+  compareModels = [];
+  renderCompareChips();
+  document.getElementById('compare-content').style.display = 'none';
+  document.getElementById('compare-empty').style.display = 'block';
 }
 
 function addCompareModel() {
