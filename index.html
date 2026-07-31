@@ -77,6 +77,9 @@
         <button class="nav-item" data-page="omni">
           <span class="nav-item-icon">🤖</span> 具身全模态
         </button>
+        <button class="nav-item" data-page="tokens">
+          <span class="nav-item-icon">📊</span> Token 调用量
+        </button>
       </div>
       <div class="nav-section">
         <div class="nav-section-title">资讯</div>
@@ -456,6 +459,60 @@
       </div>
     </div>
 
+    <!-- ===== TOKENS (OpenRouter call volume) ===== -->
+    <div class="page" id="page-tokens">
+      <div class="header">
+        <div class="header-left">
+          <h1>📊 Token 调用量 · OpenRouter</h1>
+          <p>全球最大统一 API 网关的真实路由量 · 非全球全量（约占全球 ~1%）· 仅作真实代理指标</p>
+        </div>
+      </div>
+      <div class="source-legend">
+        <span style="font-weight:600">数据口径：</span>
+        <span class="source-legend-item"><span class="source-badge OR">OR</span> OpenRouter 路由量 — 经每经 / 中国基金报 / huxiu 逐周测算</span>
+        <span class="source-legend-item">⚠️ 媒体常称“全球总调用量”，实为 OpenRouter 路由量，本模块如实标注</span>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header"><h3>📈 周度 Token 调用量 <span class="source-badge OR">OR</span></h3><span style="font-size:12px;color:var(--text-muted)" id="tokens-snapshot"></span></div>
+          <div class="card-body"><div class="chart-container" style="height:380px"><canvas id="tokenWeekly"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>🗓️ 月度 Token 总量（估算） <span class="source-badge OR">OR</span></h3><span style="font-size:12px;color:var(--text-muted)">🟢实测月榜 · 🟡周度外推</span></div>
+          <div class="card-body"><div class="chart-container" style="height:380px"><canvas id="tokenMonthly"></canvas></div></div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:20px">
+        <div class="card">
+          <div class="card-header"><h3>🏆 周度 Top 模型 Token 调用量 <span class="source-badge OR">OR</span></h3><span style="font-size:12px;color:var(--text-muted)">🔴中国 🔵美国</span></div>
+          <div class="card-body">
+            <div class="chart-container" style="height:300px"><canvas id="tokenTop"></canvas></div>
+            <div class="table-wrap" style="margin-top:12px">
+              <table>
+                <thead><tr><th>周次</th><th>#</th><th>模型</th><th>周调用量(万亿)</th></tr></thead>
+                <tbody id="tokens-top-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>📋 周度快照明细 <span class="source-badge OR">OR</span></h3></div>
+          <div class="card-body" style="padding:0">
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>周次</th><th>总量(万亿)</th><th>中国(万亿)</th><th>美国(万亿)</th><th>来源</th></tr></thead>
+                <tbody id="tokens-weekly-table"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card grid-full" style="margin-top:20px">
+        <div class="card-header"><h3>📌 关于本模块与数据口径</h3></div>
+        <div class="card-body" id="tokens-about"></div>
+      </div>
+    </div>
+
     <!-- ===== METHODOLOGY ===== -->
     <div class="page" id="page-news">
       <div class="header">
@@ -492,6 +549,7 @@
     <button class="mobile-nav-item" data-page="coding"><span class="mi-icon">💻</span><span class="mi-label">编程</span></button>
     <button class="mobile-nav-item" data-page="multimodal"><span class="mi-icon">🎨</span><span class="mi-label">多模态</span></button>
     <button class="mobile-nav-item" data-page="omni"><span class="mi-icon">🤖</span><span class="mi-label">全模态</span></button>
+    <button class="mobile-nav-item" data-page="tokens"><span class="mi-icon">📊</span><span class="mi-label">调用量</span></button>
     <button class="mobile-nav-item" data-page="news"><span class="mi-icon">📰</span><span class="mi-label">新闻</span></button>
     <button class="mobile-nav-item" data-page="methodology"><span class="mi-icon">📋</span><span class="mi-label">方法</span></button>
   </nav>

@@ -4,6 +4,7 @@ let METHODOLOGY = null;
 let EVOLUTION = null;
 let NEWS = null;
 let DAILYOMNI = null;
+let TOKENS = null;
 let compareModels = [];
 let CURRENT_PAGE = 'dashboard';
 const STATE = { sources: new Set(['AA','LB','Arena']) };
@@ -133,18 +134,20 @@ const SUBTITLES = {
 async function loadData() {
   try {
     const fetchOpts = { cache: 'no-store' };
-    const [modelsRes, methodRes, evoRes, newsRes, omniRes] = await Promise.all([
+    const [modelsRes, methodRes, evoRes, newsRes, omniRes, tokensRes] = await Promise.all([
       fetch('data/models.json', fetchOpts),
       fetch('data/methodology.json', fetchOpts),
       fetch('data/evolution.json', fetchOpts),
       fetch('data/news.json', fetchOpts),
-      fetch('data/dailyomni.json', fetchOpts)
+      fetch('data/dailyomni.json', fetchOpts),
+      fetch('data/tokens.json', fetchOpts)
     ]);
     DATA = await modelsRes.json();
     METHODOLOGY = await methodRes.json();
     EVOLUTION = await evoRes.json();
     NEWS = await newsRes.json();
     DAILYOMNI = await omniRes.json().catch(() => null);
+    TOKENS = await tokensRes.json().catch(() => null);
     initApp();
   } catch(e) {
     console.error('Data load failed:', e);
@@ -324,6 +327,7 @@ function switchPage(name) {
   else if (name==='coding') initCoding();
   else if (name==='multimodal') initMultimodal();
   else if (name==='omni') initOmni();
+  else if (name==='tokens') initTokens();
   else if (name==='news') initNews();
   else if (name==='methodology') renderMethodology();
   else { initDashboard(); updateSubtitle('dashboard'); }
@@ -948,6 +952,93 @@ function initOmni() {
         </table>
       </div>
       <p style="font-size:12px;color:var(--text-muted)">快照：${meta.snapshot||''} · 本页为独立专项榜单，与「模型排行榜 / 对比」中的通用 LLM 指标不混用。</p>`;
+  }
+}
+
+// ========== TOKENS (OpenRouter call volume) ==========
+function initTokens() {
+  const wrap = document.getElementById('tokens-weekly-table');
+  if (!wrap) return;
+  if (!TOKENS) { wrap.innerHTML = '<tr><td colspan="5" style="padding:24px;color:var(--text-secondary)">Token 数据加载失败，请检查 data/tokens.json。</td></tr>'; return; }
+  const meta = TOKENS.meta || {};
+  const weekly = TOKENS.weekly || [];
+  const monthly = TOKENS.monthly_estimate || [];
+
+  const snapEl = document.getElementById('tokens-snapshot');
+  if (snapEl) snapEl.textContent = '更新 ' + (meta.updated || '');
+
+  const about = document.getElementById('tokens-about');
+  if (about) about.innerHTML = `<p style="font-size:14px;color:var(--text-secondary);margin-bottom:10px;line-height:1.8">${meta.note || ''}</p>
+    <div class="table-wrap"><table><tbody>
+      <tr><td style="font-weight:600;width:120px">数据口径</td><td>${meta.scope || ''}</td></tr>
+      <tr><td style="font-weight:600">来源</td><td>${meta.source || ''}</td></tr>
+      <tr><td style="font-weight:600">单位</td><td>${meta.unit || ''}</td></tr>
+    </tbody></table></div>`;
+
+  // Weekly line (total + CN + US)
+  const labels = weekly.map(w => w.week);
+  makeChart('tokenWeekly', {
+    type: 'line',
+    data: { labels, datasets: [
+      { label: '总调用量', data: weekly.map(w => w.total_t), borderColor: '#6366f1', backgroundColor: '#6366f133', fill: true, tension: 0.3, pointRadius: 4, borderWidth: 2 },
+      { label: '中国', data: weekly.map(w => w.cn_t), borderColor: '#ef4444', backgroundColor: 'transparent', spanGaps: true, tension: 0.3, pointRadius: 4, borderWidth: 2 },
+      { label: '美国', data: weekly.map(w => w.us_t), borderColor: '#2563eb', backgroundColor: 'transparent', spanGaps: true, tension: 0.3, pointRadius: 4, borderWidth: 2 }
+    ]},
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y} 万亿` } } },
+      scales: { y: { title: { display: true, text: '万亿 Token', font: { size: 12 } }, ticks: { font: { size: 11 } }, beginAtZero: false }, x: { ticks: { font: { size: 9 }, maxRotation: 45 } } }
+    }
+  });
+
+  // Monthly estimate line
+  const mcolors = monthly.map(m => m.confidence === 'reported' ? '#10b981' : '#f59e0b');
+  makeChart('tokenMonthly', {
+    type: 'line',
+    data: { labels: monthly.map(m => m.month), datasets: [{ label: '月度 Token 总量（万亿）', data: monthly.map(m => m.total_t), borderColor: '#8b5cf6', backgroundColor: '#8b5cf633', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: mcolors, borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => { const m = monthly[c.dataIndex]; return ` ${c.parsed.y} 万亿 · ${m.confidence === 'reported' ? '实测月榜' : '周度外推'}`; } } } },
+      scales: { y: { title: { display: true, text: '万亿 Token', font: { size: 12 } }, ticks: { font: { size: 11 } }, beginAtZero: false }, x: { ticks: { font: { size: 11 } } } }
+    }
+  });
+
+  // Top models bar (latest week)
+  const topWeeks = Object.keys(TOKENS.top_models || {});
+  const latestWeek = topWeeks[topWeeks.length - 1];
+  const topModels = (TOKENS.top_models[latestWeek] || []).slice().reverse();
+  const barColors = topModels.map(m => m.country === '中国' ? '#ef4444' : m.country === '美国' ? '#2563eb' : '#94a3b8');
+  makeChart('tokenTop', {
+    type: 'bar',
+    data: { labels: topModels.map(m => m.model), datasets: [{ label: '周调用量 (万亿)', data: topModels.map(m => m.tokens_t), backgroundColor: barColors, borderRadius: 4 }] },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.parsed.x} 万亿 (${latestWeek})` } } },
+      scales: { x: { title: { display: true, text: '万亿 Token / 周', font: { size: 12 } }, ticks: { font: { size: 11 } } }, y: { ticks: { font: { size: 11 } } } }
+    }
+  });
+
+  // Weekly table
+  wrap.innerHTML = weekly.slice().reverse().map(w => `<tr>
+    <td style="white-space:nowrap">${w.week}</td>
+    <td class="source-cell"><span class="score">${w.total_t}</span> <small style="color:var(--text-muted)">万亿</small></td>
+    <td style="color:#ef4444;font-weight:600">${w.cn_t != null ? w.cn_t : '—'}</td>
+    <td style="color:#2563eb;font-weight:600">${w.us_t != null ? w.us_t : '—'}</td>
+    <td style="font-size:11px;color:var(--text-muted)">${w.source || ''}</td>
+  </tr>`).join('');
+
+  // Top models table (all weeks)
+  const topWrap = document.getElementById('tokens-top-table');
+  if (topWrap) {
+    let rows = '';
+    topWeeks.slice().reverse().forEach(wk => {
+      (TOKENS.top_models[wk] || []).forEach((m, i) => {
+        rows += `<tr>
+          <td style="font-size:11px;color:var(--text-muted);white-space:nowrap">${wk}</td>
+          <td><span class="rank-num ${i < 3 ? 'top3' : ''}">${i + 1}</span></td>
+          <td><div class="model-cell"><div class="model-icon" style="background:${m.country === '中国' ? '#ef4444' : '#2563eb'};width:22px;height:22px;font-size:10px">${m.model[0]}</div><div><div class="model-name" style="font-size:12px">${m.model}</div><div class="model-provider">${m.provider}</div></div></div></td>
+          <td class="source-cell"><span class="score">${m.tokens_t}</span> <small style="color:var(--text-muted)">万亿</small></td>
+        </tr>`;
+      });
+    });
+    topWrap.innerHTML = rows;
   }
 }
 
