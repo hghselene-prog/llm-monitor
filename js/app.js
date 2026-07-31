@@ -3,6 +3,7 @@ let DATA = null;
 let METHODOLOGY = null;
 let EVOLUTION = null;
 let NEWS = null;
+let DAILYOMNI = null;
 let compareModels = [];
 let CURRENT_PAGE = 'dashboard';
 const STATE = { sources: new Set(['AA','LB','Arena']) };
@@ -132,16 +133,18 @@ const SUBTITLES = {
 async function loadData() {
   try {
     const fetchOpts = { cache: 'no-store' };
-    const [modelsRes, methodRes, evoRes, newsRes] = await Promise.all([
+    const [modelsRes, methodRes, evoRes, newsRes, omniRes] = await Promise.all([
       fetch('data/models.json', fetchOpts),
       fetch('data/methodology.json', fetchOpts),
       fetch('data/evolution.json', fetchOpts),
-      fetch('data/news.json', fetchOpts)
+      fetch('data/news.json', fetchOpts),
+      fetch('data/dailyomni.json', fetchOpts)
     ]);
     DATA = await modelsRes.json();
     METHODOLOGY = await methodRes.json();
     EVOLUTION = await evoRes.json();
     NEWS = await newsRes.json();
+    DAILYOMNI = await omniRes.json().catch(() => null);
     initApp();
   } catch(e) {
     console.error('Data load failed:', e);
@@ -320,6 +323,7 @@ function switchPage(name) {
   else if (name==='cost') initCost();
   else if (name==='coding') initCoding();
   else if (name==='multimodal') initMultimodal();
+  else if (name==='omni') initOmni();
   else if (name==='news') initNews();
   else if (name==='methodology') renderMethodology();
   else { initDashboard(); updateSubtitle('dashboard'); }
@@ -873,6 +877,78 @@ function initMultimodal() {
     <td class="source-cell">${g.ie?`<span class="score">${g.ie}</span>${formatSourceBadge('Arena')}`:'—'}</td>
     <td class="source-cell">${g.t2v?`<span class="score">${g.t2v}</span>${formatSourceBadge('Arena')}`:'—'}</td>
   </tr>`).join('');
+}
+
+// ========== OMNI (DailyOmni embodied omni-modal) ==========
+function initOmni() {
+  const wrap = document.getElementById('omni-table');
+  if (!wrap) return;
+  if (!DAILYOMNI) { wrap.innerHTML = '<tr><td colspan="7" style="padding:24px;color:var(--text-secondary)">DailyOmni 数据加载失败，请检查 data/dailyomni.json。</td></tr>'; return; }
+  const meta = DAILYOMNI.meta || {};
+  const models = [...DAILYOMNI.models].sort((a,b)=>b.score-a.score);
+  const snapEl = document.getElementById('omni-snapshot');
+  if (snapEl) snapEl.textContent = meta.snapshot || '';
+
+  wrap.innerHTML = models.map((m,i)=>{
+    const sub = m.submetrics ? Object.entries(m.submetrics).map(([k,v])=>`<span class="metrics-tag" style="background:var(--source-do-bg);color:var(--source-do)">${k} ${v}</span>`).join(' ') : '<span style="color:var(--text-muted);font-size:12px">—</span>';
+    const cc = m.color || 'var(--source-do)';
+    const countryHtml = m.country ? `<span style="color:${m.country==='中国'?'#ef4444':'#2563eb'};font-weight:600">${m.country}</span>` : '—';
+    return `<tr>
+      <td><span class="rank-num ${i<3?'top3':''}">${i+1}</span></td>
+      <td><div class="model-cell"><div class="model-icon" style="background:${cc};width:22px;height:22px;font-size:10px">${m.name[0]}</div><div><div class="model-name" style="font-size:12px">${m.name}</div><div class="model-provider">${m.provider}</div></div></div></td>
+      <td>${m.provider}</td>
+      <td>${countryHtml}</td>
+      <td class="source-cell"><span class="score">${m.score.toFixed(2)}</span>${formatSourceBadge('DO')}</td>
+      <td style="font-size:11px">${sub}</td>
+      <td style="font-size:11px;color:var(--text-muted);white-space:nowrap">${m.snapshot||''}</td>
+    </tr>`;
+  }).join('');
+
+  // TOP10 horizontal bar (reverse so highest on top)
+  const top = models.slice(0,10).reverse();
+  const barColors = top.map(m => m.country==='中国' ? '#ef4444' : m.country==='美国' ? '#2563eb' : '#94a3b8');
+  makeChart('omniBar', {
+    type:'bar',
+    data:{ labels: top.map(m=>m.name), datasets:[{ label:'DailyOmni Accuracy', data: top.map(m=>m.score), backgroundColor: barColors, borderRadius:4 }] },
+    options:{
+      indexAxis:'y', responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` ${c.parsed.x.toFixed(2)}`}} },
+      scales:{ x:{ title:{display:true,text:'Accuracy %',font:{size:12}}, ticks:{font:{size:11}}, suggestedMin:50, suggestedMax:90 }, y:{ ticks:{font:{size:11}} } }
+    }
+  });
+
+  // WITA-Omni sub-metrics
+  const wita = DAILYOMNI.models.find(m=>m.submetrics && Object.keys(m.submetrics).length);
+  if (wita && document.getElementById('omniSub')) {
+    const keys = Object.keys(wita.submetrics);
+    makeChart('omniSub', {
+      type:'bar',
+      data:{ labels: keys, datasets:[{ label:'WITA-Omni 细分 Accuracy', data: keys.map(k=>wita.submetrics[k]), backgroundColor:'#06b6d4', borderRadius:4 }] },
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{ legend:{display:false}, tooltip:{callbacks:{label:c=>` ${c.parsed.y.toFixed(2)}`}} },
+        scales:{ y:{ beginAtZero:false, suggestedMin:75, suggestedMax:90, title:{display:true,text:'Accuracy %',font:{size:12}}, ticks:{font:{size:11}} }, x:{ ticks:{font:{size:11}} } }
+      }
+    });
+  }
+
+  // About card
+  const about = document.getElementById('omni-about');
+  if (about) {
+    about.innerHTML = `
+      <p style="font-size:14px;color:var(--text-secondary);margin-bottom:12px;line-height:1.8">${meta.note||''}</p>
+      <div class="table-wrap" style="margin-bottom:12px">
+        <table>
+          <tbody>
+            <tr><td style="font-weight:600;width:140px">数据集</td><td>${meta.dataset||''}</td></tr>
+            <tr><td style="font-weight:600">评分口径</td><td>${meta.scale||''}</td></tr>
+            <tr><td style="font-weight:600">论文</td><td>${meta.paper||''}</td></tr>
+            <tr><td style="font-weight:600">参考链接</td><td>🔗 <a href="${meta.url}" target="_blank">${meta.url}</a> · <a href="${meta.pwc}" target="_blank">Papers With Code</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted)">快照：${meta.snapshot||''} · 本页为独立专项榜单，与「模型排行榜 / 对比」中的通用 LLM 指标不混用。</p>`;
+  }
 }
 
 // ========== METHODOLOGY ==========

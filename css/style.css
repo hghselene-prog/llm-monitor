@@ -15,6 +15,7 @@
   --source-aa: #6366f1; --source-aa-bg: #eef2ff;
   --source-lb: #10b981; --source-lb-bg: #ecfdf5;
   --source-arena: #f59e0b; --source-arena-bg: #fffbeb;
+  --source-do: #06b6d4; --source-do-bg: #ecfeff;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);background:var(--bg-secondary);color:var(--text);line-height:1.6}
@@ -93,6 +94,7 @@ tbody tr:hover{background:var(--bg-secondary)}
 .source-badge.AA{background:var(--source-aa-bg);color:var(--source-aa)}
 .source-badge.LB{background:var(--source-lb-bg);color:var(--source-lb)}
 .source-badge.Arena{background:var(--source-arena-bg);color:var(--source-arena)}
+.source-badge.DO{background:var(--source-do-bg);color:var(--source-do)}
 .source-legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:16px;font-size:12px}
 .source-legend-item{display:flex;align-items:center;gap:6px}
 .source-legend-dot{width:10px;height:10px;border-radius:3px}

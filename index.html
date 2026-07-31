@@ -74,6 +74,9 @@
         <button class="nav-item" data-page="multimodal">
           <span class="nav-item-icon">🎨</span> 多模态
         </button>
+        <button class="nav-item" data-page="omni">
+          <span class="nav-item-icon">🤖</span> 具身全模态
+        </button>
       </div>
       <div class="nav-section">
         <div class="nav-section-title">资讯</div>
@@ -410,6 +413,49 @@
       </div>
     </div>
 
+    <!-- ===== OMNI (DailyOmni embodied omni-modal) ===== -->
+    <div class="page" id="page-omni">
+      <div class="header">
+        <div class="header-left">
+          <h1>🤖 具身全模态 · DailyOmni</h1>
+          <p>音视频时序对齐 + 跨模态联合推理基准 · 评测机器人"看听说动"自然交互能力 · 与通用 LLM 智力/成本维度不同，不可直接对比</p>
+        </div>
+      </div>
+      <div class="source-legend">
+        <span style="font-weight:600">数据来源：</span>
+        <span class="source-legend-item"><span class="source-legend-dot" style="background:var(--source-do)"></span><span class="source-badge DO">DO</span> DailyOmni — 具身全模态理解权威榜单</span>
+        <span class="source-legend-item">📹 684 真实短视频 · 1,197 选择题 · 6 大任务</span>
+      </div>
+      <div class="card grid-full">
+        <div class="card-header">
+          <h3>🏆 DailyOmni 全模态理解排行榜 <span class="source-badge DO">DO</span></h3>
+          <span style="font-size:12px;color:var(--text-muted)">Accuracy % · 越高越好 · <span id="omni-snapshot"></span></span>
+        </div>
+        <div class="card-body" style="padding:0">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>#</th><th>模型</th><th>厂商</th><th>地区</th><th>综合 Accuracy</th><th>细分指标</th><th>快照</th></tr></thead>
+              <tbody id="omni-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="grid-2" style="margin-top:20px">
+        <div class="card">
+          <div class="card-header"><h3>📊 排行榜 TOP 10 <span class="source-badge DO">DO</span></h3><span style="font-size:12px;color:var(--text-muted)">🔴中国 🔵美国 ⚪学术团队</span></div>
+          <div class="card-body"><div class="chart-container" style="height:430px"><canvas id="omniBar"></canvas></div></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><h3>🔬 WITA-Omni 细分指标 <span class="source-badge DO">DO</span></h3><span style="font-size:12px;color:var(--text-muted)">登顶模型八项指标六项第一</span></div>
+          <div class="card-body"><div class="chart-container" style="height:430px"><canvas id="omniSub"></canvas></div></div>
+        </div>
+      </div>
+      <div class="card grid-full" style="margin-top:20px">
+        <div class="card-header"><h3>📋 关于 DailyOmni</h3></div>
+        <div class="card-body" id="omni-about"></div>
+      </div>
+    </div>
+
     <!-- ===== METHODOLOGY ===== -->
     <div class="page" id="page-news">
       <div class="header">
@@ -445,6 +491,7 @@
     <button class="mobile-nav-item" data-page="cost"><span class="mi-icon">💰</span><span class="mi-label">成本</span></button>
     <button class="mobile-nav-item" data-page="coding"><span class="mi-icon">💻</span><span class="mi-label">编程</span></button>
     <button class="mobile-nav-item" data-page="multimodal"><span class="mi-icon">🎨</span><span class="mi-label">多模态</span></button>
+    <button class="mobile-nav-item" data-page="omni"><span class="mi-icon">🤖</span><span class="mi-label">全模态</span></button>
     <button class="mobile-nav-item" data-page="news"><span class="mi-icon">📰</span><span class="mi-label">新闻</span></button>
     <button class="mobile-nav-item" data-page="methodology"><span class="mi-icon">📋</span><span class="mi-label">方法</span></button>
   </nav>

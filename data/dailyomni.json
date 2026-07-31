@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "name": "DailyOmni",
+    "full_name": "Daily-Omni — 具身全模态音视频时序推理基准",
+    "paper": "Daily-Omni: Towards Audio-Visual Reasoning with Temporal Alignment across Modalities (2026)",
+    "url": "https://github.com/daily-omni/daily-omni",
+    "pwc": "https://paperswithcode.com/benchmark/dailyomni",
+    "snapshot": "2026-07-28（WITA-Omni 登顶轮；历史条目取自 Papers With Code 公开轨迹）",
+    "dataset": "684 段真实日常场景短视频 + 1,197 道选择题，覆盖音视频对齐、上下文理解、事件序列、因果推理、跨模态一致性等 6 大任务",
+    "scale": "0–100（Accuracy %），越高越好",
+    "note": "DailyOmni 评测的是具身全模态（看+听+说+动）理解，重点是真实物理空间里的声画对位与时序推理，与通用 LLM 的智力/成本维度不同，不能直接对比。模型集合也基本不重合（Omni 模型为主）。"
+  },
+  "metrics": ["综合 Accuracy", "音视频对齐", "事件时序", "综合推理", "比较理解", "30s 视频理解", "60s 视频理解", "上下文理解"],
+  "models": [
+    {
+      "name": "WITA-Omni Preview",
+      "provider": "智元机器人 (AGIBOT)",
+      "country": "中国",
+      "color": "#ef4444",
+      "score": 85.21,
+      "snapshot": "2026-07-28",
+      "note": "具身原生端到端多模态交互大模型，八项指标中六项第一",
+      "submetrics": { "音视频对齐": 86.13, "事件时序": 84.64, "综合推理": 85.06 }
+    },
+    {
+      "name": "Qwen3.5-Omni-Plus",
+      "provider": "阿里巴巴",
+      "country": "中国",
+      "color": "#ec4899",
+      "score": 84.68,
+      "snapshot": "2026-07-28",
+      "note": "开源模型最高分",
+      "submetrics": null
+    },
+    {
+      "name": "MiMo-V2.5",
+      "provider": "小米",
+      "country": "中国",
+      "color": "#f59e0b",
+      "score": 83.50,
+      "snapshot": "llm-stats 2026-07-18",
+      "note": "此前 llm-stats 快照榜首，被 WITA-Omni 反超",
+      "submetrics": null
+    },
+    {
+      "name": "LongCat-Flash-Omni Instruct",
+      "provider": "美团",
+      "country": "中国",
+      "color": "#8b5cf6",
+      "score": 82.40,
+      "snapshot": "2025-10",
+      "note": "Papers With Code 历史轨迹",
+      "submetrics": null
+    },
+    {
+      "name": "MiniCPM-o 4.5-Instruct",
+      "provider": "面壁智能",
+      "country": "中国",
+      "color": "#06b6d4",
+      "score": 80.20,
+      "snapshot": "2026-04",
+      "note": "Papers With Code 历史轨迹",
+      "submetrics": null
+    },
+    {
+      "name": "Qwen3-Omni-30B-A3B-Thinking",
+      "provider": "阿里巴巴",
+      "country": "中国",
+      "color": "#db2777",
+      "score": 75.80,
+      "snapshot": "2025-09",
+      "note": "Papers With Code 历史轨迹",
+      "submetrics": null
+    },
+    {
+      "name": "Nemotron 3 Nano Omni",
+      "provider": "NVIDIA",
+      "country": "美国",
+      "color": "#76b900",
+      "score": 74.50,
+      "snapshot": "2026-04",
+      "note": "Papers With Code 历史轨迹",
+      "submetrics": null
+    },
+    {
+      "name": "Gemini 2.5 Flash",
+      "provider": "Google",
+      "country": "美国",
+      "color": "#4285f4",
+      "score": 73.06,
+      "snapshot": "公开榜单（闭源代表）",
+      "note": "DailyOmni 公开榜单闭源代表分数",
+      "submetrics": null
+    },
+    {
+      "name": "OmniJigsaw (CMM)",
+      "provider": "学术团队",
+      "country": "",
+      "color": "#94a3b8",
+      "score": 71.10,
+      "snapshot": "2026-04",
+      "note": "Papers With Code 历史轨迹，具体实验室以 PWC 为准",
+      "submetrics": null
+    },
+    {
+      "name": "OmniCaptioner-IF-7B",
+      "provider": "学术团队",
+      "country": "",
+      "color": "#94a3b8",
+      "score": 68.40,
+      "snapshot": "2026-06",
+      "note": "Papers With Code 历史轨迹",
+      "submetrics": null
+    },
+    {
+      "name": "LatentOmni",
+      "provider": "学术团队",
+      "country": "",
+      "color": "#94a3b8",
+      "score": 67.40,
+      "snapshot": "2026-05",
+      "note": "Papers With Code 历史轨迹",
+      "submetrics": null
+    },
+    {
+      "name": "OmniAgent-RL-7B",
+      "provider": "学术团队",
+      "country": "",
+      "color": "#94a3b8",
+      "score": 64.80,
+      "snapshot": "2026-06",
+      "note": "Papers With Code 历史轨迹",
+      "submetrics": null
+    },
+    {
+      "name": "HumanOmniV2-7B",
+      "provider": "学术团队",
+      "country": "",
+      "color": "#94a3b8",
+      "score": 58.50,
+      "snapshot": "2025-06",
+      "note": "Papers With Code 历史轨迹",
+      "submetrics": null
+    }
+  ]
+}

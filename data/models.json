@@ -51,6 +51,19 @@
         "elo_search",
         "elo_agent"
       ]
+    },
+    "DO": {
+      "name": "DailyOmni",
+      "url": "https://github.com/daily-omni/daily-omni",
+      "icon": "🤖",
+      "color": "#06b6d4",
+      "desc": "具身全模态音视频时序推理基准 — 684 真实短视频 / 1197 选择题",
+      "metrics": [
+        "omni_accuracy",
+        "audio_visual_alignment",
+        "event_sequencing",
+        "cross_modal_reasoning"
+      ]
     }
   },
   "models": [
@@ -2474,6 +2487,7 @@
   "update_frequency": {
     "AA": "持续更新，新模型评测通常在发布后 1-3 天内上线",
     "LB": "每 6 个月刷新全部题目，发布新版本",
-    "Arena": "实时更新，Elo 分数随用户投票动态变化"
+    "Arena": "实时更新，Elo 分数随用户投票动态变化",
+    "DO": "随官方榜单发布更新；本快照截至 2026-07-28（WITA-Omni 登顶轮）"
   }
 }

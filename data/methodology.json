@@ -4,7 +4,7 @@
     {
       "id": "overview",
       "title": "三大数据源概览",
-      "content": "本平台聚合三大权威 AI 模型评测平台的数据，提供多维度的模型性能对比视角。每个指标均标注其数据来源，确保透明可追溯。"
+      "content": "本平台聚合三大通用 LLM 评测平台（Artificial Analysis · LiveBench · LMArena）的数据，并提供独立的「具身全模态」专项榜单 DailyOmni。每个指标均标注其数据来源，确保透明可追溯。"
     },
     {
       "id": "artificial-analysis",
@@ -47,6 +47,20 @@
         "专项 Arena：文本对话、视觉理解、WebDev、文档处理、图像生成/编辑、视频生成/编辑、搜索、Agent"
       ],
       "metrics_provided": ["文本对话Elo", "视觉理解Elo", "WebDev Elo", "文档处理Elo", "图像生成Elo", "视频生成Elo", "搜索Elo", "Agent投票率"]
+    },
+    {
+      "id": "dailyomni",
+      "source": "DO",
+      "title": "DailyOmni — 具身全模态音视频时序推理基准",
+      "url": "https://github.com/daily-omni/daily-omni",
+      "content": "DailyOmni 是 2026 年发布的音视频推理基准，重点评测真实物理空间中『声画对位 + 时序推理』的能力——即模型能否把画面里的人和他发出的声音对应上、理清事件先后顺序、结合视听信息做跨模态推理。这与人形机器人自然交互强相关，被业内视为具身智能感知能力的『试金石』。",
+      "items": [
+        "数据规模：684 段真实日常场景短视频 + 1,197 道选择题，跨 6 大任务（音视频对齐 / 上下文理解 / 事件序列 / 因果推理 / 跨模态一致性等）",
+        "评分口径：Accuracy %（0–100），越高越好；2026-07-28 由智元 WITA-Omni Preview 以 85.21 登顶（八项指标六项第一）",
+        "与通用 LLM 榜单的区别：测的是具身全模态（看+听+说+动）理解，模型集合以 Omni 模型为主，不与智力/成本维度直接可比",
+        "被 Papers With Code、llm-stats 等第三方平台收录跟踪，属行业公认权威第三方榜单"
+      ],
+      "metrics_provided": ["综合 Accuracy", "音视频对齐", "事件时序", "综合推理", "比较理解", "30s/60s 视频理解"]
     }
   ],
   "comparison": {
