@@ -5,6 +5,19 @@
 .company-chip:hover{border-color:var(--primary);color:var(--primary)}
 .company-chip.active{background:var(--primary);border-color:var(--primary);color:#fff}
 .company-tag{display:inline-block;font-size:12px;font-weight:600;color:var(--text);background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;padding:2px 8px;white-space:nowrap}
+/* 成本页：品牌 + 档位 双筛选行 */
+.filter-row{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;padding:12px 16px 4px}
+.filter-group{display:flex;flex-direction:column;gap:6px}
+.filter-label{font-size:11px;font-weight:600;color:var(--text-muted);padding-left:2px}
+.filter-group .company-filter{padding:0}
+/* 成本页：按档位分组表头 */
+.tier-row td{background:var(--bg-secondary);padding:8px 14px !important;border-bottom:1px solid var(--border)}
+.tier-badge{display:inline-block;font-size:13px;font-weight:700;padding:2px 10px;border-radius:6px;color:#fff}
+.tier-badge.tier-top{background:linear-gradient(90deg,#f59e0b,#ef4444)}
+.tier-badge.tier-balanced{background:linear-gradient(90deg,#6366f1,#8b5cf6)}
+.tier-badge.tier-fast{background:linear-gradient(90deg,#10b981,#06b6d4)}
+.tier-sub{font-size:11px;color:var(--text-muted);margin-left:10px}
+.tier-count{font-size:11px;color:var(--text-secondary);margin-left:8px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:1px 8px}
 .badge-base{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--orange);border-radius:6px;padding:2px 7px}
 .mult-low{font-weight:700;color:var(--green)}
 .mult-high{font-weight:700;color:var(--red)}

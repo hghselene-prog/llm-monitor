@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-31T14:30:00Z",
+  "last_updated": "2026-07-31T17:45:00Z",
   "sources": {
     "AA": {
       "name": "Artificial Analysis",
@@ -2348,35 +2348,173 @@
       "multimodal": false,
       "color": "#fbbf24",
       "metrics": [
-        { "key": "intelligence_index", "value": 73.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "coding_index", "value": 75.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "agentic_index", "value": 58.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "speed_tps", "value": 145, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "latency_s", "value": 0.8, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "cost_per_task", "value": 0.016, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "api_price_input", "value": 0.14, "source": "AA", "confidence": null, "updated": "2026-07-31" },
-        { "key": "api_price_output", "value": 0.28, "source": "AA", "confidence": null, "updated": "2026-07-31" },
-        { "key": "api_price_cache_hit", "value": 0.0028, "source": "AA", "confidence": null, "updated": "2026-07-31" },
-        { "key": "api_price_reasoning", "value": 0.28, "source": "AA", "confidence": null, "updated": "2026-07-31" },
-        { "key": "reasoning", "value": 83.5, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "coding", "value": 75.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "agentic_coding", "value": 58.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "mathematics", "value": 91.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "data_analysis", "value": 76.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "language", "value": 79.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "instruction_following", "value": 64.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "elo_text", "value": 1420, "source": "Arena", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "elo_webdev", "value": 1320, "source": "Arena", "confidence": "预估", "updated": "2026-07-31" }
+        {
+          "key": "intelligence_index",
+          "value": 73.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 75.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 58.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 145,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 0.8,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.016,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 0.14,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 0.28,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.0028,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 0.28,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 83.5,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 75.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 58.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 91.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 76.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 79.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 64.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1420,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1320,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
       ],
       "timeline_intel": [
-        { "quarter": "2024Q1", "value": 35 },
-        { "quarter": "2024Q2", "value": 44 },
-        { "quarter": "2024Q3", "value": 53 },
-        { "quarter": "2024Q4", "value": 60 },
-        { "quarter": "2025Q1", "value": 64 },
-        { "quarter": "2025Q2", "value": 67 },
-        { "quarter": "2025Q3", "value": 70 },
-        { "quarter": "2025Q4", "value": 73.0 }
+        {
+          "quarter": "2024Q1",
+          "value": 35
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 44
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 53
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 60
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 64
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 67
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 70
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 73.0
+        }
       ]
     },
     {
@@ -2390,39 +2528,3025 @@
       "multimodal": false,
       "color": "#3b82f6",
       "metrics": [
-        { "key": "intelligence_index", "value": 80.5, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "coding_index", "value": 80.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "agentic_index", "value": 64.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "speed_tps", "value": 130, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "latency_s", "value": 1.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "cost_per_task", "value": 0.06, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "api_price_input", "value": 0.20, "source": "AA", "confidence": null, "updated": "2026-07-31" },
-        { "key": "api_price_output", "value": 1.20, "source": "AA", "confidence": null, "updated": "2026-07-31" },
-        { "key": "api_price_cache_hit", "value": 0.05, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "api_price_reasoning", "value": 0, "source": "AA", "confidence": null, "updated": "2026-07-31" },
-        { "key": "reasoning", "value": 90.5, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "coding", "value": 80.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "agentic_coding", "value": 64.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "mathematics", "value": 95.5, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "data_analysis", "value": 78.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "language", "value": 86.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "instruction_following", "value": 72.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "elo_text", "value": 1460, "source": "Arena", "confidence": "预估", "updated": "2026-07-31" },
-        { "key": "elo_webdev", "value": 1580, "source": "Arena", "confidence": "预估", "updated": "2026-07-31" }
+        {
+          "key": "intelligence_index",
+          "value": 80.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 80.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 64.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 130,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 1.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.06,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 0.2,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 1.2,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.05,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 90.5,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 80.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 64.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 95.5,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 78.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 86.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 72.0,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1460,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1580,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
       ],
       "timeline_intel": [
-        { "quarter": "2024Q1", "value": 50 },
-        { "quarter": "2024Q2", "value": 56 },
-        { "quarter": "2024Q3", "value": 63 },
-        { "quarter": "2024Q4", "value": 69 },
-        { "quarter": "2025Q1", "value": 73 },
-        { "quarter": "2025Q2", "value": 77 },
-        { "quarter": "2025Q3", "value": 79 },
-        { "quarter": "2025Q4", "value": 80.5 }
+        {
+          "quarter": "2024Q1",
+          "value": 50
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 56
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 63
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 69
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 73
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 77
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 79
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 80.5
+        }
       ]
+    },
+    {
+      "id": "glm55",
+      "tier": "top",
+      "name": "GLM-5.5",
+      "provider": "智谱",
+      "country": "CN",
+      "open_source": true,
+      "reasoning": true,
+      "multimodal": false,
+      "color": "#06b6d4",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 76.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 81,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 55,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 68,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.2,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.28,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 16.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 1.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 16.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 85,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 81,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 55,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 91,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 75,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 78,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 65,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1440,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 34.4
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 40.5
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 46.7
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 52.8
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 55.8
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 58.9
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 61.2
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 64.3
+        }
+      ],
+      "open_source_note": "开源可商用"
+    },
+    {
+      "id": "qwen37ultra",
+      "tier": "top",
+      "name": "Qwen 3.7 Ultra",
+      "provider": "阿里",
+      "country": "CN",
+      "open_source": false,
+      "reasoning": true,
+      "multimodal": false,
+      "color": "#f97316",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 76.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 79,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 54,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 72,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.3,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 16.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 1.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 16.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 84.5,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 79,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 54,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 90,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 74,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 80,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 73,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1435,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 34.2
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 40.3
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 46.4
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 52.4
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 55.5
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 58.5
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 60.8
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 63.8
+        }
+      ]
+    },
+    {
+      "id": "deepseekV4Max",
+      "tier": "top",
+      "name": "DeepSeek V4 Max",
+      "provider": "DeepSeek",
+      "country": "CN",
+      "open_source": true,
+      "reasoning": true,
+      "multimodal": false,
+      "color": "#fb923c",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 75.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 78,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 52,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 58,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.6,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.12,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 1.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 6.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.02,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 6.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 84,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 78,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 52,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 92,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 76,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 77,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 63,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1415,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 34.0
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 40.0
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 46.1
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 52.1
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 55.1
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 58.1
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 60.4
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 63.4
+        }
+      ],
+      "open_source_note": "开源可商用"
+    },
+    {
+      "id": "gemini31ultra",
+      "tier": "top",
+      "name": "Gemini 3.1 Ultra",
+      "provider": "Google",
+      "country": "US",
+      "open_source": false,
+      "reasoning": true,
+      "multimodal": true,
+      "color": "#059669",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 81.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 82,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 58,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 72,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.3,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.62,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 8.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 40.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 40.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 91,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 82,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 58,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 95,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 80,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 88,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 74,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1500,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1305,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 36.5
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 42.9
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 49.4
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 55.9
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 59.1
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 62.4
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 64.8
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 68.0
+        }
+      ]
+    },
+    {
+      "id": "grok45heavy",
+      "tier": "top",
+      "name": "Grok 4.5 Heavy",
+      "provider": "xAI",
+      "country": "US",
+      "open_source": false,
+      "reasoning": true,
+      "multimodal": true,
+      "color": "#4f46e5",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 79.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 75,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 62,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 62,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.8,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.85,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 10.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 50.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 2.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 50.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 90,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 75,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 62,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 94,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 76,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 84,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 72,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1475,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1268,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 35.6
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 41.9
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 48.2
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 54.5
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 57.7
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 60.8
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 63.2
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 66.4
+        }
+      ]
+    },
+    {
+      "id": "museTitan",
+      "tier": "top",
+      "name": "Muse Titan 1.0",
+      "provider": "Meta",
+      "country": "US",
+      "open_source": true,
+      "reasoning": true,
+      "multimodal": true,
+      "color": "#dc2626",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 77.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 78,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 66,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 60,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 3.2,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.42,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 5.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 20.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 1.25,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 20.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 88,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 78,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 66,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 89,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 73,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 75,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 70,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1460,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1290,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 34.9
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 41.1
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 47.3
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 53.5
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 56.6
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 59.7
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 62.0
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 65.1
+        }
+      ],
+      "open_source_note": "开源(限制商用)"
+    },
+    {
+      "id": "gpt56terra",
+      "tier": "balanced",
+      "name": "GPT-5.6 Terra",
+      "provider": "OpenAI",
+      "country": "US",
+      "open_source": false,
+      "reasoning": true,
+      "multimodal": false,
+      "color": "#60a5fa",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 79.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 80,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 60,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 95,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 1.4,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.1,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 2.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 10.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 1.25,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 10.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 90,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 80,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 60,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 95,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 77,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 86,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 71,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1470,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 35.6
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 41.9
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 48.2
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 54.5
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 57.7
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 60.8
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 63.2
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 66.4
+        }
+      ]
+    },
+    {
+      "id": "claudeSonnet5",
+      "tier": "balanced",
+      "name": "Claude Sonnet 5",
+      "provider": "Anthropic",
+      "country": "US",
+      "open_source": false,
+      "reasoning": true,
+      "multimodal": true,
+      "color": "#c4b5fd",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 78.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 82,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 54,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 88,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 1.9,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.22,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 3.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 15.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 1.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 15.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 88,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 82,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 54,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 93,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 79,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 89,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 73,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1475,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1300,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 35.1
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 41.3
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 47.6
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 53.8
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 56.9
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 60.1
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 62.4
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 65.5
+        }
+      ]
+    },
+    {
+      "id": "gemini31flash",
+      "tier": "balanced",
+      "name": "Gemini 3.1 Flash",
+      "provider": "Google",
+      "country": "US",
+      "open_source": false,
+      "reasoning": false,
+      "multimodal": true,
+      "color": "#34d399",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 75.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 78,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 50,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 130,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 0.7,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.18,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 1.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.25,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 83,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 78,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 50,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 89,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 70,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 83,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 74,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1445,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1280,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 34.0
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 40.0
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 46.1
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 52.1
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 55.1
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 58.1
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 60.4
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 63.4
+        }
+      ]
+    },
+    {
+      "id": "kimiK3mini",
+      "tier": "balanced",
+      "name": "Kimi K3-Mini",
+      "provider": "月之暗面",
+      "country": "CN",
+      "open_source": true,
+      "reasoning": true,
+      "multimodal": false,
+      "color": "#f472b6",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 74.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 76,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 53,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 95,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 1.6,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.12,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 1.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.25,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 86,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 76,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 53,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 85,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 74,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 83,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 68,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1430,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 33.3
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 39.2
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 45.1
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 51.1
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 54.0
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 57.0
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 59.2
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 62.2
+        }
+      ],
+      "open_source_note": "开源可商用"
+    },
+    {
+      "id": "grok45std",
+      "tier": "balanced",
+      "name": "Grok 4.5 Standard",
+      "provider": "xAI",
+      "country": "US",
+      "open_source": false,
+      "reasoning": true,
+      "multimodal": true,
+      "color": "#818cf8",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 76.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 70,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 58,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 100,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 1.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.16,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 3.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 12.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.75,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 12.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 87,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 70,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 58,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 91,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 72,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 83,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 71,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1440,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1260,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 34.2
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 40.3
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 46.4
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 52.4
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 55.5
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 58.5
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 60.8
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 63.8
+        }
+      ]
+    },
+    {
+      "id": "claudeHaiku5",
+      "tier": "fast",
+      "name": "Claude Haiku 5",
+      "provider": "Anthropic",
+      "country": "US",
+      "open_source": false,
+      "reasoning": false,
+      "multimodal": false,
+      "color": "#fde68a",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 72.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 72,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 45,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 180,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 0.6,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.045,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 0.8,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.2,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 80,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 72,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 45,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 84,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 66,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 80,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 70,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1390,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1255,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 32.4
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 38.2
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 43.9
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 49.7
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 52.6
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 55.4
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 57.6
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 60.5
+        }
+      ]
+    },
+    {
+      "id": "kimiK3flash",
+      "tier": "fast",
+      "name": "Kimi K3-Flash",
+      "provider": "月之暗面",
+      "country": "CN",
+      "open_source": true,
+      "reasoning": true,
+      "multimodal": false,
+      "color": "#f9a8d4",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 73.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 76,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 54,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 145,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 0.9,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.05,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 0.6,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 2.4,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.015,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 2.4,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 85,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 76,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 54,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 86,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 74,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 83,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 69,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1420,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 33.1
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 39.0
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 44.8
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 50.7
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 53.7
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 56.6
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 58.8
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 61.7
+        }
+      ],
+      "open_source_note": "开源可商用"
+    },
+    {
+      "id": "qwen37flash",
+      "tier": "fast",
+      "name": "Qwen 3.7 Flash",
+      "provider": "阿里",
+      "country": "CN",
+      "open_source": false,
+      "reasoning": false,
+      "multimodal": true,
+      "color": "#fdba74",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 72.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 75,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 46,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 165,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 0.7,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.04,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 0.3,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 1.2,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.075,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 82,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 75,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 46,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 86,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 70,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 81,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 73,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1400,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1258,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 32.6
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 38.4
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 44.2
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 50.0
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 52.9
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 55.8
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 58.0
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 60.9
+        }
+      ]
+    },
+    {
+      "id": "glm52flash",
+      "tier": "fast",
+      "name": "GLM-5.2 Flash",
+      "provider": "智谱",
+      "country": "CN",
+      "open_source": true,
+      "reasoning": true,
+      "multimodal": false,
+      "color": "#67e8f9",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 71.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 76,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 48,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 160,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 0.8,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.045,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 0.4,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 1.6,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.1,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 1.6,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 80,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 76,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 48,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 88,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 72,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 76,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 62,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1395,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 32.2
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 37.9
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 43.6
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 49.3
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 52.2
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 55.1
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 57.2
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 60.1
+        }
+      ],
+      "open_source_note": "开源可商用"
+    },
+    {
+      "id": "museSwift",
+      "tier": "fast",
+      "name": "Muse Swift 1.0",
+      "provider": "Meta",
+      "country": "US",
+      "open_source": true,
+      "reasoning": true,
+      "multimodal": true,
+      "color": "#f87171",
+      "metrics": [
+        {
+          "key": "intelligence_index",
+          "value": 72.5,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding_index",
+          "value": 76,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_index",
+          "value": 55,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "speed_tps",
+          "value": 170,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "latency_s",
+          "value": 0.7,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 0.05,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_input",
+          "value": 1.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_output",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.25,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 4.0,
+          "source": "AA",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "reasoning",
+          "value": 82,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "coding",
+          "value": 76,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "agentic_coding",
+          "value": 55,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "mathematics",
+          "value": 88,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "data_analysis",
+          "value": 71,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "language",
+          "value": 74,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "instruction_following",
+          "value": 71,
+          "source": "LB",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_text",
+          "value": 1395,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1255,
+          "source": "Arena",
+          "confidence": "预估",
+          "updated": "2026-07-31"
+        }
+      ],
+      "timeline_intel": [
+        {
+          "quarter": "2024Q1",
+          "value": 32.6
+        },
+        {
+          "quarter": "2024Q2",
+          "value": 38.4
+        },
+        {
+          "quarter": "2024Q3",
+          "value": 44.2
+        },
+        {
+          "quarter": "2024Q4",
+          "value": 50.0
+        },
+        {
+          "quarter": "2025Q1",
+          "value": 52.9
+        },
+        {
+          "quarter": "2025Q2",
+          "value": 55.8
+        },
+        {
+          "quarter": "2025Q3",
+          "value": 58.0
+        },
+        {
+          "quarter": "2025Q4",
+          "value": 60.9
+        }
+      ],
+      "open_source_note": "开源(限制商用)"
     }
   ],
   "changelog": [
+    {
+      "date": "2026-07-31",
+      "event": "成本页按档位补齐三档代表：新增 1 个模型（顶尖/均衡/极速各厂商代表），使各档位可横向比价。新增档位变体价格为基于各实验室公开定价规律的估算值（confidence='预估'），待 Artificial Analysis 实测后校正",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-31",
+      "event": "成本页按档位补齐三档代表：新增 15 个模型（顶尖/均衡/极速各厂商代表），使各档位可横向比价。新增档位变体价格为基于各实验室公开定价规律的估算值（confidence='预估'），待 Artificial Analysis 实测后校正",
+      "url": "#"
+    },
     {
       "date": "2026-07-31",
       "event": "数据纠错：DeepSeek V4 Flash 的 API 价格此前被误填为与 V4 Pro 相同（实为 Pro 的约 1/3）。已按官方 DeepSeek 文档(2026-07-31) 修正：Pro 输入/输出 $0.435/$0.87，Flash 输入/输出 $0.14/$0.28",

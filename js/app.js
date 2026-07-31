@@ -828,7 +828,13 @@ function initTrendElo() {
 
 // ========== COST ==========
 let costCompanyFilter = 'all';
-function initCost() { initCostScatter(); buildCostCompanyFilter(); renderCostTable(); initCostSpeedIntel(); }
+let costTierFilter = 'all';
+const COST_TIERS = [
+  { k:'top', label:'🏆 顶尖模型', sub:'旗舰 · 最强智能 · 高单价', cls:'tier-top' },
+  { k:'balanced', label:'⚖️ 均衡模型', sub:'性价比 · 中等能力中等价', cls:'tier-balanced' },
+  { k:'fast', label:'⚡ 极速模型', sub:'高吞吐 · 低延迟 · 低价', cls:'tier-fast' }
+];
+function initCost() { initCostScatter(); buildCostCompanyFilter(); buildCostTierFilter(); renderCostTable(); initCostSpeedIntel(); }
 function initCostScatter() {
   const points = DATA.models.map(m => {
     const intel = getMetricVal(m,'intelligence_index'), cost = getMetricVal(m,'cost_per_task'), speed = getMetricVal(m,'speed_tps');
@@ -842,53 +848,66 @@ function initCostScatter() {
     }
   });
 }
+function costRowHTML(m, proOut) {
+  const inp = getMetricVal(m,'api_price_input'), out = getMetricVal(m,'api_price_output');
+  const cache = getMetricVal(m,'api_price_cache_hit'), reas = getMetricVal(m,'api_price_reasoning');
+  let multCell;
+  if (m.id === 'deepseekV4') multCell = '<span class="badge-base">基准 1.00×</span>';
+  else if (out != null && proOut) {
+    const mult = out / proOut;
+    const txt = mult >= 1 ? '×' + mult.toFixed(2) : '×' + mult.toFixed(2) + ' <span class="mult-frac">(≈1/' + (1/mult).toFixed(1) + ')</span>';
+    multCell = '<span class="mult-' + (mult<=1?'low':'high') + '">' + txt + '</span>';
+  } else multCell = '—';
+  return `<tr>
+    <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><div><div class="model-name" style="font-size:12px">${m.name}</div></div></div></td>
+    <td><span class="company-tag">${m.provider}</span></td>
+    <td>$${inp?.toFixed(2)||'—'}</td><td>$${out?.toFixed(2)||'—'}</td><td>$${cache?.toFixed(3)||'—'}</td>
+    <td>${(reas&&reas>0)?'$'+reas.toFixed(2):'—'}</td>
+    <td>${multCell}</td>
+  </tr>`;
+}
 function renderCostTable() {
   const pro = DATA.models.find(m => m.id === 'deepseekV4');
   const proOut = getMetricVal(pro, 'api_price_output') || 1;
-  const sorted = [...DATA.models]
-    .filter(m => costCompanyFilter === 'all' || m.provider === costCompanyFilter)
-    .sort((a,b)=>(getMetricVal(a,'cost_per_task')||0)-(getMetricVal(b,'cost_per_task')||0));
-  document.getElementById('cost-table-body').innerHTML = sorted.map(m => {
-    const inp = getMetricVal(m,'api_price_input'), out = getMetricVal(m,'api_price_output');
-    const cache = getMetricVal(m,'api_price_cache_hit'), reas = getMetricVal(m,'api_price_reasoning');
-    let multCell;
-    if (m.id === 'deepseekV4') multCell = '<span class="badge-base">基准 1.00×</span>';
-    else if (out != null && proOut) {
-      const mult = out / proOut;
-      const txt = mult >= 1 ? '×' + mult.toFixed(2) : '×' + mult.toFixed(2) + ' <span class="mult-frac">(≈1/' + (1/mult).toFixed(1) + ')</span>';
-      multCell = '<span class="mult-' + (mult<=1?'low':'high') + '">' + txt + '</span>';
-    } else multCell = '—';
-    return `<tr>
-      <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><div><div class="model-name" style="font-size:12px">${m.name}</div></div></div></td>
-      <td><span class="company-tag">${m.provider}</span></td>
-      <td>$${inp?.toFixed(2)||'—'}</td><td>$${out?.toFixed(2)||'—'}</td><td>$${cache?.toFixed(3)||'—'}</td>
-      <td>${(reas&&reas>0)?'$'+reas.toFixed(2):'—'}</td>
-      <td>${multCell}</td>
-    </tr>`;
+  const visible = DATA.models.filter(m =>
+    (costCompanyFilter === 'all' || m.provider === costCompanyFilter) &&
+    (costTierFilter === 'all' || m.tier === costTierFilter)
+  );
+  const tiers = COST_TIERS.filter(t => costTierFilter === 'all' || t.k === costTierFilter);
+  const html = tiers.map(t => {
+    const list = visible.filter(m => m.tier === t.k).sort((a,b)=>(getMetricVal(a,'cost_per_task')||0)-(getMetricVal(b,'cost_per_task')||0));
+    if (!list.length) return '';
+    return `<tr class="tier-row ${t.cls}"><td colspan="7"><span class="tier-badge ${t.cls}">${t.label}</span><span class="tier-sub">${t.sub}</span><span class="tier-count">${list.length} 款</span></td></tr>` +
+      list.map(m => costRowHTML(m, proOut)).join('');
   }).join('');
+  document.getElementById('cost-table-body').innerHTML = html || '<tr><td colspan="7" style="text-align:center;color:var(--text-muted);padding:24px">当前筛选下没有模型</td></tr>';
 }
 
 function exportCostCSV() {
   const pro = DATA.models.find(m => m.id === 'deepseekV4');
   const proOut = getMetricVal(pro, 'api_price_output') || 1;
-  const rows = [...DATA.models]
-    .filter(m => costCompanyFilter === 'all' || m.provider === costCompanyFilter)
-    .sort((a,b)=>(getMetricVal(a,'cost_per_task')||0)-(getMetricVal(b,'cost_per_task')||0));
+  const tierLabel = { top:'顶尖', balanced:'均衡', fast:'极速' };
+  const rows = DATA.models.filter(m =>
+    (costCompanyFilter === 'all' || m.provider === costCompanyFilter) &&
+    (costTierFilter === 'all' || m.tier === costTierFilter)
+  ).sort((a,b)=>(getMetricVal(a,'cost_per_task')||0)-(getMetricVal(b,'cost_per_task')||0));
   if (!rows.length) return alert('当前筛选下没有可导出的模型');
-  const headers = ['模型', '公司', '输入 $/M', '输出 $/M', '缓存命中 $/M', '推理Token $/M', '×相对V4Pro输出价'];
+  const headers = ['档位', '模型', '公司', '输入 $/M', '输出 $/M', '缓存命中 $/M', '推理Token $/M', '×相对V4Pro输出价'];
   const body = rows.map(m => {
     const inp = getMetricVal(m,'api_price_input'), out = getMetricVal(m,'api_price_output');
     const cache = getMetricVal(m,'api_price_cache_hit'), reas = getMetricVal(m,'api_price_reasoning');
     let mult = '—';
     if (m.id === 'deepseekV4') mult = '1.00';
     else if (out != null && proOut) mult = (out / proOut).toFixed(2);
-    return [m.name, m.provider, inp?.toFixed(2)??'—', out?.toFixed(2)??'—', cache?.toFixed(3)??'—', (reas&&reas>0)?reas.toFixed(2):'—', mult];
+    return [tierLabel[m.tier]||m.tier, m.name, m.provider, inp?.toFixed(2)??'—', out?.toFixed(2)??'—', cache?.toFixed(3)??'—', (reas&&reas>0)?reas.toFixed(2):'—', mult];
   });
   const csv = [headers.map(h=>`"${h}"`).join(','), ...body.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(','))].join('\n');
   const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url; a.download = `llm-monitor-api-price-${costCompanyFilter === 'all' ? 'all' : costCompanyFilter}-${new Date().toISOString().slice(0,10)}.csv`;
+  const fnTier = costTierFilter === 'all' ? 'all' : (tierLabel[costTierFilter]||costTierFilter);
+  const fnBrand = costCompanyFilter === 'all' ? 'all' : costCompanyFilter;
+  a.href = url; a.download = `llm-monitor-api-price-${fnBrand}-${fnTier}-${new Date().toISOString().slice(0,10)}.csv`;
   document.body.appendChild(a); a.click(); a.remove();
   URL.revokeObjectURL(url);
 }
@@ -902,6 +921,17 @@ function buildCostCompanyFilter() {
   el.querySelectorAll('.company-chip').forEach(b => b.addEventListener('click', () => {
     costCompanyFilter = b.dataset.company;
     buildCostCompanyFilter();
+    renderCostTable();
+  }));
+}
+function buildCostTierFilter() {
+  const el = document.getElementById('cost-tier-filter');
+  if (!el) return;
+  const items = [{k:'all',label:'全部'}, {k:'top',label:'顶尖'}, {k:'balanced',label:'均衡'}, {k:'fast',label:'极速'}];
+  el.innerHTML = items.map(p => `<button class="company-chip ${costTierFilter===p.k?'active':''}" data-tier="${p.k}">${p.label}</button>`).join('');
+  el.querySelectorAll('.company-chip').forEach(b => b.addEventListener('click', () => {
+    costTierFilter = b.dataset.tier;
+    buildCostTierFilter();
     renderCostTable();
   }));
 }
