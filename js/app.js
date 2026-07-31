@@ -1117,19 +1117,37 @@ function initTokens() {
       <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;line-height:1.7"><strong style="color:var(--text-primary)">上方逐月折线</strong>由真实锚点 + 指数插值构成：<span style="color:#7c3aed">●</span> 实测锚点 = tokensperday 2024-02（~2T/天）与 2026-07（360.4T/天）；<span style="color:#06b6d4">●</span> 披露推算 = 国家数据局实测中国量（2025-06 的 30T/天、2026-03 的 140T/天）×2（tokensperday：中国≈全球一半）；其余月份为按相邻锚点增速指数插值（标“插值”）。曲线形态与 tokensperday / Epoch / Exponential View 估算一致。</p>`;
   }
 
-  // Top models bar (latest week)
-  const topWeeks = Object.keys(TOKENS.top_models || {});
-  const latestWeek = topWeeks[topWeeks.length - 1];
-  const topModels = (TOKENS.top_models[latestWeek] || []).slice().reverse();
-  const barColors = topModels.map(m => m.country === '中国' ? '#ef4444' : m.country === '美国' ? '#2563eb' : '#94a3b8');
+  // 中美模型调用占比（100% 堆叠图）：基于 weekly 中已披露 cn_t/us_t 拆分的周
+  const shareWeeks = weekly.filter(w => w.cn_t != null && w.us_t != null);
+  const pct = (v, t) => +(v / t * 100).toFixed(1);
+  const other = w => +(w.total_t - w.cn_t - w.us_t).toFixed(2);
   makeChart('tokenTop', {
     type: 'bar',
-    data: { labels: topModels.map(m => m.model), datasets: [{ label: '周调用量 (万亿)', data: topModels.map(m => m.tokens_t), backgroundColor: barColors, borderRadius: 4 }] },
-    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => ` ${c.parsed.x} 万亿 (${latestWeek})` } } },
-      scales: { x: { title: { display: true, text: '万亿 Token / 周', font: { size: 12 } }, ticks: { font: { size: 11 } } }, y: { ticks: { font: { size: 11 } } } }
+    data: {
+      labels: shareWeeks.map(w => w.week),
+      datasets: [
+        { label: '中国', data: shareWeeks.map(w => pct(w.cn_t, w.total_t)), backgroundColor: '#ef4444', borderRadius: 3, stack: 's' },
+        { label: '美国', data: shareWeeks.map(w => pct(w.us_t, w.total_t)), backgroundColor: '#2563eb', borderRadius: 3, stack: 's' },
+        { label: '其他', data: shareWeeks.map(w => pct(other(w), w.total_t)), backgroundColor: '#cbd5e1', borderRadius: 3, stack: 's' }
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } },
+        tooltip: { callbacks: { label: c => { const w = shareWeeks[c.dataIndex]; const raw = c.dataset.label === '中国' ? w.cn_t : c.dataset.label === '美国' ? w.us_t : other(w); return ` ${c.dataset.label}: ${raw} 万亿 (${c.parsed.y}%)`; } } }
+      },
+      scales: {
+        x: { stacked: true, ticks: { font: { size: 9 }, maxRotation: 45, autoSkip: false } },
+        y: { stacked: true, min: 0, max: 100, title: { display: true, text: '占总调用量 %', font: { size: 12 } }, ticks: { font: { size: 11 }, callback: v => v + '%' } }
+      }
     }
   });
+  const noteEl = document.getElementById('tokens-share-note');
+  if (noteEl) {
+    const cnLast = shareWeeks.length ? pct(shareWeeks[shareWeeks.length - 1].cn_t, shareWeeks[shareWeeks.length - 1].total_t) : '—';
+    const usLast = shareWeeks.length ? pct(shareWeeks[shareWeeks.length - 1].us_t, shareWeeks[shareWeeks.length - 1].total_t) : '—';
+    noteEl.textContent = `共 ${weekly.length} 个周快照，其中 ${shareWeeks.length} 个披露了中美拆分（其余周未拆分，故不计入占比图）。最新披露周：中国 ${cnLast}% · 美国 ${usLast}%。`;
+  }
 
   // Weekly table
   wrap.innerHTML = weekly.slice().reverse().map(w => `<tr>
