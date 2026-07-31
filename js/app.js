@@ -838,13 +838,14 @@ function initCost() { initCostScatter(); buildCostCompanyFilter(); buildCostTier
 function initCostScatter() {
   const points = DATA.models.map(m => {
     const intel = getMetricVal(m,'intelligence_index'), cost = getMetricVal(m,'cost_per_task'), speed = getMetricVal(m,'speed_tps');
-    return { x:cost||0.01, y:intel||0, r:Math.max(4,(speed||50)/20), name:m.name, color:m.color };
+    const r = intel != null ? Math.max(3, Math.min(22, (intel - 60) * 0.55)) : 4;
+    return { x:cost||0.01, y:intel||0, r, speed: speed||0, name:m.name, color:m.color };
   });
   makeChart('costScatter', { type:'bubble',
     data:{ datasets:[{ data:points, backgroundColor:points.map(p=>p.color+'88'), borderColor:points.map(p=>p.color), borderWidth:1.5 }] },
     options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · $${c.raw.x.toFixed(3)}` } }, legend:{display:false} },
-      scales:{ x:{ title:{display:true,text:'每任务成本 (USD) (来源: AA)',font:{size:12}}, type:'logarithmic', ticks:{font:{size:11}} }, y:{ title:{display:true,text:'智力指数 (来源: AA)',font:{size:12}}, min:65, max:86, ticks:{font:{size:11}} } }
+      plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 智力 ${c.raw.y} · 成本 $${c.raw.x.toFixed(3)} · 速度 ${c.raw.speed} t/s` } }, legend:{display:false} },
+      scales:{ x:{ title:{display:true,text:'每任务成本 (USD) (来源: AA)',font:{size:12}}, type:'logarithmic', ticks:{font:{size:11}} }, y:{ title:{display:true,text:'智力指数 (来源: AA)',font:{size:12}}, min:60, max:88, ticks:{font:{size:11}} } }
     }
   });
 }
@@ -938,12 +939,13 @@ function buildCostTierFilter() {
 function initCostSpeedIntel() {
   const points = DATA.models.map(m => {
     const cost = getMetricVal(m,'cost_per_task'), speed = getMetricVal(m,'speed_tps'), intel = getMetricVal(m,'intelligence_index');
-    return { x:cost||0.01, y:speed||0, r:Math.max(7,(intel||70)/5), name:m.name, color:m.color };
+    const r = intel != null ? Math.max(4, Math.min(28, Math.pow(Math.max(0, intel - 55), 1.65) * 0.18)) : 6;
+    return { x:cost||0.01, y:speed||0, r, intel: intel||0, name:m.name, color:m.color };
   });
   makeChart('costSpeedIntel', { type:'bubble',
     data:{ datasets:[{ data:points, backgroundColor:points.map(p=>p.color+'77'), borderColor:points.map(p=>p.color), borderWidth:1.5 }] },
     options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 速度 ${c.raw.y} t/s · 成本 $${c.raw.x.toFixed(3)} · 智力 ✓` } }, legend:{display:false} },
+      plugins:{ pointLabels:{enabled:true}, tooltip:{ callbacks:{ label:c=>`${c.raw.name}: 速度 ${c.raw.y} t/s · 成本 $${c.raw.x.toFixed(3)} · 智力 ${c.raw.intel}` } }, legend:{display:false} },
       scales:{ x:{ title:{display:true,text:'每任务成本 (USD) (来源: AA)',font:{size:12}}, type:'logarithmic', ticks:{font:{size:11}} }, y:{ title:{display:true,text:'输出速度 t/s (来源: AA)',font:{size:12}}, ticks:{font:{size:11}} } }
     }
   });
