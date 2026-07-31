@@ -227,11 +227,15 @@
       <div id="compare-content" style="display:none">
         <div class="grid-2" style="margin-top:16px">
           <div class="card">
-            <div class="card-header"><h3>📊 能力雷达图（标准化至0-100）</h3></div>
+            <div class="card-header"><h3>📊 能力雷达图（标准化至0-100）</h3><span style="font-size:12px;color:var(--text-muted)">多模型时线条加重、填充变淡</span></div>
             <div class="card-body"><div class="chart-container" style="height:400px"><canvas id="radarCompare"></canvas></div></div>
+            <div id="compare-gap-wrap" style="display:none;border-top:1px solid var(--border-light)">
+              <div class="card-header" style="border-bottom:none"><h3>🔍 指标差距（选中模型在该指标上的跨度）</h3><span style="font-size:12px;color:var(--text-muted)">条形越长，模型间差异越大</span></div>
+              <div class="card-body" style="padding-top:0"><div class="chart-container" style="height:260px"><canvas id="compareGapChart"></canvas></div></div>
+            </div>
           </div>
           <div class="card">
-            <div class="card-header"><h3>📋 详细指标对比（含数据来源）</h3></div>
+            <div class="card-header"><h3>📋 详细指标对比（含数据来源）</h3><button class="btn" onclick="exportCompareCSV()" style="font-size:12px;padding:6px 12px">📥 导出 CSV</button></div>
             <div class="card-body" style="padding:0">
               <div class="table-wrap" id="compare-table-wrap"></div>
             </div>

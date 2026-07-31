@@ -623,16 +623,20 @@ function renderCompareContent() {
   const metrics = COMPARE_METRICS.filter(m => STATE.sources.has(m.source));
   const radarMetrics = metrics.filter(m => m.max && !EXCLUDE_RADAR.has(m.key));
 
-  // Radar
+  // Radar: heavier borders / lighter fills so overlapping models remain readable
+  const isMany = selected.length >= 5;
   makeChart('radarCompare', { type:'radar',
     data:{ labels:radarMetrics.map(m=>m.label),
-      datasets:selected.map(m => ({ label:m.name, data:radarMetrics.map(rm => { const v = getMetricVal(m, rm.key); return v ? Math.min(100,(v/rm.max)*100) : 0; }), borderColor:m.color, backgroundColor:m.color+'18', borderWidth:2, pointRadius:3 }))
+      datasets:selected.map((m, i) => ({ label:m.name, data:radarMetrics.map(rm => { const v = getMetricVal(m, rm.key); return v ? Math.min(100,(v/rm.max)*100) : 0; }), borderColor:m.color, backgroundColor:m.color+(isMany?'10':'18'), borderWidth:isMany?3:2.5, pointRadius:isMany?4:3, pointHoverRadius:isMany?6:5, pointBackgroundColor:'#fff', pointBorderColor:m.color, pointBorderWidth:2, order:i }))
     },
     options:{ responsive:true, maintainAspectRatio:false,
-      plugins:{ legend:{ position:'bottom', labels:{font:{size:11}, usePointStyle:true} } },
-      scales:{ r:{ min:0, max:100, ticks:{ stepSize:20, font:{size:10} } } }
+      plugins:{ legend:{ position:'bottom', labels:{font:{size:11}, usePointStyle:true, boxWidth:8} } },
+      scales:{ r:{ min:0, max:100, ticks:{ stepSize:20, font:{size:10}, backdropColor:'transparent' }, angleLines:{color:'var(--border)'}, grid:{color:'var(--border-light)'} } }
     }
   });
+
+  // Gap chart: shows per-metric span (max-min) across selected models
+  buildCompareGapChart(selected, radarMetrics);
 
   // Detail table
   const tableWrap = document.getElementById('compare-table-wrap');
@@ -675,6 +679,52 @@ function renderCompareContent() {
     });
   }
   buildPriceMultiple(selected);
+}
+
+// 指标差距条形图：展示每个指标上选中模型的 max-min（标准化后），让用户一眼看出哪里差距大
+function buildCompareGapChart(selected, radarMetrics) {
+  const wrap = document.getElementById('compare-gap-wrap');
+  if (!wrap) return;
+  if (selected.length < 3) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+  const rows = radarMetrics.map(rm => {
+    const vals = selected.map(m => { const v = getMetricVal(m, rm.key); return v ? (v / rm.max) * 100 : 0; }).filter(v => v > 0);
+    const span = vals.length ? Math.max(...vals) - Math.min(...vals) : 0;
+    return { label: rm.label, span };
+  }).sort((a, b) => b.span - a.span);
+  makeChart('compareGapChart', {
+    type: 'bar',
+    data: { labels: rows.map(r => r.label), datasets: [{ label: '差距跨度（标准化分）', data: rows.map(r => r.span), backgroundColor: '#6366f1cc', borderColor: '#4f46e5', borderWidth: 1, borderRadius: 4 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `跨度 ${c.raw.toFixed(1)} 分` } } },
+      scales: { x: { ticks: { font: { size: 11 }, autoSkip: false, maxRotation: 45, minRotation: 30 } }, y: { title: { display: true, text: '标准化分差距', font: { size: 12 } }, beginAtZero: true, ticks: { font: { size: 11 } } } }
+    }
+  });
+}
+
+// 导出对比表格为 CSV
+function exportCompareCSV() {
+  const selected = compareModels.map(id => DATA.models.find(m => m.id === id));
+  if (!selected.length) return alert('请先选择至少一个模型');
+  const metrics = COMPARE_METRICS.filter(m => STATE.sources.has(m.source));
+  const headers = ['指标', '数据来源', ...selected.map(m => `${m.name}（${m.provider}）`)];
+  const rows = metrics.map(cm => {
+    const cells = selected.map(m => {
+      let v;
+      if (cm.key === '_provider') v = m.provider;
+      else if (cm.key === '_open') v = m.open_source ? '开源' : '闭源';
+      else v = cm.fmt ? cm.fmt(getMetricVal(m, cm.key)) : (getMetricVal(m, cm.key) ?? '—');
+      return String(v).replace(/"/g, '""');
+    });
+    return [`"${cm.label}"`, `"${cm.source || ''}"`, ...cells.map(c => `"${c}"`)];
+  });
+  const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `llm-monitor-compare-${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
 }
 
 // 价格倍数：以 DeepSeek V4 Pro 为基准(1.0×)，展示所有模型相对其每任务成本的倍数
