@@ -1,11 +1,35 @@
 {
   "meta": {
     "title": "大模型新闻速递",
-    "updated": "2026-07-30",
+    "updated": "2026-07-31",
     "description": "收集国内外各厂商大模型最新进展，偏财经 / 新闻方向（发布、融资/IPO、政策监管、财报、算力基建等）。按「国内 / 海外」分区，条目均来自公开媒体报道并附原始链接，非本站原创。",
     "disclaimer": "新闻时效性强，本页为快照式收录；如需更新需重新抓取并覆盖本文件（无后台自动拉取，零运行成本）。"
   },
   "news": [
+    {
+      "id": "deepseek-v4-flash-launch",
+      "date": "2026-07-31",
+      "region": "domestic",
+      "category": "发布",
+      "company": "DeepSeek",
+      "model": "DeepSeek V4 Flash",
+      "title": "DeepSeek-V4-Flash 正式版 API 上线公测：Agent 能力大幅增强",
+      "summary": "7 月 31 日下午，DeepSeek 通过 API 文档发布日志宣布 DeepSeek-V4-Flash 正式版 API 上线公测。Agent 能力显著提升，在 Terminal Bench 2.1（82.7）、NL2Repo（54.2）、Cybergym（76.7）、DeepSWE（54.4）、Toolathlon verified（70.3）、Agent Last Exam（25.2）、Automation Bench（25.1）、DSBench-FullStack（68.7）、DSBench-Hard（59.6）等 9 项基准上全面超越 V4-Pro-Preview。正式版原生支持 Responses API 并专项适配 Codex，模型结构与尺寸同 preview 一致、仅后训练优化；百万 Token 上下文、MoE 架构、主打极致性价比。V4-Pro 正式版将尽快发布。",
+      "source": "IT之家 / DoNews",
+      "url": "https://www.163.com/dy/article/L361566N0511B8LM.html"
+    },
+    {
+      "id": "openai-gpt56-price-cut",
+      "date": "2026-07-31",
+      "region": "overseas",
+      "category": "发布",
+      "company": "OpenAI",
+      "model": "GPT-5.6 (Sol / Terra / Luna)",
+      "title": "OpenAI GPT-5.6 全系大降价：Luna 输入/输出降至 $0.20/$1.20（−80%）",
+      "summary": "7 月 31 日凌晨，OpenAI CEO Altman 宣布 GPT-5.6 全系新定价：入门级 Luna 输入/输出价降至每百万 Token $0.20/$1.20（降幅 80%），Terra 降价 20% 至 $2/$12，旗舰 Sol 维持 $5/$30 并新增 2.5× 极速 Fast 模式（价格翻倍、智力不变）。降价核心在于 Sol 自主重写优化底层生产内核，端到端运行成本降 20%、token 生成效率提 15%；自动批准模式成本降约 10 倍，引发 API 价格战。",
+      "source": "华尔街见闻 / 财联社 / 新智元",
+      "url": "https://new.qq.com/rain/a/20260731A02KWU00"
+    },
     {
       "id": "kimi-k3-launch",
       "date": "2026-07-17",

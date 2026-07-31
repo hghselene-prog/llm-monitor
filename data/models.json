@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-29T01:00:00Z",
+  "last_updated": "2026-07-31T14:30:00Z",
   "sources": {
     "AA": {
       "name": "Artificial Analysis",
@@ -310,17 +310,17 @@
         },
         {
           "key": "api_price_input",
-          "value": 15.0,
+          "value": 5.0,
           "source": "AA",
           "confidence": null,
-          "updated": "2026-07-19"
+          "updated": "2026-07-31"
         },
         {
           "key": "api_price_output",
-          "value": 60.0,
+          "value": 30.0,
           "source": "AA",
           "confidence": null,
-          "updated": "2026-07-19"
+          "updated": "2026-07-31"
         },
         {
           "key": "api_price_cache_hit",
@@ -2322,9 +2322,104 @@
           "value": 78.9
         }
       ]
+    },
+    {
+      "id": "deepseekV4Flash",
+      "tier": "fast",
+      "name": "DeepSeek V4 Flash",
+      "provider": "DeepSeek",
+      "country": "CN",
+      "open_source": true,
+      "open_source_note": "开源可商用",
+      "reasoning": true,
+      "multimodal": false,
+      "color": "#fbbf24",
+      "metrics": [
+        { "key": "intelligence_index", "value": 73.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "coding_index", "value": 75.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "agentic_index", "value": 58.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "speed_tps", "value": 145, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "latency_s", "value": 0.8, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "cost_per_task", "value": 0.042, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "api_price_input", "value": 0.55, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "api_price_output", "value": 2.19, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "api_price_cache_hit", "value": 0.14, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "api_price_reasoning", "value": 2.19, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "reasoning", "value": 83.5, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "coding", "value": 75.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "agentic_coding", "value": 58.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "mathematics", "value": 91.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "data_analysis", "value": 76.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "language", "value": 79.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "instruction_following", "value": 64.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "elo_text", "value": 1420, "source": "Arena", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "elo_webdev", "value": 1320, "source": "Arena", "confidence": "预估", "updated": "2026-07-31" }
+      ],
+      "timeline_intel": [
+        { "quarter": "2024Q1", "value": 35 },
+        { "quarter": "2024Q2", "value": 44 },
+        { "quarter": "2024Q3", "value": 53 },
+        { "quarter": "2024Q4", "value": 60 },
+        { "quarter": "2025Q1", "value": 64 },
+        { "quarter": "2025Q2", "value": 67 },
+        { "quarter": "2025Q3", "value": 70 },
+        { "quarter": "2025Q4", "value": 73.0 }
+      ]
+    },
+    {
+      "id": "gpt56luna",
+      "tier": "fast",
+      "name": "GPT-5.6 Luna",
+      "provider": "OpenAI",
+      "country": "US",
+      "open_source": false,
+      "reasoning": true,
+      "multimodal": false,
+      "color": "#3b82f6",
+      "metrics": [
+        { "key": "intelligence_index", "value": 80.5, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "coding_index", "value": 80.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "agentic_index", "value": 64.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "speed_tps", "value": 130, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "latency_s", "value": 1.0, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "cost_per_task", "value": 0.06, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "api_price_input", "value": 0.20, "source": "AA", "confidence": null, "updated": "2026-07-31" },
+        { "key": "api_price_output", "value": 1.20, "source": "AA", "confidence": null, "updated": "2026-07-31" },
+        { "key": "api_price_cache_hit", "value": 0.05, "source": "AA", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "api_price_reasoning", "value": 0, "source": "AA", "confidence": null, "updated": "2026-07-31" },
+        { "key": "reasoning", "value": 90.5, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "coding", "value": 80.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "agentic_coding", "value": 64.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "mathematics", "value": 95.5, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "data_analysis", "value": 78.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "language", "value": 86.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "instruction_following", "value": 72.0, "source": "LB", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "elo_text", "value": 1460, "source": "Arena", "confidence": "预估", "updated": "2026-07-31" },
+        { "key": "elo_webdev", "value": 1580, "source": "Arena", "confidence": "预估", "updated": "2026-07-31" }
+      ],
+      "timeline_intel": [
+        { "quarter": "2024Q1", "value": 50 },
+        { "quarter": "2024Q2", "value": 56 },
+        { "quarter": "2024Q3", "value": 63 },
+        { "quarter": "2024Q4", "value": 69 },
+        { "quarter": "2025Q1", "value": 73 },
+        { "quarter": "2025Q2", "value": 77 },
+        { "quarter": "2025Q3", "value": 79 },
+        { "quarter": "2025Q4", "value": 80.5 }
+      ]
     }
   ],
   "changelog": [
+    {
+      "date": "2026-07-31",
+      "event": "DeepSeek-V4-Flash 正式版 API 上线公测：Agent 能力大幅增强，9 项基准全面超越 V4-Pro-Preview（Terminal Bench 2.1 达 82.7）",
+      "url": "#"
+    },
+    {
+      "date": "2026-07-31",
+      "event": "OpenAI GPT-5.6 全系大降价：Luna 输入/输出降至 $0.20/$1.20（−80%），Terra −20%，Sol 新增 2.5× 极速 Fast 模式",
+      "url": "#"
+    },
     {
       "date": "2026-07-28",
       "event": "Claude Opus 5 上线全部三大榜单：AA 智力指数与 Agentic Index 双第一，Arena 各专项 Elo 领跑（初期置信区间较宽）",
