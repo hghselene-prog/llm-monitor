@@ -998,21 +998,26 @@ function initTokens() {
   const gMonthlyUpper = g ? Math.round(g.estimated_range_T[1] * 30.44) : null; // ~14519
   makeChart('tokenMonthly', {
     type: 'line',
-    data: { labels: monthly.map(m => m.month), datasets: [
-      { label: 'OpenRouter 月度（万亿）', data: monthly.map(m => m.total_t), borderColor: '#8b5cf6', backgroundColor: '#8b5cf633', fill: false, tension: 0.3, pointRadius: 6, pointBackgroundColor: mcolors, borderWidth: 2, yAxisID: 'yOR' },
-      { label: `全球估算 tokensperday（≈${gMonthlyEst} 万亿/月）`, data: monthly.map(() => gMonthlyEst), borderColor: '#7c3aed', borderDash: [6, 4], pointRadius: 0, borderWidth: 2, yAxisID: 'yGlobal' }
-    ]},
+    data: { labels: monthly.map(m => m.month), datasets: [{ label: '月度 Token 总量（万亿）', data: monthly.map(m => m.total_t), borderColor: '#8b5cf6', backgroundColor: '#8b5cf633', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: mcolors, borderWidth: 2 }] },
     options: { responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } }, tooltip: { callbacks: { label: c => {
-        if (c.dataset.yAxisID === 'yGlobal') return ` ${c.dataset.label}`;
-        const m = monthly[c.dataIndex]; return ` ${c.parsed.y} 万亿 · ${m.confidence === 'reported' ? '实测月榜' : '周度外推'}`;
-      } } } },
-      scales: {
-        yOR: { type: 'linear', position: 'left', title: { display: true, text: 'OpenRouter 万亿/月', font: { size: 12 } }, ticks: { font: { size: 11 } }, beginAtZero: true },
-        yGlobal: { type: 'linear', position: 'right', title: { display: true, text: '全球估算 万亿/月', font: { size: 12 } }, ticks: { font: { size: 11 }, callback: v => v >= 1000 ? (v/1000)+'k' : v }, grid: { drawOnChartArea: false }, beginAtZero: true, suggestedMax: gMonthlyUpper ? gMonthlyUpper * 1.1 : 16000 }
-      }
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => { const m = monthly[c.dataIndex]; return ` ${c.parsed.y} 万亿 · ${m.confidence === 'reported' ? '实测月榜' : '周度外推'}`; } } } },
+      scales: { y: { title: { display: true, text: '万亿 Token', font: { size: 12 } }, ticks: { font: { size: 11 } }, beginAtZero: false }, x: { ticks: { font: { size: 11 } } } }
     }
   });
+
+  // Global monthly estimate line (tokensperday + national disclosures)
+  const gm = TOKENS.global_monthly || [];
+  if (gm.length) {
+    const gmColors = gm.map(m => m.confidence === 'reported' ? '#7c3aed' : m.confidence === 'estimated' ? '#06b6d4' : '#c4b5fd');
+    makeChart('tokenGlobalMonthly', {
+      type: 'line',
+      data: { labels: gm.map(m => m.month), datasets: [{ label: '全球估算（万亿/月）', data: gm.map(m => m.total_t), borderColor: '#7c3aed', backgroundColor: '#7c3aed22', fill: true, tension: 0.25, pointRadius: 3, pointBackgroundColor: gmColors, borderWidth: 2 }] },
+      options: { responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => { const m = gm[c.dataIndex]; const tag = m.confidence === 'reported' ? '实测锚点' : m.confidence === 'estimated' ? '披露推算' : '插值'; return ` ${m.month}: ${c.parsed.y} 万亿 · ${tag}`; } } } },
+        scales: { y: { title: { display: true, text: '万亿 Token / 月', font: { size: 12 } }, ticks: { font: { size: 11 }, callback: v => v >= 1000 ? (v/1000)+'k' : v }, beginAtZero: true }, x: { ticks: { font: { size: 9 }, maxRotation: 60, autoSkip: true, maxTicksLimit: 12 } } }
+      }
+    });
+  }
 
   // tokensperday global estimate card
   const gEl = document.getElementById('tokens-global');
@@ -1031,7 +1036,8 @@ function initTokens() {
         <tr><td style="font-weight:600">OpenRouter 占比</td><td>本模块 OpenRouter 月度（${monthly[monthly.length-1].total_t} 万亿/月）约为全球估算的 ~1%（印证“路由量≈全球1%”的判断）</td></tr>
         <tr><td style="font-weight:600">来源</td><td><a href="${g.url}" target="_blank" style="color:var(--accent)">${g.url}</a> · ${g.source}</td></tr>
       </tbody></table></div>
-      <p style="font-size:12px;color:var(--text-muted);margin-top:10px">${g.note}</p>`;
+      <p style="font-size:12px;color:var(--text-muted);margin-top:10px">${g.note}</p>
+      <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;line-height:1.7"><strong style="color:var(--text-primary)">上方逐月折线</strong>由真实锚点 + 指数插值构成：<span style="color:#7c3aed">●</span> 实测锚点 = tokensperday 2024-02（~2T/天）与 2026-07（360.4T/天）；<span style="color:#06b6d4">●</span> 披露推算 = 国家数据局实测中国量（2025-06 的 30T/天、2026-03 的 140T/天）×2（tokensperday：中国≈全球一半）；其余月份为按相邻锚点增速指数插值（标“插值”）。曲线形态与 tokensperday / Epoch / Exponential View 估算一致。</p>`;
   }
 
   // Top models bar (latest week)
