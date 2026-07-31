@@ -1,4 +1,14 @@
 /* ===== LLM Monitor — 大模型性能监控对比平台 ===== */
+/* 成本页：公司筛选 + 倍数标记 */
+.company-filter{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px 4px}
+.company-chip{border:1px solid var(--border);background:var(--bg-secondary);color:var(--text-secondary);padding:5px 12px;border-radius:20px;font-size:12px;cursor:pointer;transition:all .15s;font-family:inherit}
+.company-chip:hover{border-color:var(--primary);color:var(--primary)}
+.company-chip.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.company-tag{display:inline-block;font-size:12px;font-weight:600;color:var(--text);background:var(--bg-secondary);border:1px solid var(--border);border-radius:6px;padding:2px 8px;white-space:nowrap}
+.badge-base{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--orange);border-radius:6px;padding:2px 7px}
+.mult-low{font-weight:700;color:var(--green)}
+.mult-high{font-weight:700;color:var(--red)}
+.mult-frac{font-weight:400;font-size:11px;color:var(--text-muted)}
 :root {
   --bg: #ffffff; --bg-secondary: #f8f9fa; --bg-card: #ffffff;
   --text: #1a1a2e; --text-secondary: #6b7280; --text-muted: #9ca3af;

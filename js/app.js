@@ -777,7 +777,8 @@ function initTrendElo() {
 }
 
 // ========== COST ==========
-function initCost() { initCostScatter(); renderCostTable(); initCostSpeedIntel(); }
+let costCompanyFilter = 'all';
+function initCost() { initCostScatter(); buildCostCompanyFilter(); renderCostTable(); initCostSpeedIntel(); }
 function initCostScatter() {
   const points = DATA.models.map(m => {
     const intel = getMetricVal(m,'intelligence_index'), cost = getMetricVal(m,'cost_per_task'), speed = getMetricVal(m,'speed_tps');
@@ -792,16 +793,42 @@ function initCostScatter() {
   });
 }
 function renderCostTable() {
-  const sorted = [...DATA.models].sort((a,b)=>(getMetricVal(a,'cost_per_task')||0)-(getMetricVal(b,'cost_per_task')||0));
+  const pro = DATA.models.find(m => m.id === 'deepseekV4');
+  const proOut = getMetricVal(pro, 'api_price_output') || 1;
+  const sorted = [...DATA.models]
+    .filter(m => costCompanyFilter === 'all' || m.provider === costCompanyFilter)
+    .sort((a,b)=>(getMetricVal(a,'cost_per_task')||0)-(getMetricVal(b,'cost_per_task')||0));
   document.getElementById('cost-table-body').innerHTML = sorted.map(m => {
     const inp = getMetricVal(m,'api_price_input'), out = getMetricVal(m,'api_price_output');
     const cache = getMetricVal(m,'api_price_cache_hit'), reas = getMetricVal(m,'api_price_reasoning');
+    let multCell;
+    if (m.id === 'deepseekV4') multCell = '<span class="badge-base">基准 1.00×</span>';
+    else if (out != null && proOut) {
+      const mult = out / proOut;
+      const txt = mult >= 1 ? '×' + mult.toFixed(2) : '×' + mult.toFixed(2) + ' <span class="mult-frac">(≈1/' + (1/mult).toFixed(1) + ')</span>';
+      multCell = '<span class="mult-' + (mult<=1?'low':'high') + '">' + txt + '</span>';
+    } else multCell = '—';
     return `<tr>
-      <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><div><div class="model-name" style="font-size:12px">${m.name}</div><div class="model-provider">${m.provider}</div></div></div></td>
-      <td>$${inp?.toFixed(2)||'—'}</td><td>$${out?.toFixed(2)||'—'}</td><td>$${cache?.toFixed(2)||'—'}</td>
+      <td><div class="model-cell"><div class="model-icon" style="background:${m.color};width:22px;height:22px;font-size:10px">${m.name[0]}</div><div><div class="model-name" style="font-size:12px">${m.name}</div></div></div></td>
+      <td><span class="company-tag">${m.provider}</span></td>
+      <td>$${inp?.toFixed(2)||'—'}</td><td>$${out?.toFixed(2)||'—'}</td><td>$${cache?.toFixed(3)||'—'}</td>
       <td>${(reas&&reas>0)?'$'+reas.toFixed(2):'—'}</td>
+      <td>${multCell}</td>
     </tr>`;
   }).join('');
+}
+
+function buildCostCompanyFilter() {
+  const el = document.getElementById('cost-company-filter');
+  if (!el) return;
+  const providers = [...new Set(DATA.models.map(m => m.provider))];
+  const items = [{k:'all',label:'全部'}].concat(providers.map(p=>({k:p,label:p})));
+  el.innerHTML = items.map(p => `<button class="company-chip ${costCompanyFilter===p.k?'active':''}" data-company="${p.k}">${p.label}</button>`).join('');
+  el.querySelectorAll('.company-chip').forEach(b => b.addEventListener('click', () => {
+    costCompanyFilter = b.dataset.company;
+    buildCostCompanyFilter();
+    renderCostTable();
+  }));
 }
 function initCostSpeedIntel() {
   const points = DATA.models.map(m => {

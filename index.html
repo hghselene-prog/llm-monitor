@@ -336,11 +336,12 @@
           <div class="card-body"><div class="chart-container"><canvas id="costScatter"></canvas></div></div>
         </div>
         <div class="card">
-          <div class="card-header"><h3>💲 API 价格对比 ($/百万Token) <span class="source-badge AA">AA</span></h3></div>
+          <div class="card-header"><h3>💲 API 价格对比 ($/百万Token) <span class="source-badge AA">AA</span></h3><span style="font-size:12px;color:var(--text-muted)">末列以 V4 Pro 输出价为基准</span></div>
+          <div id="cost-company-filter" class="company-filter"></div>
           <div class="card-body" style="padding:0">
             <div class="table-wrap">
               <table>
-                <thead><tr><th>模型</th><th>输入 $/M</th><th>输出 $/M</th><th>缓存命中 $/M</th><th>推理Token $/M</th></tr></thead>
+                <thead><tr><th>模型</th><th>公司</th><th>输入 $/M</th><th>输出 $/M</th><th>缓存命中 $/M</th><th>推理Token $/M</th><th>× 相对 V4 Pro 输出价</th></tr></thead>
                 <tbody id="cost-table-body"></tbody>
               </table>
             </div>
