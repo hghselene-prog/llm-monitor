@@ -463,14 +463,15 @@
     <div class="page" id="page-tokens">
       <div class="header">
         <div class="header-left">
-          <h1>📊 Token 调用量 · OpenRouter</h1>
-          <p>全球最大统一 API 网关的真实路由量 · 非全球全量（约占全球 ~1%）· 仅作真实代理指标</p>
+          <h1>📊 Token 调用量 · OpenRouter + 全球估算</h1>
+          <p>左：OpenRouter 真实路由量（约占全球 ~1%）· 右：tokensperday.com 全球 AI token 吞吐估算（双线对照，互不冒充实测）</p>
         </div>
       </div>
       <div class="source-legend">
         <span style="font-weight:600">数据口径：</span>
-        <span class="source-legend-item"><span class="source-badge OR">OR</span> OpenRouter 路由量 — 经每经 / 中国基金报 / huxiu 逐周测算</span>
-        <span class="source-legend-item">⚠️ 媒体常称“全球总调用量”，实为 OpenRouter 路由量，本模块如实标注</span>
+        <span class="source-legend-item"><span class="source-badge OR">OR</span> OpenRouter 路由量 — 经每经 / 中国基金报 / huxiu 逐周测算（真实代理）</span>
+        <span class="source-legend-item"><span class="source-badge TS">TS</span> tokensperday.com 全球估算 — 三层三角法拼出的全球吞吐（估算）</span>
+        <span class="source-legend-item">⚠️ 媒体常把 OpenRouter 周量叫“全球总调用量”，实为路由量，本模块如实拆分标注</span>
       </div>
       <div class="grid-2">
         <div class="card">
@@ -506,6 +507,10 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="card grid-full" style="margin-top:20px">
+        <div class="card-header"><h3>🌐 全球 AI Token 吞吐估算 · tokensperday.com <span class="source-badge TS">TS</span></h3><span style="font-size:12px;color:var(--text-muted)" id="tokens-global-asof"></span></div>
+        <div class="card-body" id="tokens-global"></div>
       </div>
       <div class="card grid-full" style="margin-top:20px">
         <div class="card-header"><h3>📌 关于本模块与数据口径</h3></div>

@@ -990,16 +990,49 @@ function initTokens() {
     }
   });
 
-  // Monthly estimate line
+  // Monthly estimate line (OpenRouter) + global estimate (tokensperday) on dual axis
   const mcolors = monthly.map(m => m.confidence === 'reported' ? '#10b981' : '#f59e0b');
+  const g = TOKENS.global_estimate || null;
+  const gMonthlyEst = g ? Math.round(g.estimated_daily_T * 30.44) : null;   // ~10970 万亿/月
+  const gMonthlyFloor = g ? Math.round(g.floor_daily_T * 30.44) : null;     // ~9137
+  const gMonthlyUpper = g ? Math.round(g.estimated_range_T[1] * 30.44) : null; // ~14519
   makeChart('tokenMonthly', {
     type: 'line',
-    data: { labels: monthly.map(m => m.month), datasets: [{ label: '月度 Token 总量（万亿）', data: monthly.map(m => m.total_t), borderColor: '#8b5cf6', backgroundColor: '#8b5cf633', fill: true, tension: 0.3, pointRadius: 6, pointBackgroundColor: mcolors, borderWidth: 2 }] },
+    data: { labels: monthly.map(m => m.month), datasets: [
+      { label: 'OpenRouter 月度（万亿）', data: monthly.map(m => m.total_t), borderColor: '#8b5cf6', backgroundColor: '#8b5cf633', fill: false, tension: 0.3, pointRadius: 6, pointBackgroundColor: mcolors, borderWidth: 2, yAxisID: 'yOR' },
+      { label: `全球估算 tokensperday（≈${gMonthlyEst} 万亿/月）`, data: monthly.map(() => gMonthlyEst), borderColor: '#7c3aed', borderDash: [6, 4], pointRadius: 0, borderWidth: 2, yAxisID: 'yGlobal' }
+    ]},
     options: { responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => { const m = monthly[c.dataIndex]; return ` ${c.parsed.y} 万亿 · ${m.confidence === 'reported' ? '实测月榜' : '周度外推'}`; } } } },
-      scales: { y: { title: { display: true, text: '万亿 Token', font: { size: 12 } }, ticks: { font: { size: 11 } }, beginAtZero: false }, x: { ticks: { font: { size: 11 } } } }
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } }, tooltip: { callbacks: { label: c => {
+        if (c.dataset.yAxisID === 'yGlobal') return ` ${c.dataset.label}`;
+        const m = monthly[c.dataIndex]; return ` ${c.parsed.y} 万亿 · ${m.confidence === 'reported' ? '实测月榜' : '周度外推'}`;
+      } } } },
+      scales: {
+        yOR: { type: 'linear', position: 'left', title: { display: true, text: 'OpenRouter 万亿/月', font: { size: 12 } }, ticks: { font: { size: 11 } }, beginAtZero: true },
+        yGlobal: { type: 'linear', position: 'right', title: { display: true, text: '全球估算 万亿/月', font: { size: 12 } }, ticks: { font: { size: 11 }, callback: v => v >= 1000 ? (v/1000)+'k' : v }, grid: { drawOnChartArea: false }, beginAtZero: true, suggestedMax: gMonthlyUpper ? gMonthlyUpper * 1.1 : 16000 }
+      }
     }
   });
+
+  // tokensperday global estimate card
+  const gEl = document.getElementById('tokens-global');
+  if (gEl && g) {
+    const asof = document.getElementById('tokens-global-asof');
+    if (asof) asof.textContent = '快照 ' + (g.as_of || '');
+    gEl.innerHTML = `<p style="font-size:13px;color:var(--text-secondary);margin-bottom:12px;line-height:1.8">${g.method}</p>
+      <div class="stats-row" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:12px">
+        <div class="stat-box" style="background:var(--bg-subtle);border-radius:10px;padding:12px"><div style="font-size:11px;color:var(--text-muted)">披露下限（日）</div><div style="font-size:20px;font-weight:700;color:#06b6d4">${g.floor_daily_T} <small>T</small></div></div>
+        <div class="stat-box" style="background:var(--bg-subtle);border-radius:10px;padding:12px"><div style="font-size:11px;color:var(--text-muted)">六通道估算（日）</div><div style="font-size:20px;font-weight:700;color:#06b6d4">${g.estimated_daily_T} <small>T</small></div><div style="font-size:11px;color:var(--text-muted)">区间 ${g.estimated_range_T[0]}–${g.estimated_range_T[1]} T/天</div></div>
+        <div class="stat-box" style="background:var(--bg-subtle);border-radius:10px;padding:12px"><div style="font-size:11px;color:var(--text-muted)">Epoch/ExpView 口径</div><div style="font-size:20px;font-weight:700;color:#06b6d4">${g.epoch_expview_daily_T} <small>T/天</small></div></div>
+        <div class="stat-box" style="background:var(--bg-subtle);border-radius:10px;padding:12px"><div style="font-size:11px;color:var(--text-muted)">累计（自 2024-01）</div><div style="font-size:20px;font-weight:700;color:#06b6d4">${g.cumulative_quadrillion} <small>Q</small></div></div>
+      </div>
+      <div class="table-wrap"><table><tbody>
+        <tr><td style="font-weight:600;width:140px">月度全球估算</td><td>≈ ${gMonthlyEst} 万亿/月（下限 ${gMonthlyFloor} · 上限 ${gMonthlyUpper}，按 30.44 天/月换算）</td></tr>
+        <tr><td style="font-weight:600">OpenRouter 占比</td><td>本模块 OpenRouter 月度（${monthly[monthly.length-1].total_t} 万亿/月）约为全球估算的 ~1%（印证“路由量≈全球1%”的判断）</td></tr>
+        <tr><td style="font-weight:600">来源</td><td><a href="${g.url}" target="_blank" style="color:var(--accent)">${g.url}</a> · ${g.source}</td></tr>
+      </tbody></table></div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:10px">${g.note}</p>`;
+  }
 
   // Top models bar (latest week)
   const topWeeks = Object.keys(TOKENS.top_models || {});
