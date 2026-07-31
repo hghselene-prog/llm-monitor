@@ -868,6 +868,31 @@ function renderCostTable() {
   }).join('');
 }
 
+function exportCostCSV() {
+  const pro = DATA.models.find(m => m.id === 'deepseekV4');
+  const proOut = getMetricVal(pro, 'api_price_output') || 1;
+  const rows = [...DATA.models]
+    .filter(m => costCompanyFilter === 'all' || m.provider === costCompanyFilter)
+    .sort((a,b)=>(getMetricVal(a,'cost_per_task')||0)-(getMetricVal(b,'cost_per_task')||0));
+  if (!rows.length) return alert('当前筛选下没有可导出的模型');
+  const headers = ['模型', '公司', '输入 $/M', '输出 $/M', '缓存命中 $/M', '推理Token $/M', '×相对V4Pro输出价'];
+  const body = rows.map(m => {
+    const inp = getMetricVal(m,'api_price_input'), out = getMetricVal(m,'api_price_output');
+    const cache = getMetricVal(m,'api_price_cache_hit'), reas = getMetricVal(m,'api_price_reasoning');
+    let mult = '—';
+    if (m.id === 'deepseekV4') mult = '1.00';
+    else if (out != null && proOut) mult = (out / proOut).toFixed(2);
+    return [m.name, m.provider, inp?.toFixed(2)??'—', out?.toFixed(2)??'—', cache?.toFixed(3)??'—', (reas&&reas>0)?reas.toFixed(2):'—', mult];
+  });
+  const csv = [headers.map(h=>`"${h}"`).join(','), ...body.map(r=>r.map(c=>`"${String(c).replace(/"/g,'""')}"`).join(','))].join('\n');
+  const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `llm-monitor-api-price-${costCompanyFilter === 'all' ? 'all' : costCompanyFilter}-${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+
 function buildCostCompanyFilter() {
   const el = document.getElementById('cost-company-filter');
   if (!el) return;
