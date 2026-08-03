@@ -339,7 +339,24 @@ function initDashboard() {
   renderDashboardCharts();
   renderTop8();
   renderFeeds();
+  buildDashboardGlobalTokens();
   updateSubtitle('dashboard');
+}
+
+function buildDashboardGlobalTokens() {
+  const el = document.getElementById('dashboardGlobalTokens');
+  if (!el || !TOKENS) return;
+  const gm = TOKENS.global_monthly || [];
+  if (!gm.length) return;
+  const gmColors = gm.map(m => m.confidence === 'reported' ? '#7c3aed' : m.confidence === 'estimated' ? '#06b6d4' : '#c4b5fd');
+  makeChart('dashboardGlobalTokens', {
+    type: 'line',
+    data: { labels: gm.map(m => m.month), datasets: [{ label: '全球估算（万亿/月）', data: gm.map(m => m.total_t), borderColor: '#7c3aed', backgroundColor: '#7c3aed22', fill: true, tension: 0.25, pointRadius: 3, pointBackgroundColor: gmColors, borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => { const m = gm[c.dataIndex]; const tag = m.confidence === 'reported' ? '实测锚点' : m.confidence === 'estimated' ? '披露推算' : '插值'; return ` ${m.month}: ${c.parsed.y} 万亿 · ${tag}`; } } } },
+      scales: { y: { title: { display: true, text: '万亿 Token / 月', font: { size: 12 } }, ticks: { font: { size: 11 }, callback: v => v >= 1000 ? (v/1000)+'k' : v }, beginAtZero: true }, x: { ticks: { font: { size: 9 }, maxRotation: 60, autoSkip: true, maxTicksLimit: 12 } } }
+    }
+  });
 }
 
 function buildStats() {
@@ -1097,6 +1114,7 @@ function initTokens() {
   const meta = TOKENS.meta || {};
   const weekly = TOKENS.weekly || [];
   const monthly = TOKENS.monthly_estimate || [];
+  const topWeeks = Object.keys(TOKENS.top_models || {});
 
   const snapEl = document.getElementById('tokens-snapshot');
   if (snapEl) snapEl.textContent = '更新 ' + (meta.updated || '');
@@ -1109,18 +1127,17 @@ function initTokens() {
       <tr><td style="font-weight:600">单位</td><td>${meta.unit || ''}</td></tr>
     </tbody></table></div>`;
 
-  // Weekly line (total + CN + US)
+  // Weekly line (CN + US only, no total)
   const labels = weekly.map(w => w.week);
   makeChart('tokenWeekly', {
     type: 'line',
     data: { labels, datasets: [
-      { label: '总调用量', data: weekly.map(w => w.total_t), borderColor: '#6366f1', backgroundColor: '#6366f133', fill: true, tension: 0.3, pointRadius: 4, borderWidth: 2 },
-      { label: '中国', data: weekly.map(w => w.cn_t), borderColor: '#ef4444', backgroundColor: 'transparent', spanGaps: true, tension: 0.3, pointRadius: 4, borderWidth: 2 },
-      { label: '美国', data: weekly.map(w => w.us_t), borderColor: '#2563eb', backgroundColor: 'transparent', spanGaps: true, tension: 0.3, pointRadius: 4, borderWidth: 2 }
+      { label: '中国', data: weekly.map(w => w.cn_t), borderColor: '#ef4444', backgroundColor: '#ef444422', fill: true, spanGaps: true, tension: 0.3, pointRadius: 4, borderWidth: 2 },
+      { label: '美国', data: weekly.map(w => w.us_t), borderColor: '#2563eb', backgroundColor: '#2563eb22', fill: true, spanGaps: true, tension: 0.3, pointRadius: 4, borderWidth: 2 }
     ]},
     options: { responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y} 万亿` } } },
-      scales: { y: { title: { display: true, text: '万亿 Token', font: { size: 12 } }, ticks: { font: { size: 11 } }, beginAtZero: false }, x: { ticks: { font: { size: 9 }, maxRotation: 45 } } }
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y != null ? c.parsed.y + ' 万亿' : '未披露'}` } } },
+      scales: { y: { title: { display: true, text: '万亿 Token', font: { size: 12 } }, ticks: { font: { size: 11 } }, beginAtZero: true }, x: { ticks: { font: { size: 9 }, maxRotation: 45 } } }
     }
   });
 
@@ -1174,36 +1191,58 @@ function initTokens() {
       <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;line-height:1.7"><strong style="color:var(--text-primary)">上方逐月折线</strong>由真实锚点 + 指数插值构成：<span style="color:#7c3aed">●</span> 实测锚点 = tokensperday 2024-02（~2T/天）与 2026-07（360.4T/天）；<span style="color:#06b6d4">●</span> 披露推算 = 国家数据局实测中国量（2025-06 的 30T/天、2026-03 的 140T/天）×2（tokensperday：中国≈全球一半）；其余月份为按相邻锚点增速指数插值（标“插值”）。曲线形态与 tokensperday / Epoch / Exponential View 估算一致。</p>`;
   }
 
-  // 中美模型调用占比（100% 堆叠图）：基于 weekly 中已披露 cn_t/us_t 拆分的周
+  // 中美 Token 调用量对比（分组柱状图）：基于 weekly 中已披露 cn_t/us_t 拆分的周
   const shareWeeks = weekly.filter(w => w.cn_t != null && w.us_t != null);
-  const pct = (v, t) => +(v / t * 100).toFixed(1);
-  const other = w => +(w.total_t - w.cn_t - w.us_t).toFixed(2);
   makeChart('tokenTop', {
     type: 'bar',
     data: {
       labels: shareWeeks.map(w => w.week),
       datasets: [
-        { label: '中国', data: shareWeeks.map(w => pct(w.cn_t, w.total_t)), backgroundColor: '#ef4444', borderRadius: 3, stack: 's' },
-        { label: '美国', data: shareWeeks.map(w => pct(w.us_t, w.total_t)), backgroundColor: '#2563eb', borderRadius: 3, stack: 's' },
-        { label: '其他', data: shareWeeks.map(w => pct(other(w), w.total_t)), backgroundColor: '#cbd5e1', borderRadius: 3, stack: 's' }
+        { label: '中国', data: shareWeeks.map(w => w.cn_t), backgroundColor: '#ef4444', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.8 },
+        { label: '美国', data: shareWeeks.map(w => w.us_t), backgroundColor: '#2563eb', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.8 }
       ]
     },
     options: { responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } },
-        tooltip: { callbacks: { label: c => { const w = shareWeeks[c.dataIndex]; const raw = c.dataset.label === '中国' ? w.cn_t : c.dataset.label === '美国' ? w.us_t : other(w); return ` ${c.dataset.label}: ${raw} 万亿 (${c.parsed.y}%)`; } } }
+        tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y} 万亿` } }
       },
       scales: {
-        x: { stacked: true, ticks: { font: { size: 9 }, maxRotation: 45, autoSkip: false } },
-        y: { stacked: true, min: 0, max: 100, title: { display: true, text: '占总调用量 %', font: { size: 12 } }, ticks: { font: { size: 11 }, callback: v => v + '%' } }
+        x: { ticks: { font: { size: 9 }, maxRotation: 45, autoSkip: false } },
+        y: { beginAtZero: true, title: { display: true, text: '周调用量 (万亿 Token)', font: { size: 12 } }, ticks: { font: { size: 11 } } }
       }
     }
   });
   const noteEl = document.getElementById('tokens-share-note');
   if (noteEl) {
-    const cnLast = shareWeeks.length ? pct(shareWeeks[shareWeeks.length - 1].cn_t, shareWeeks[shareWeeks.length - 1].total_t) : '—';
-    const usLast = shareWeeks.length ? pct(shareWeeks[shareWeeks.length - 1].us_t, shareWeeks[shareWeeks.length - 1].total_t) : '—';
-    noteEl.textContent = `共 ${weekly.length} 个周快照，其中 ${shareWeeks.length} 个披露了中美拆分（其余周未拆分，故不计入占比图）。最新披露周：中国 ${cnLast}% · 美国 ${usLast}%。`;
+    const cnLast = shareWeeks.length ? shareWeeks[shareWeeks.length - 1].cn_t : '—';
+    const usLast = shareWeeks.length ? shareWeeks[shareWeeks.length - 1].us_t : '—';
+    noteEl.textContent = `共 ${weekly.length} 个周快照，其中 ${shareWeeks.length} 个披露了中美拆分（其余周未拆分，故不计入此图）。最新披露周：中国 ${cnLast} 万亿 · 美国 ${usLast} 万亿。`;
+  }
+
+  // Top models chart (latest week): 中美对比，按国籍着色
+  if (topWeeks.length) {
+    const latest = topWeeks[topWeeks.length - 1];
+    const topModels = (TOKENS.top_models[latest] || []).slice().sort((a,b)=>(b.tokens_t||0)-(a.tokens_t||0));
+    makeChart('tokenTopModels', {
+      type: 'bar',
+      data: {
+        labels: topModels.map(m => m.model),
+        datasets: [{ data: topModels.map(m => m.tokens_t), backgroundColor: topModels.map(m => m.country === '中国' ? '#ef4444' : '#2563eb'), borderRadius: 4 }]
+      },
+      options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false },
+          tooltip: { callbacks: { label: c => { const m = topModels[c.dataIndex]; return ` ${m.model}（${m.provider}·${m.country}）: ${c.parsed.x} 万亿`; } } } },
+        scales: { x: { title: { display: true, text: '周调用量 (万亿)', font: { size: 11 } }, ticks: { font: { size: 11 } }, beginAtZero: true },
+          y: { ticks: { font: { size: 10 } } } }
+      }
+    });
+    const tNote = document.getElementById('tokens-top-note');
+    if (tNote) {
+      const cn = topModels.filter(m => m.country === '中国').reduce((s,m)=>s+m.tokens_t,0);
+      const us = topModels.filter(m => m.country === '美国').reduce((s,m)=>s+m.tokens_t,0);
+      tNote.textContent = `最新周 ${latest}：🔴中国 ${cn.toFixed(2)} 万亿 · 🔵美国 ${us.toFixed(2)} 万亿（美国侧为公开明细缺失时的估算）。`;
+    }
   }
 
   // Weekly table
