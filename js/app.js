@@ -1200,33 +1200,43 @@ function initTokens() {
       <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;line-height:1.7"><strong style="color:var(--text-primary)">上方逐月折线</strong>由真实锚点 + 指数插值构成：<span style="color:#7c3aed">●</span> 实测锚点 = tokensperday 2024-02（~2T/天）与 2026-07（360.4T/天）；<span style="color:#06b6d4">●</span> 披露推算 = 国家数据局实测中国量（2025-06 的 30T/天、2026-03 的 140T/天）×2（tokensperday：中国≈全球一半）；其余月份为按相邻锚点增速指数插值（标“插值”）。曲线形态与 tokensperday / Epoch / Exponential View 估算一致。</p>`;
   }
 
-  // 中美 Token 调用量对比（分组柱状图）：基于 weekly 中已披露 cn_t/us_t 拆分的周，美国侧含未拆分重归因
+  // 中美 Token 调用量占比（100% 堆叠柱状图）：基于 weekly 中已披露 cn_t/us_t 拆分的周，美国侧含未拆分重归因
   const shareWeeks = weekly.filter(w => w.cn_t != null && w.us_t != null);
+  const pctOf = (v, w) => {
+    const t = (w.cn_t || 0) + usReOf(w);
+    return t ? +(v / t * 100).toFixed(2) : 0;
+  };
   makeChart('tokenTop', {
     type: 'bar',
     data: {
       labels: shareWeeks.map(w => w.week),
       datasets: [
-        { label: '中国', data: shareWeeks.map(w => w.cn_t), backgroundColor: '#ef4444', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.8 },
-        { label: '美国（含未拆分重归因）', data: shareWeeks.map(usReOf), backgroundColor: '#2563eb', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.8 }
+        { label: '中国', data: shareWeeks.map(w => pctOf(w.cn_t, w)), backgroundColor: '#ef4444', borderRadius: 3, stack: 's' },
+        { label: '美国（含未拆分重归因）', data: shareWeeks.map(w => pctOf(usReOf(w), w)), backgroundColor: '#2563eb', borderRadius: 3, stack: 's' }
       ]
     },
     options: { responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } },
-        tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y != null ? c.parsed.y.toFixed(2) + ' 万亿' : '—'}` } }
+        tooltip: { callbacks: { label: c => {
+          const w = shareWeeks[c.dataIndex];
+          const raw = c.dataset.label.startsWith('中国') ? w.cn_t : usReOf(w);
+          return ` ${c.dataset.label}: ${raw.toFixed(2)} 万亿 (${c.parsed.y}%)`;
+        } } }
       },
       scales: {
-        x: { ticks: { font: { size: 9 }, maxRotation: 45, autoSkip: false } },
-        y: { beginAtZero: true, title: { display: true, text: '周调用量 (万亿 Token)', font: { size: 12 } }, ticks: { font: { size: 11 } } }
+        x: { stacked: true, ticks: { font: { size: 9 }, maxRotation: 45, autoSkip: false } },
+        y: { stacked: true, min: 0, max: 100, title: { display: true, text: '占比 %', font: { size: 12 } }, ticks: { font: { size: 11 }, callback: v => v + '%' } }
       }
     }
   });
   const noteEl = document.getElementById('tokens-share-note');
   if (noteEl) {
-    const cnLast = shareWeeks.length ? shareWeeks[shareWeeks.length - 1].cn_t : '—';
-    const usLast = shareWeeks.length ? usReOf(shareWeeks[shareWeeks.length - 1]) : '—';
-    noteEl.innerHTML = `按模型归属国口径，<b>未拆分部分已按 OpenRouter 实际构成重归因</b>（美国 86% / 欧洲 14%）。重归因后美国为最大来源（见下方「全球来源占比」）。最新周：中国 ${cnLast} 万亿 · 美国(重归因) ${usLast.toFixed(2)} 万亿。`;
+    const w = shareWeeks.length ? shareWeeks[shareWeeks.length - 1] : null;
+    if (w) {
+      const cn = w.cn_t, us = usReOf(w), t = cn + us;
+      noteEl.innerHTML = `按模型归属国口径，<b>未拆分部分已按 OpenRouter 实际构成重归因</b>（美国 86% / 欧洲 14%）。最新周占比：中国 ${(cn/t*100).toFixed(1)}% · 美国(重归因) ${(us/t*100).toFixed(1)}%。重归因后美国为最大来源（见下方「全球来源占比」）。`;
+    }
   }
 
   // 调用模型占比（按公司归类，中美各前三高亮，其余灰色）：跨周聚合 top_models，按公司分组排序
