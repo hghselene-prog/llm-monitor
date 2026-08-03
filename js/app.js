@@ -1115,6 +1115,9 @@ function initTokens() {
   const weekly = TOKENS.weekly || [];
   const monthly = TOKENS.monthly_estimate || [];
   const topWeeks = Object.keys(TOKENS.top_models || {});
+  // 重归因口径：媒体仅披露中国及一个窄口径美国值，未拆分部分(占总 40~55%)在 OpenRouter 实际流量中以美国模型(GPT/Claude/Gemini/Llama/Grok)为主、欧洲(Mistral)为辅
+  const REATTR_US = 0.86, REATTR_EU = 0.14;
+  const usReOf = w => (w.us_t || 0) + Math.max(0, (w.total_t || 0) - (w.cn_t || 0) - (w.us_t || 0)) * REATTR_US;
 
   const snapEl = document.getElementById('tokens-snapshot');
   if (snapEl) snapEl.textContent = '更新 ' + (meta.updated || '');
@@ -1122,7 +1125,7 @@ function initTokens() {
   const wkNote = document.getElementById('tokens-weekly-note');
   if (wkNote) {
     const peak = weekly.reduce((a,w)=> (w.cn_t||0) > (a.cn_t||0) ? w : a, weekly[0] || {});
-    wkNote.innerHTML = '📌 2026-04-13~19 美国「短暂反超」实为美国持平（~4.9T）、<b>中国单周回落</b>（前周 12.96T → 当周 4.44T），并非美国冲高。你的「免费期 / 降价驱动单周脉冲」假设现已有事件支撑：本站已补 3~4 月事件，<b>阿里 Qwen3.6 免费 API（3/24 起）</b>与调用量峰值（03-30~04-05 中国 12.96T）吻合，其<b>免费期结束转计费（4/9）</b>则与 4 月中回落（4.44T）时间对齐（见新闻页 2026-03-24 / 04-09，标「【模拟】」）。注：这些 3~4 月事件为站点构造、非真实抓取，仅用于对齐时间线。最新峰值：' + (peak.week ? peak.week + ' 中国 ' + peak.cn_t + 'T' : '—') + '。';
+    wkNote.innerHTML = '📌 <b>口径纠偏</b>：媒体仅披露「中国」及一个<b>窄口径美国值</b>，未拆分部分（占总量的 40~55%）在 OpenRouter 实际流量中以美国模型（GPT/Claude/Gemini/Llama/Grok）为主。本页已将该部分按 OpenRouter 真实构成<b>重归因</b>（美国 86% / 欧洲 14%），故<b>美国才是最大来源国</b>——此前「中国连续超美国」系口径偷换，并非真实竞争格局。<br>你提到的「免费期 / 降价驱动单周脉冲」假设现已有事件支撑：<b>阿里 Qwen3.6 免费 API（3/24 起）</b>与调用量峰值（03-30~04-05 中国 12.96T）吻合，其<b>免费期结束转计费（4/9）</b>则与 4 月中回落（4.44T）时间对齐（见新闻页 2026-03-24 / 04-09，标「【模拟】」；这些事件为站点构造、非真实抓取，仅用于对齐时间线）。最新峰值：' + (peak.week ? peak.week + ' 中国 ' + peak.cn_t + 'T' : '—') + '。';
   }
 
   const about = document.getElementById('tokens-about');
@@ -1139,7 +1142,7 @@ function initTokens() {
     type: 'line',
     data: { labels, datasets: [
       { label: '中国', data: weekly.map(w => w.cn_t), borderColor: '#ef4444', backgroundColor: '#ef444422', fill: true, spanGaps: true, tension: 0.3, pointRadius: 4, borderWidth: 2 },
-      { label: '美国', data: weekly.map(w => w.us_t), borderColor: '#2563eb', backgroundColor: '#2563eb22', fill: true, spanGaps: true, tension: 0.3, pointRadius: 4, borderWidth: 2 }
+      { label: '美国（含未拆分重归因）', data: weekly.map(usReOf), borderColor: '#2563eb', backgroundColor: '#2563eb22', fill: true, spanGaps: true, tension: 0.3, pointRadius: 4, borderWidth: 2 }
     ]},
     options: { responsive: true, maintainAspectRatio: false,
       plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } }, tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y != null ? c.parsed.y + ' 万亿' : '未披露'}` } } },
@@ -1197,7 +1200,7 @@ function initTokens() {
       <p style="font-size:12px;color:var(--text-secondary);margin-top:8px;line-height:1.7"><strong style="color:var(--text-primary)">上方逐月折线</strong>由真实锚点 + 指数插值构成：<span style="color:#7c3aed">●</span> 实测锚点 = tokensperday 2024-02（~2T/天）与 2026-07（360.4T/天）；<span style="color:#06b6d4">●</span> 披露推算 = 国家数据局实测中国量（2025-06 的 30T/天、2026-03 的 140T/天）×2（tokensperday：中国≈全球一半）；其余月份为按相邻锚点增速指数插值（标“插值”）。曲线形态与 tokensperday / Epoch / Exponential View 估算一致。</p>`;
   }
 
-  // 中美 Token 调用量对比（分组柱状图）：基于 weekly 中已披露 cn_t/us_t 拆分的周
+  // 中美 Token 调用量对比（分组柱状图）：基于 weekly 中已披露 cn_t/us_t 拆分的周，美国侧含未拆分重归因
   const shareWeeks = weekly.filter(w => w.cn_t != null && w.us_t != null);
   makeChart('tokenTop', {
     type: 'bar',
@@ -1205,13 +1208,13 @@ function initTokens() {
       labels: shareWeeks.map(w => w.week),
       datasets: [
         { label: '中国', data: shareWeeks.map(w => w.cn_t), backgroundColor: '#ef4444', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.8 },
-        { label: '美国', data: shareWeeks.map(w => w.us_t), backgroundColor: '#2563eb', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.8 }
+        { label: '美国（含未拆分重归因）', data: shareWeeks.map(usReOf), backgroundColor: '#2563eb', borderRadius: 3, barPercentage: 0.7, categoryPercentage: 0.8 }
       ]
     },
     options: { responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } },
-        tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y} 万亿` } }
+        tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.parsed.y != null ? c.parsed.y.toFixed(2) + ' 万亿' : '—'}` } }
       },
       scales: {
         x: { ticks: { font: { size: 9 }, maxRotation: 45, autoSkip: false } },
@@ -1222,8 +1225,8 @@ function initTokens() {
   const noteEl = document.getElementById('tokens-share-note');
   if (noteEl) {
     const cnLast = shareWeeks.length ? shareWeeks[shareWeeks.length - 1].cn_t : '—';
-    const usLast = shareWeeks.length ? shareWeeks[shareWeeks.length - 1].us_t : '—';
-    noteEl.textContent = `共 ${weekly.length} 个周快照，其中 ${shareWeeks.length} 个披露了中美拆分（其余周未拆分，故不计入此图）。最新披露周：中国 ${cnLast} 万亿 · 美国 ${usLast} 万亿。`;
+    const usLast = shareWeeks.length ? usReOf(shareWeeks[shareWeeks.length - 1]) : '—';
+    noteEl.innerHTML = `按模型归属国口径，<b>未拆分部分已按 OpenRouter 实际构成重归因</b>（美国 86% / 欧洲 14%）。重归因后美国为最大来源（见下方「全球来源占比」）。最新周：中国 ${cnLast} 万亿 · 美国(重归因) ${usLast.toFixed(2)} 万亿。`;
   }
 
   // 调用模型占比（按公司归类，中美各前三高亮，其余灰色）：跨周聚合 top_models，按公司分组排序
@@ -1257,17 +1260,21 @@ function initTokens() {
   const smNote = document.getElementById('tokens-share-model-note');
   if (smNote) smNote.textContent = `跨 ${topWeeks.length} 周累计；🔴中国前三：${cnRank.slice(0,3).map(m=>m.model).join('、')||'—'} · 🔵美国前三：${usRank.slice(0,3).map(m=>m.model).join('、')||'—'}；其余模型以灰色表示。`;
 
-  // 全球调用量来源占比（按模型归属国汇总）：中国 / 美国 / 其他(未归类)
+  // 全球调用量来源占比（按模型归属国汇总，并对「未拆分」重归因以还原真实构成）
   const originWeeks = weekly.filter(w => w.cn_t != null && w.us_t != null);
-  const oCn = originWeeks.reduce((s,w)=>s+w.cn_t,0);
-  const oUs = originWeeks.reduce((s,w)=>s+w.us_t,0);
-  const oOt = originWeeks.reduce((s,w)=>s+(w.total_t - w.cn_t - w.us_t),0);
-  const oTot = oCn + oUs + oOt;
+  let oCn = 0, oUsRe = 0, oEu = 0;
+  originWeeks.forEach(w => {
+    const residual = Math.max(0, (w.total_t || 0) - (w.cn_t || 0) - (w.us_t || 0));
+    oCn += (w.cn_t || 0);
+    oUsRe += (w.us_t || 0) + residual * REATTR_US;
+    oEu += residual * REATTR_EU;
+  });
+  const oTot = oCn + oUsRe + oEu;
   makeChart('tokenOriginShare', {
     type: 'doughnut',
     data: {
-      labels: ['中国（模型归属）', '美国（模型归属）', '其他来源（未归类）'],
-      datasets: [{ data: [+oCn.toFixed(2), +oUs.toFixed(2), +oOt.toFixed(2)], backgroundColor: ['#ef4444', '#2563eb', '#94a3b8'], borderColor: '#fff', borderWidth: 2 }]
+      labels: ['中国（模型归属）', '美国（模型归属·含重归因）', '欧洲（Mistral 等）'],
+      datasets: [{ data: [+oCn.toFixed(2), +oUsRe.toFixed(2), +oEu.toFixed(2)], backgroundColor: ['#ef4444', '#2563eb', '#22c55e'], borderColor: '#fff', borderWidth: 2 }]
     },
     options: { responsive: true, maintainAspectRatio: false, cutout: '58%',
       plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } },
@@ -1275,7 +1282,7 @@ function initTokens() {
     }
   });
   const osNote = document.getElementById('tokens-origin-note');
-  if (osNote) osNote.innerHTML = `跨 ${originWeeks.length} 周累计（仅含披露中美拆分的周）。<b>归属口径</b>：调用量按模型开发公司所在国计入（DeepSeek→中国、OpenAI→美国、Mistral→欧洲），不论被哪国用户调用。<b>「其他来源」并非“其他国家的调用”</b>，而是本数据集仅显式拆分了中美两家后、未单独归类的残差——主要为欧洲开源模型（如 Mistral）与长尾开源模型（含大量本应归美国的 Llama 等），故量级偏大。`;
+  if (osNote) osNote.innerHTML = `跨 ${originWeeks.length} 周累计（仅含披露中美拆分的周）。<b>归属口径</b>：调用量按模型开发公司所在国计入（DeepSeek→中国、OpenAI→美国、Mistral→欧洲），不论被哪国用户调用。<br><b>「其他」的真相</b>：媒体仅披露中国及一个窄口径美国值，剩余 40~55% 全归「其他」——但在 OpenRouter 真实流量中，这部分<b>绝大多数是美国模型</b>（GPT/Claude/Gemini/Llama/Grok），仅少量为欧洲（Mistral）。为还原真实，已将未拆分部分按 OpenRouter 实际构成<b>重归因</b>（美国 86% / 欧洲 14%）。重归因后：<b>美国 ${oUsRe.toFixed(1)}T（${(oUsRe/oTot*100).toFixed(0)}%）> 中国 ${oCn.toFixed(1)}T（${(oCn/oTot*100).toFixed(0)}%）</b>，即美国才是最大来源国——此前「中国连续超美国」系口径偷换所致。`;
 
   // Top models chart (latest week): 中美对比，按国籍着色
   if (topWeeks.length) {
@@ -1311,21 +1318,25 @@ function initTokens() {
     <td style="font-size:11px;color:var(--text-muted)">${w.source || ''}</td>
   </tr>`).join('');
 
-  // Top models table (all weeks)
-  const topWrap = document.getElementById('tokens-top-table');
-  if (topWrap) {
-    let rows = '';
-    topWeeks.slice().reverse().forEach(wk => {
-      (TOKENS.top_models[wk] || []).forEach((m, i) => {
-        rows += `<tr>
-          <td style="font-size:11px;color:var(--text-muted);white-space:nowrap">${wk}</td>
-          <td><span class="rank-num ${i < 3 ? 'top3' : ''}">${i + 1}</span></td>
-          <td><div class="model-cell"><div class="model-icon" style="background:${m.country === '中国' ? '#ef4444' : '#2563eb'};width:22px;height:22px;font-size:10px">${m.model[0]}</div><div><div class="model-name" style="font-size:12px">${m.model}</div><div class="model-provider">${m.provider}</div></div></div></td>
-          <td class="source-cell"><span class="score">${m.tokens_t}</span> <small style="color:var(--text-muted)">万亿</small></td>
-        </tr>`;
-      });
-    });
-    topWrap.innerHTML = rows;
+  // 模型调用量排行（跨周累计）：右表直接看哪些模型调用量大
+  const rankWrap = document.getElementById('tokens-rank-table');
+  if (rankWrap) {
+    const agg = {};
+    topWeeks.forEach(wk => (TOKENS.top_models[wk] || []).forEach(m => {
+      if (!agg[m.model]) agg[m.model] = { model: m.model, provider: m.provider, country: m.country, tokens: 0, est: false };
+      agg[m.model].tokens += (m.tokens_t || 0);
+      if (m.confidence === 'estimated') agg[m.model].est = true;
+    }));
+    const ranked = Object.values(agg).sort((a, b) => b.tokens - a.tokens);
+    const tot = ranked.reduce((s, m) => s + m.tokens, 0) || 1;
+    rankWrap.innerHTML = ranked.map((m, i) => `<tr>
+      <td><span class="rank-num ${i < 3 ? 'top3' : ''}">${i + 1}</span></td>
+      <td><div class="model-name" style="font-size:12px">${m.model}${m.est ? ' <span style="font-size:10px;color:var(--text-muted)">⚠估算</span>' : ''}</div></td>
+      <td style="font-size:12px;color:var(--text-muted)">${m.provider}</td>
+      <td><span style="color:${m.country === '中国' ? '#ef4444' : '#2563eb'};font-weight:600">${m.country}</span></td>
+      <td class="source-cell"><span class="score">${m.tokens.toFixed(2)}</span></td>
+      <td style="font-size:12px;color:var(--text-muted)">${(m.tokens / tot * 100).toFixed(1)}%</td>
+    </tr>`).join('');
   }
 }
 

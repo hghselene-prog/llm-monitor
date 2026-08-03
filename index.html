@@ -502,7 +502,7 @@
       </div>
       <div class="grid-2" style="margin-top:20px">
         <div class="card">
-          <div class="card-header"><h3>🌍 中美 Token 调用量对比 <span class="source-badge OR">OR</span></h3><span style="font-size:12px;color:var(--text-muted)">🔴中国 🔵美国 · 仅含已披露中美拆分的周</span></div>
+          <div class="card-header"><h3>🌍 中美 Token 调用量对比 <span class="source-badge OR">OR</span></h3><span style="font-size:12px;color:var(--text-muted)">🔴中国 · 🔵美国(含未拆分重归因) · 按模型归属国</span></div>
           <div class="card-body">
             <div class="chart-container" style="height:300px"><canvas id="tokenTop"></canvas></div>
             <p style="font-size:11px;color:var(--text-muted);margin-top:8px" id="tokens-share-note"></p>
@@ -516,21 +516,21 @@
           </div>
         </div>
         <div class="card">
-          <div class="card-header"><h3>🌐 全球调用量来源占比 <span class="source-badge OR">OR</span></h3><span style="font-size:12px;color:var(--text-muted)">按模型归属国 · 中国 / 美国 / 其他</span></div>
+          <div class="card-header"><h3>🌐 全球调用量来源占比 <span class="source-badge OR">OR</span></h3><span style="font-size:12px;color:var(--text-muted)">按模型归属国 · 未拆分部分已重归因(美/欧)</span></div>
           <div class="card-body">
             <div class="chart-container" style="height:300px"><canvas id="tokenOriginShare"></canvas></div>
             <p style="font-size:11px;color:var(--text-muted);margin-top:8px;line-height:1.7" id="tokens-origin-note"></p>
           </div>
         </div>
         <div class="card">
-          <div class="card-header"><h3>🏆 周度 Top 模型 Token 调用量 <span class="source-badge OR">OR</span></h3><span style="font-size:12px;color:var(--text-muted)">🔴中国 🔵美国 · 最新周 Top 8</span></div>
+          <div class="card-header"><h3>🏆 模型调用量排行 <span class="source-badge OR">OR</span></h3><span style="font-size:12px;color:var(--text-muted)">🔴中国 🔵美国 · 上：最新周 Top · 下：跨周累计排行</span></div>
           <div class="card-body">
-            <div class="chart-container" style="height:260px"><canvas id="tokenTopModels"></canvas></div>
+            <div class="chart-container" style="height:240px"><canvas id="tokenTopModels"></canvas></div>
             <p style="font-size:11px;color:var(--text-muted);margin-top:8px" id="tokens-top-note"></p>
             <div class="table-wrap" style="margin-top:12px">
               <table>
-                <thead><tr><th>周次</th><th>#</th><th>模型</th><th>周调用量(万亿)</th></tr></thead>
-                <tbody id="tokens-top-table"></tbody>
+                <thead><tr><th>#</th><th>模型</th><th>厂商</th><th>国家</th><th>累计(万亿)</th><th>占已列</th></tr></thead>
+                <tbody id="tokens-rank-table"></tbody>
               </table>
             </div>
           </div>
