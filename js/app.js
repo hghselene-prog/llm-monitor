@@ -1257,6 +1257,26 @@ function initTokens() {
   const smNote = document.getElementById('tokens-share-model-note');
   if (smNote) smNote.textContent = `跨 ${topWeeks.length} 周累计；🔴中国前三：${cnRank.slice(0,3).map(m=>m.model).join('、')||'—'} · 🔵美国前三：${usRank.slice(0,3).map(m=>m.model).join('、')||'—'}；其余模型以灰色表示。`;
 
+  // 全球调用量来源占比（按模型归属国汇总）：中国 / 美国 / 其他(未归类)
+  const originWeeks = weekly.filter(w => w.cn_t != null && w.us_t != null);
+  const oCn = originWeeks.reduce((s,w)=>s+w.cn_t,0);
+  const oUs = originWeeks.reduce((s,w)=>s+w.us_t,0);
+  const oOt = originWeeks.reduce((s,w)=>s+(w.total_t - w.cn_t - w.us_t),0);
+  const oTot = oCn + oUs + oOt;
+  makeChart('tokenOriginShare', {
+    type: 'doughnut',
+    data: {
+      labels: ['中国（模型归属）', '美国（模型归属）', '其他来源（未归类）'],
+      datasets: [{ data: [+oCn.toFixed(2), +oUs.toFixed(2), +oOt.toFixed(2)], backgroundColor: ['#ef4444', '#2563eb', '#94a3b8'], borderColor: '#fff', borderWidth: 2 }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, cutout: '58%',
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 }, usePointStyle: true } },
+        tooltip: { callbacks: { label: c => ` ${c.label}: ${c.parsed} 万亿 (${(c.parsed/oTot*100).toFixed(1)}%)` } } }
+    }
+  });
+  const osNote = document.getElementById('tokens-origin-note');
+  if (osNote) osNote.innerHTML = `跨 ${originWeeks.length} 周累计（仅含披露中美拆分的周）。<b>归属口径</b>：调用量按模型开发公司所在国计入（DeepSeek→中国、OpenAI→美国、Mistral→欧洲），不论被哪国用户调用。<b>「其他来源」并非“其他国家的调用”</b>，而是本数据集仅显式拆分了中美两家后、未单独归类的残差——主要为欧洲开源模型（如 Mistral）与长尾开源模型（含大量本应归美国的 Llama 等），故量级偏大。`;
+
   // Top models chart (latest week): 中美对比，按国籍着色
   if (topWeeks.length) {
     const latest = topWeeks[topWeeks.length - 1];
