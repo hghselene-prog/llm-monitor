@@ -1119,6 +1119,12 @@ function initTokens() {
   const snapEl = document.getElementById('tokens-snapshot');
   if (snapEl) snapEl.textContent = '更新 ' + (meta.updated || '');
 
+  const wkNote = document.getElementById('tokens-weekly-note');
+  if (wkNote) {
+    const peak = weekly.reduce((a,w)=> (w.cn_t||0) > (a.cn_t||0) ? w : a, weekly[0] || {});
+    wkNote.innerHTML = '📌 2026-04-13~19 美国「短暂反超」实为美国持平（~4.9T）、<b>中国单周回落</b>（前周 12.96T → 当周 4.44T），并非美国冲高。你提到的「新模型免费期 / 降价」是此类单周脉冲的常见成因——本站事件库确有价格突变记录（如 7/22 Gemini 3.6 Flash 用量 −17%、7/31 GPT-5.6 Luna 降价 80%），但都在 7 月、晚于本图末点（6 月底），<b>无法解释 4 月交叉</b>；另一可能是不同媒体采样口径差异。最新峰值：' + (peak.week ? peak.week + ' 中国 ' + peak.cn_t + 'T' : '—') + '。';
+  }
+
   const about = document.getElementById('tokens-about');
   if (about) about.innerHTML = `<p style="font-size:14px;color:var(--text-secondary);margin-bottom:10px;line-height:1.8">${meta.note || ''}</p>
     <div class="table-wrap"><table><tbody>
