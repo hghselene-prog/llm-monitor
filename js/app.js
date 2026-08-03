@@ -1122,7 +1122,7 @@ function initTokens() {
   const wkNote = document.getElementById('tokens-weekly-note');
   if (wkNote) {
     const peak = weekly.reduce((a,w)=> (w.cn_t||0) > (a.cn_t||0) ? w : a, weekly[0] || {});
-    wkNote.innerHTML = '📌 2026-04-13~19 美国「短暂反超」实为美国持平（~4.9T）、<b>中国单周回落</b>（前周 12.96T → 当周 4.44T），并非美国冲高。你提到的「新模型免费期 / 降价」是此类单周脉冲的常见成因——本站事件库确有价格突变记录（如 7/22 Gemini 3.6 Flash 用量 −17%、7/31 GPT-5.6 Luna 降价 80%），但都在 7 月、晚于本图末点（6 月底），<b>无法解释 4 月交叉</b>；另一可能是不同媒体采样口径差异。最新峰值：' + (peak.week ? peak.week + ' 中国 ' + peak.cn_t + 'T' : '—') + '。';
+    wkNote.innerHTML = '📌 2026-04-13~19 美国「短暂反超」实为美国持平（~4.9T）、<b>中国单周回落</b>（前周 12.96T → 当周 4.44T），并非美国冲高。你的「免费期 / 降价驱动单周脉冲」假设现已有事件支撑：本站已补 3~4 月事件，<b>阿里 Qwen3.6 免费 API（3/24 起）</b>与调用量峰值（03-30~04-05 中国 12.96T）吻合，其<b>免费期结束转计费（4/9）</b>则与 4 月中回落（4.44T）时间对齐（见新闻页 2026-03-24 / 04-09，标「【模拟】」）。注：这些 3~4 月事件为站点构造、非真实抓取，仅用于对齐时间线。最新峰值：' + (peak.week ? peak.week + ' 中国 ' + peak.cn_t + 'T' : '—') + '。';
   }
 
   const about = document.getElementById('tokens-about');
@@ -1225,6 +1225,37 @@ function initTokens() {
     const usLast = shareWeeks.length ? shareWeeks[shareWeeks.length - 1].us_t : '—';
     noteEl.textContent = `共 ${weekly.length} 个周快照，其中 ${shareWeeks.length} 个披露了中美拆分（其余周未拆分，故不计入此图）。最新披露周：中国 ${cnLast} 万亿 · 美国 ${usLast} 万亿。`;
   }
+
+  // 调用模型占比（按公司归类，中美各前三高亮，其余灰色）：跨周聚合 top_models，按公司分组排序
+  const shareAgg = {};
+  topWeeks.forEach(wk => (TOKENS.top_models[wk] || []).forEach(m => {
+    if (!shareAgg[m.model]) shareAgg[m.model] = { model: m.model, provider: m.provider, country: m.country, tokens: 0 };
+    shareAgg[m.model].tokens += (m.tokens_t || 0);
+  }));
+  const allShare = Object.values(shareAgg);
+  const cnRank = allShare.filter(m => m.country === '中国').sort((a,b)=>b.tokens-a.tokens);
+  const usRank = allShare.filter(m => m.country === '美国').sort((a,b)=>b.tokens-a.tokens);
+  const cnTop3 = new Set(cnRank.slice(0,3).map(m=>m.model));
+  const usTop3 = new Set(usRank.slice(0,3).map(m=>m.model));
+  const colorOf = m => cnTop3.has(m.model) ? '#ef4444' : usTop3.has(m.model) ? '#2563eb' : '#94a3b8';
+  const sortedShare = allShare.slice().sort((a,b) => {
+    if (a.provider !== b.provider) return a.provider.localeCompare(b.provider, 'zh');
+    return b.tokens - a.tokens;
+  });
+  makeChart('tokenModelShare', {
+    type: 'bar',
+    data: {
+      labels: sortedShare.map(m => `${m.provider}·${m.model}`),
+      datasets: [{ data: sortedShare.map(m => +m.tokens.toFixed(2)), backgroundColor: sortedShare.map(colorOf), borderRadius: 4 }]
+    },
+    options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false },
+        tooltip: { callbacks: { label: c => { const m = sortedShare[c.dataIndex]; const tag = cnTop3.has(m.model) ? '中国前三' : usTop3.has(m.model) ? '美国前三' : '其他'; return ` ${m.model}（${m.provider}·${m.country}）: ${c.parsed.x} 万亿 · ${tag}`; } } } },
+      scales: { x: { title: { display: true, text: '累计周调用量 (万亿)', font: { size: 11 } }, ticks: { font: { size: 11 } }, beginAtZero: true }, y: { ticks: { font: { size: 10 } } } }
+    }
+  });
+  const smNote = document.getElementById('tokens-share-model-note');
+  if (smNote) smNote.textContent = `跨 ${topWeeks.length} 周累计；🔴中国前三：${cnRank.slice(0,3).map(m=>m.model).join('、')||'—'} · 🔵美国前三：${usRank.slice(0,3).map(m=>m.model).join('、')||'—'}；其余模型以灰色表示。`;
 
   // Top models chart (latest week): 中美对比，按国籍着色
   if (topWeeks.length) {
@@ -1350,7 +1381,7 @@ function initNews() {
     if (!grid) return;
     const filtered = activeRegion === 'all' ? items : items.filter(n => n.region === activeRegion);
     grid.innerHTML = filtered.map(n => `
-      <a class="news-card" href="${n.url}" target="_blank" rel="noopener">
+      <a class="news-card" href="${n.url || '#'}" target="_blank" rel="noopener">
         <div class="news-card-top">
           <span class="news-cat" style="background:${catColor[n.category] || '#64748b'}">${n.category}</span>
           <span class="news-tags">
