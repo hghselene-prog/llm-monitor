@@ -1312,6 +1312,11 @@ function initTokens() {
       const us = topModels.filter(m => m.country === '美国').reduce((s,m)=>s+m.tokens_t,0);
       tNote.textContent = `最新周 ${latest}：🔴中国 ${cn.toFixed(2)} 万亿 · 🔵美国 ${us.toFixed(2)} 万亿（美国侧为公开明细缺失时的估算）。`;
     }
+    // 口径差异醒目提示：此图是单模型排名，不是国家汇总
+    const callout = document.getElementById('tokens-caliber-callout');
+    if (callout) {
+      callout.innerHTML = `⚠️ <b>口径说明</b>：此图展示的是<b>最新一周单个模型调用量排名</b>，并非国家总量汇总。中国头部模型（DeepSeek、Qwen 等）集中度高、单模型冲榜；而美国模型（GPT、Claude、Gemini、Llama 等）调用量分散在多个模型+未拆分长尾中，单模型排名不占优但<b>国家总量更大</b>（见左侧「全球来源占比」美国 55% &gt; 中国 38%）。两者口径不同，结论不矛盾。`;
+    }
   }
 
   // Weekly table
