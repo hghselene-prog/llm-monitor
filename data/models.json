@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-07-31T17:45:00Z",
+  "last_updated": "2026-08-04T10:00:00Z",
   "sources": {
     "AA": {
       "name": "Artificial Analysis",
@@ -1794,6 +1794,91 @@
           "value": 73.1
         }
       ]
+    },
+    {
+      "id": "qwen38max",
+      "tier": "top",
+      "name": "Qwen3.8 Max",
+      "provider": "阿里",
+      "country": "CN",
+      "open_source": false,
+      "open_source_note": "Max 版闭源；Qwen3.8-Max 预计下周开源，同时开源 Qwen3.8-27B",
+      "reasoning": true,
+      "multimodal": true,
+      "color": "#f97316",
+      "metrics": [
+        {
+          "key": "speed_tps",
+          "value": 46,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-08-04"
+        },
+        {
+          "key": "latency_s",
+          "value": 2.48,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-08-04"
+        },
+        {
+          "key": "cost_per_task",
+          "value": 1.76,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-08-04"
+        },
+        {
+          "key": "api_price_input",
+          "value": 1.67,
+          "source": "AA",
+          "confidence": "国内价折算USD",
+          "updated": "2026-08-03"
+        },
+        {
+          "key": "api_price_output",
+          "value": 5.0,
+          "source": "AA",
+          "confidence": "国内价折算USD",
+          "updated": "2026-08-03"
+        },
+        {
+          "key": "api_price_cache_hit",
+          "value": 0.21,
+          "source": "AA",
+          "confidence": "国内价折算USD",
+          "updated": "2026-08-03"
+        },
+        {
+          "key": "api_price_reasoning",
+          "value": 0,
+          "source": "AA",
+          "confidence": null,
+          "updated": "2026-08-03"
+        },
+        {
+          "key": "elo_text",
+          "value": 1496,
+          "source": "Arena",
+          "confidence": "±10",
+          "updated": "2026-08-04"
+        },
+        {
+          "key": "elo_vision",
+          "value": 1305,
+          "source": "Arena",
+          "confidence": "±9",
+          "updated": "2026-08-04"
+        },
+        {
+          "key": "elo_webdev",
+          "value": 1668,
+          "source": "Arena",
+          "confidence": "±18",
+          "updated": "2026-08-04"
+        }
+      ],
+      "timeline_intel": []
     },
     {
       "id": "glm52",
@@ -5537,6 +5622,11 @@
     }
   ],
   "changelog": [
+    {
+      "date": "2026-08-04",
+      "event": "新增 Qwen3.8 Max（阿里 8/3 发布，2.4T 参数 MoE）：Arena Text Elo 1496(第5)、Vision 1305(第2)、WebDev 1668(第4)；AA 速度 46 tok/s、成本 $1.76/task。暂不含 intelligence_index（AA 疑似重新校准量表，旧模型值与新量表不一致），暂不含 LB 数据（LiveBench 最新 release 6-25 早于发布日）",
+      "url": "https://www.163.com/dy/article/L3DP2RBD0530NLC9.html"
+    },
     {
       "date": "2026-07-31",
       "event": "成本页按档位补齐三档代表：新增 1 个模型（顶尖/均衡/极速各厂商代表），使各档位可横向比价。新增档位变体价格为基于各实验室公开定价规律的估算值（confidence='预估'），待 Artificial Analysis 实测后校正",
