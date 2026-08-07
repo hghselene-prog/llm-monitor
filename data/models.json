@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-08-04T10:00:00Z",
+  "last_updated": "2026-08-07T08:00:00Z",
   "sources": {
     "AA": {
       "name": "Artificial Analysis",
@@ -5622,6 +5622,11 @@
     }
   ],
   "changelog": [
+    {
+      "date": "2026-08-06",
+      "event": "新闻速递新增两条：①DeepSeek 预告全面上调 API 价格（预计涨幅较大，现行峰谷价 V4-Flash 输出 2元/百万tok）；②Qwen3.8-Max 登顶 AA Agentic 榜（55.4 分全球第一）。均因 AA 本期重校准量表，新值未并入可比指标数组",
+      "url": "https://hghselene-prog.github.io/llm-monitor/#news"
+    },
     {
       "date": "2026-08-04",
       "event": "新增 Qwen3.8 Max（阿里 8/3 发布，2.4T 参数 MoE）：Arena Text Elo 1496(第5)、Vision 1305(第2)、WebDev 1668(第4)；AA 速度 46 tok/s、成本 $1.76/task。暂不含 intelligence_index（AA 疑似重新校准量表，旧模型值与新量表不一致），暂不含 LB 数据（LiveBench 最新 release 6-25 早于发布日）",

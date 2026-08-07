@@ -1,11 +1,35 @@
 {
   "meta": {
     "title": "大模型新闻速递",
-    "updated": "2026-07-31",
+    "updated": "2026-08-07",
     "description": "收集国内外各厂商大模型最新进展，偏财经 / 新闻方向（发布、融资/IPO、政策监管、财报、算力基建等）。按「国内 / 海外」分区，条目均来自公开媒体报道并附原始链接，非本站原创。",
     "disclaimer": "新闻时效性强，本页为快照式收录；如需更新需重新抓取并覆盖本文件（无后台自动拉取，零运行成本）。"
   },
   "news": [
+    {
+      "id": "qwen38-aa-agentic-1",
+      "date": "2026-08-06",
+      "region": "domestic",
+      "category": "发布",
+      "company": "阿里巴巴 (阿里通义)",
+      "model": "Qwen3.8-Max",
+      "title": "Qwen3.8-Max 登顶 Artificial Analysis Agentic 榜：55.4 分超越 Claude Opus 5 / GPT-5.6 全球第一",
+      "summary": "8 月 6 日，Artificial Analysis 公布新一期榜单，阿里 Qwen3.8-Max 在智能体能力（Agentic Index）排行榜以 55.4 分超越 Claude Opus 5、GPT-5.6，位列全球第一。该领域冠军长期被 Claude、GPT 垄断，此前中国模型最好成绩为 Kimi K3 的 50.1 分。⚠️ 数据一致性说明：AA 于本期重校准了指数量表，Qwen3.8-Max 的 55.4 为「新量表」值，与本站其他模型「旧量表」Agentic 值（如 Claude Opus 5 = 66.9、Kimi K3 = 57.6）不直接可比，故未并入模型可比指标数组，仅在新闻中如实标注。",
+      "source": "上海证券报 / 极目新闻 / 网易号",
+      "url": "https://www.cnstock.com/commonDetail/756037"
+    },
+    {
+      "id": "deepseek-price-hike",
+      "date": "2026-08-06",
+      "region": "domestic",
+      "category": "价格",
+      "company": "DeepSeek",
+      "model": "DeepSeek V4 Flash / V4 Pro",
+      "title": "DeepSeek 预告全面上调 API 价格，称\"预计涨幅较大\"",
+      "summary": "8 月 6 日，DeepSeek 发布公告称计划近期整体上调 API 服务定价、预计涨幅较大，具体方案与生效时间待正式通知；这标志其或将告别持续近两年的极致低价策略。现行峰谷定价（高峰时段价格为平峰 2 倍）：V4-Flash 缓存命中输入 0.02 元、未命中 1 元、输出 2 元/百万 Token（高峰 4 元）；V4-Pro 对应 0.025 / 3 / 6 元（高峰 12 元）。调价背景是调用量暴增——OpenCode 披露 8 月 1 日 V4-Flash 单日处理 8 万亿 Token（5 万亿免费 + 3 万亿付费）。后续本站将在新价生效、具体幅度公布后更新成本页数据。",
+      "source": "上海证券报 / 澎湃新闻 / 腾讯新闻",
+      "url": "https://www.cnstock.com/commonDetail/756390"
+    },
     {
       "id": "sim-qwen36-free",
       "date": "2026-03-24",
